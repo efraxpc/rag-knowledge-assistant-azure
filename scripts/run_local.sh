@@ -320,6 +320,7 @@ start_services() {
     "${PYTHON_BIN}" -m streamlit run app/streamlit_app.py \
         --server.address "${UI_HOST}" \
         --server.port "${UI_PORT}" \
+        --server.showEmailPrompt false \
         --browser.gatherUsageStats false &
     UI_PID=$!
 
