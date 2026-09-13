@@ -1,0 +1,16 @@
+flowchart TB
+  tenant["Microsoft Entra ID → Directorio del proyecto<br/>Directory (tenant) ID; usuarios miembros o invitados admitidos."]:::azure
+  frontend["App registration: Streamlit<br/>Application (client) ID + client secret del frontend.<br/>Web redirect: localhost:8501/oauth2callback.<br/>Destino: .streamlit/secrets.toml [auth.microsoft]."]:::azure
+  api_reg["App registration: FastAPI<br/>Application (client) ID distinto; tokens v2 para la API.<br/>Expose an API: api://&lt;api-id&gt;/access_as_user.<br/>Client secret API → APP_ENTRA_API_CLIENT_SECRET."]:::azure
+  frontend_grant["Permiso delegado del frontend → FastAPI<br/>Streamlit solicita access_as_user; preautorizar frontend o conceder consentimiento."]:::azure
+  downstream_grant["Permisos delegados de FastAPI → Azure + consentimiento de administrador<br/>Search user_impersonation + Microsoft Cognitive Services user_impersonation.<br/>Habilitan OBO; los roles RBAC del usuario autorizan después los datos."]:::azure
+  tenant --> frontend
+  tenant --> api_reg
+  frontend --> frontend_grant
+  api_reg --> frontend_grant
+  frontend_grant --> downstream_grant
+  classDef local fill:#EFF4F8,stroke:#62788A,color:#172C42
+  classDef azure fill:#EDF6F2,stroke:#62788A,color:#172C42
+  classDef error fill:#FFF0EC,stroke:#62788A,color:#172C42
+  classDef note fill:#FFF7E8,stroke:#62788A,color:#172C42
+  classDef decision fill:#FFFFFF,stroke:#62788A,color:#172C42

@@ -1,0 +1,53 @@
+flowchart LR
+  subgraph Sources["ORIGEN Y CONFIGURACIÓN"]
+    EntraValues["Entra: tenant, client IDs y VALUE de dos secretos"]
+    AzureValues["Search/OpenAI: endpoints, índice, deployment; URL API"]
+    Local[".env + environment → Pydantic Settings"]
+    TOML["secrets.toml → st.secrets; cookie_secret aleatorio"]
+    TF["Terraform: inputs + recursos"]
+    EnvAzure["Container Apps env APP_* + secretRef entra-api-client-secret"]
+    EntraValues -.-> Local
+    EntraValues -.-> TOML
+    AzureValues -.-> Local
+    EntraValues -.-> TF
+    AzureValues -.-> TF
+    TF -.-> EnvAzure
+  end
+  Browser["Navegador"] --> UI["Streamlit: home, archivos y preguntas"]
+  TOML -.-> UI
+  Local -.-> UI
+  Local -.-> API["FastAPI: JWT RS256/JWKS, aud, iss, tid, exp, scp, azp"]
+  EnvAzure -.-> API
+  Entra["Microsoft Entra ID: tenant + apps + consentimiento"]
+  UI <-->|"OIDC: código y canje por token API"| Entra
+  UI -->|"Bearer API; POST upload / answer"| API
+  API <-->|"OBO: token usuario + credencial API"| Entra
+  API --> Upload["PDF/TXT/MD → chunks 1000 / solape 200"]
+  Search["Azure AI Search: Search Index Data Contributor; scope recurso"]
+  Principal["RBAC: usuario/grupo; scope del recurso"] -.-> Search
+  Upload -->|"token Search"| Search
+  API --> Query["Búsqueda textual; document_id; top_k UI=5"]
+  Query <-->|"search.azure.com/.default; fragmentos"| Search
+  Query --> Context{"¿Hay contexto?"}
+  Context -->|"No"| Notice["Aviso; context=[]"]
+  OpenAI["Azure OpenAI: Cognitive Services OpenAI User; scope cuenta"]
+  Principal -.-> OpenAI
+  Context -->|"Sí: pregunta + chunks"| OpenAI
+  OpenAI -->|"Respuesta"| Result["answer + context"]
+  Notice --> Result
+  Result --> UI
+  subgraph Release["PUBLICACIÓN Y APOYO"]
+    GHV["GitHub Environments vars; identidades OIDC separadas"]
+    Eval["evaluation: runner APP_* → Search CI + chat/juez"]
+    Prod["production: build ACR → actualiza imagen Container Apps"]
+    Logs["Log Analytics: registros"]
+    KV["Key Vault: provisionado; API no lo lee"]
+    GHV --> Eval --> Prod
+    Prod --> CA["Container Apps: FastAPI; AcrPull para ACR"]
+    CA --> Logs
+  end
+  CA -.-> API
+  classDef cloud fill:#EDF6F2,stroke:#62788A,color:#172C42
+  classDef config fill:#FFF7E8,stroke:#62788A,color:#172C42
+  class Entra,Search,OpenAI,CA,Logs,KV cloud
+  class Local,TOML,TF,EnvAzure,GHV config

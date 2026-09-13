@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="841.889764pt" height="595.275591pt" viewBox="0 0 841.889764 595.275591" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-09-13T18:35:00.167603</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 595.275591 
+L 841.889764 595.275591 
+L 841.889764 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 42.519685 144.566929 
+L 303.307087 144.566929 
+L 303.307087 167.244094 
+L 42.519685 167.244094 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #eff4f8; stroke: #62788a; stroke-width: 0.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 303.307087 144.566929 
+L 558.425197 144.566929 
+L 558.425197 167.244094 
+L 303.307087 167.244094 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #eff4f8; stroke: #62788a; stroke-width: 0.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 558.425197 144.566929 
+L 799.370079 144.566929 
+L 799.370079 167.244094 
+L 558.425197 167.244094 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #eff4f8; stroke: #62788a; stroke-width: 0.6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 42.519685 167.244094 
+L 303.307087 167.244094 
+L 303.307087 205.511811 
+L 42.519685 205.511811 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 303.307087 167.244094 
+L 558.425197 167.244094 
+L 558.425197 205.511811 
+L 303.307087 205.511811 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 558.425197 167.244094 
+L 799.370079 167.244094 
+L 799.370079 205.511811 
+L 558.425197 205.511811 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 42.519685 205.511811 
+L 303.307087 205.511811 
+L 303.307087 243.779528 
+L 42.519685 243.779528 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 303.307087 205.511811 
+L 558.425197 205.511811 
+L 558.425197 243.779528 
+L 303.307087 243.779528 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 558.425197 205.511811 
+L 799.370079 205.511811 
+L 799.370079 243.779528 
+L 558.425197 243.779528 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 42.519685 243.779528 
+L 303.307087 243.779528 
+L 303.307087 282.047244 
+L 42.519685 282.047244 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 303.307087 243.779528 
+L 558.425197 243.779528 
+L 558.425197 282.047244 
+L 303.307087 282.047244 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 558.425197 243.779528 
+L 799.370079 243.779528 
+L 799.370079 282.047244 
+L 558.425197 282.047244 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_14">
+    <path d="M 42.519685 282.047244 
+L 303.307087 282.047244 
+L 303.307087 320.314961 
+L 42.519685 320.314961 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_15">
+    <path d="M 303.307087 282.047244 
+L 558.425197 282.047244 
+L 558.425197 320.314961 
+L 303.307087 320.314961 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_16">
+    <path d="M 558.425197 282.047244 
+L 799.370079 282.047244 
+L 799.370079 320.314961 
+L 558.425197 320.314961 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_17">
+    <path d="M 42.519685 320.314961 
+L 303.307087 320.314961 
+L 303.307087 358.582677 
+L 42.519685 358.582677 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_18">
+    <path d="M 303.307087 320.314961 
+L 558.425197 320.314961 
+L 558.425197 358.582677 
+L 303.307087 358.582677 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_19">
+    <path d="M 558.425197 320.314961 
+L 799.370079 320.314961 
+L 799.370079 358.582677 
+L 558.425197 358.582677 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_20">
+    <path d="M 42.519685 358.582677 
+L 303.307087 358.582677 
+L 303.307087 396.850394 
+L 42.519685 396.850394 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_21">
+    <path d="M 303.307087 358.582677 
+L 558.425197 358.582677 
+L 558.425197 396.850394 
+L 303.307087 396.850394 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_22">
+    <path d="M 558.425197 358.582677 
+L 799.370079 358.582677 
+L 799.370079 396.850394 
+L 558.425197 396.850394 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_23">
+    <path d="M 42.519685 396.850394 
+L 303.307087 396.850394 
+L 303.307087 435.11811 
+L 42.519685 435.11811 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_24">
+    <path d="M 303.307087 396.850394 
+L 558.425197 396.850394 
+L 558.425197 435.11811 
+L 303.307087 435.11811 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_25">
+    <path d="M 558.425197 396.850394 
+L 799.370079 396.850394 
+L 799.370079 435.11811 
+L 558.425197 435.11811 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_26">
+    <path d="M 42.519685 435.11811 
+L 303.307087 435.11811 
+L 303.307087 473.385827 
+L 42.519685 473.385827 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_27">
+    <path d="M 303.307087 435.11811 
+L 558.425197 435.11811 
+L 558.425197 473.385827 
+L 303.307087 473.385827 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_28">
+    <path d="M 558.425197 435.11811 
+L 799.370079 435.11811 
+L 799.370079 473.385827 
+L 558.425197 473.385827 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_29">
+    <path d="M 42.519685 473.385827 
+L 303.307087 473.385827 
+L 303.307087 511.653543 
+L 42.519685 511.653543 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_30">
+    <path d="M 303.307087 473.385827 
+L 558.425197 473.385827 
+L 558.425197 511.653543 
+L 303.307087 511.653543 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_31">
+    <path d="M 558.425197 473.385827 
+L 799.370079 473.385827 
+L 799.370079 511.653543 
+L 558.425197 511.653543 
+z
+" clip-path="url(#pc78ee3104b)" style="fill: #ffffff; stroke: #62788a; stroke-width: 0.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_1">
+    <path d="M 42.519685 34.015748 
+L 799.370079 34.015748 
+" clip-path="url(#pc78ee3104b)" style="fill: none; stroke: #24567e; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_2">
+    <path d="M 42.519685 558.425197 
+L 799.370079 558.425197 
+" clip-path="url(#pc78ee3104b)" style="fill: none; stroke: #62788a; stroke-width: 0.65; stroke-linecap: square"/>
+   </g>
+   <g id="text_1">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #172c42" x="799.370079" y="576.602373" transform="rotate(-0 799.370079 576.602373)">9 / 10</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #24567e" x="42.519685" y="53.610424" transform="rotate(-0 42.519685 53.610424)">RAG MANUAL / FLUJO TÉCNICO IMPLEMENTADO</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 20px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="83.228371" transform="rotate(-0 42.519685 83.228371)">De dónde sale cada variable</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="110.025603" transform="rotate(-0 42.519685 110.025603)">Tabla de origen → variable → consumidor. Cada nombre de la primera columna lleva APP_.</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="576.562451" transform="rotate(-0 42.519685 576.562451)">Código revisado: 13 septiembre 2026 · A4 horizontal</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 9.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="51.023622" y="157.682689" transform="rotate(-0 51.023622 157.682689)">Variable en .env (prefijo APP_)</text>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 9.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="311.811024" y="157.682689" transform="rotate(-0 311.811024 157.682689)">Dónde obtener el valor</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 9.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="566.929134" y="157.682689" transform="rotate(-0 566.929134 157.682689)">Dónde se usa</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="51.023622" y="179.867683" transform="rotate(-0 51.023622 179.867683)">ENTRA_TENANT_ID</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="311.811024" y="180.131901" transform="rotate(-0 311.811024 180.131901)">Entra ID: Overview → Directory (tenant) ID</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(566.929134 180.437683)">JWT issuer/tid + OBO; tenant también en</text>
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(566.929134 191.797456)">metadata OIDC</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="51.023622" y="218.231884" transform="rotate(-0 51.023622 218.231884)">ENTRA_API_CLIENT_ID</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="311.811024" y="218.399618" transform="rotate(-0 311.811024 218.399618)">App registration FastAPI → Application (client) ID</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(566.929134 218.399618)">JWT aud; OBO client_id;</text>
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(566.929134 230.02361)">scope API en el TOML</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="51.023622" y="256.4996" transform="rotate(-0 51.023622 256.4996)">ENTRA_FRONTEND_CLIENT_ID</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(311.811024 256.667335)">App registration Streamlit → Application (client)</text>
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(311.811024 268.027108)">ID</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(566.929134 256.667335)">JWT azp; mismo ID en</text>
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(566.929134 268.027108)">[auth.microsoft].client_id</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="51.023622" y="294.767317" transform="rotate(-0 51.023622 294.767317)">ENTRA_API_CLIENT_SECRET</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="311.811024" y="294.935051" transform="rotate(-0 311.811024 294.935051)">Registro FastAPI → Certificates &amp; secrets → VALUE</text>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(566.929134 294.935051)">OBO; valor del secreto,</text>
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(566.929134 306.294824)">no Secret ID</text>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="51.023622" y="333.035033" transform="rotate(-0 51.023622 333.035033)">AZURE_SEARCH_ENDPOINT</text>
+   </g>
+   <g id="text_22">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(311.811024 333.202768)">Recurso Search: Overview / output</text>
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(311.811024 344.562541)">search_service_endpoint</text>
+   </g>
+   <g id="text_23">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="566.929134" y="333.202768" transform="rotate(-0 566.929134 333.202768)">SearchClient.endpoint</text>
+   </g>
+   <g id="text_24">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="51.023622" y="371.30275" transform="rotate(-0 51.023622 371.30275)">AZURE_SEARCH_TEXT_INDEX_NAME</text>
+   </g>
+   <g id="text_25">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="311.811024" y="371.470484" transform="rotate(-0 311.811024 371.470484)">Search → Indexes; Terraform crea índice textual</text>
+   </g>
+   <g id="text_26">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="566.929134" y="371.470484" transform="rotate(-0 566.929134 371.470484)">SearchClient.index_name</text>
+   </g>
+   <g id="text_27">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="51.023622" y="409.570466" transform="rotate(-0 51.023622 409.570466)">AZURE_OPENAI_ENDPOINT</text>
+   </g>
+   <g id="text_28">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(311.811024 409.738201)">Endpoint del recurso / output</text>
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(311.811024 421.097974)">azure_openai_endpoint</text>
+   </g>
+   <g id="text_29">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="566.929134" y="409.738201" transform="rotate(-0 566.929134 409.738201)">Base HTTPS del cliente chat</text>
+   </g>
+   <g id="text_30">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="51.023622" y="447.838183" transform="rotate(-0 51.023622 447.838183)">AZURE_OPENAI_CHAT_DEPLOYMENT</text>
+   </g>
+   <g id="text_31">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(311.811024 448.005917)">Deployment de modelo / output</text>
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(311.811024 459.365691)">azure_openai_chat_deployment_name</text>
+   </g>
+   <g id="text_32">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(566.929134 448.005917)">Campo model de chat;</text>
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(566.929134 459.365691)">no el ID del recurso</text>
+   </g>
+   <g id="text_33">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="51.023622" y="486.105899" transform="rotate(-0 51.023622 486.105899)">API_BASE_URL</text>
+   </g>
+   <g id="text_34">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(311.811024 486.273634)">Local: launcher host/puerto. Azure: output</text>
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(311.811024 497.633407)">container_app_url</text>
+   </g>
+   <g id="text_35">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="566.929134" y="486.273634" transform="rotate(-0 566.929134 486.273634)">Streamlit → destino FastAPI</text>
+   </g>
+   <g id="text_36">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="528.793319" transform="rotate(-0 42.519685 528.793319)">TOML: client_secret = VALUE del secreto del frontend; cookie_secret = aleatorio generado. API y frontend usan secretos distintos.</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pc78ee3104b">
+   <rect x="0" y="0" width="841.889764" height="595.275591"/>
+  </clipPath>
+ </defs>
+</svg>

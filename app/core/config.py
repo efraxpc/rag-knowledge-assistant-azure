@@ -23,6 +23,11 @@ class Settings(BaseSettings):
     azure_openai_chat_deployment: str | None = Field(default=None, min_length=1)
     azure_openai_judge_deployment: str | None = Field(default=None, min_length=1)
     rag_generation_timeout_seconds: float = Field(default=60, gt=0, le=300)
+    rag_max_search_attempts: int = Field(default=2, ge=1, le=2)
+    rag_max_generation_attempts: int = Field(default=2, ge=1, le=3)
+    rag_max_context_characters: int = Field(default=12_000, ge=1, le=60_000)
+    rag_verify_citations: bool = True
+    rag_trace_enabled: bool = True
     llm_judge_timeout_seconds: float = Field(default=60, gt=0, le=300)
     azure_managed_identity_client_id: str | None = Field(default=None, min_length=1)
     entra_tenant_id: UUID | None = None

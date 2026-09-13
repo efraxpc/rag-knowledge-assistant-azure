@@ -1,0 +1,64 @@
+flowchart TD
+    Request["POST /api/v1/queries/answer"]
+    Auth["Validar JWT API: tenant, aud, scp y azp"]
+    SearchToken["OBO: token delegado Search"]
+    Search["Buscar texto en Azure AI Search<br/>Conservar document_id y top_k<br/>Descartar duplicados y otros documentos<br/>Incrementar contador de búsquedas"]
+    Found{"¿Hay contexto?"}
+    SearchBudget{"¿Quedan búsquedas?<br/>Máximo por defecto: 2"}
+    Simplify["Simplificar consulta con función local<br/>Palabras de relleno ES/EN; sin llamada LLM"]
+    Changed{"¿La consulta simplificada cambió?"}
+    Empty["Abstención: información insuficiente<br/>context = []<br/>Sin token OpenAI ni generación"]
+    Prepare["Preparar copias de fragmentos, fuentes y páginas<br/>Contenido máximo: 12.000 caracteres, no tokens<br/>No cuenta pregunta, metadatos ni instrucciones<br/>Devolver solo el contexto entregado al modelo"]
+    OpenAIToken["Obtener token OpenAI solo si se genera<br/>API: OBO Cognitive Services"]
+    Generate["Azure OpenAI: generar con pregunta y contexto<br/>Incrementar contador de generaciones<br/>Máximo de salida actual: 2.000 tokens por llamada"]
+    CheckEnabled{"¿Verificación de citas activada?<br/>Por defecto: true"}
+    Check["Validar citas mediante reglas locales<br/>Al menos una cita; fuente y página presentes<br/>Solo fuente: requiere fragmento page=None<br/>Sin LLM juez en la petición"]
+    Valid{"¿Citas válidas?"}
+    GenerationBudget{"¿Quedan generaciones?<br/>Máximo por defecto: 2"}
+    Repair["Preparar instrucciones de reparación<br/>Volver a generar y comprobar las citas"]
+    Invalid["Abstención: citas no verificadas<br/>Conservar contexto disponible"]
+    Success["Respuesta final: answer + context"]
+    Error["Error controlado del proveedor o autenticación<br/>Sin reintentos HTTP del grafo ni alternativa de identidad"]
+
+    Request --> Auth --> SearchToken --> Search --> Found
+    Found -->|No| SearchBudget
+    SearchBudget -->|Sí| Simplify --> Changed
+    Changed -->|Sí| Search
+    Changed -->|No| Empty
+    SearchBudget -->|No| Empty
+    Found -->|Sí| Prepare --> OpenAIToken --> Generate --> CheckEnabled
+    CheckEnabled -->|No| Success
+    CheckEnabled -->|Sí| Check --> Valid
+    Valid -->|Sí| Success
+    Valid -->|No| GenerationBudget
+    GenerationBudget -->|Sí| Repair --> Generate
+    GenerationBudget -->|No| Invalid
+    SearchToken -.->|Fallo| Error
+    Search -.->|Fallo| Error
+    OpenAIToken -.->|Fallo| Error
+    Generate -.->|Fallo| Error
+
+    Trace["Trazas INFO en uvicorn.error<br/>Por nodo: request_id, contadores, resultado y ms<br/>Sin pregunta, contexto, respuesta ni tokens"]
+    Limits["Settings / APP_RAG_*<br/>search attempts = 2; rango 1..2<br/>generation attempts = 2; rango 1..3<br/>context characters = 12000<br/>verify citations = true; trace enabled = true"]
+    Study["Demo offline con dobles: success, recovered, empty, repair, invalid, provider-error<br/>Opciones default; no lee Settings ni .env; muestra demo_calls<br/>Sin Azure ni credenciales; --scenario all recorre los seis casos"]
+    Judge["CI usa el mismo AnswerService<br/>CLI: DefaultAzureCredential; API: OBO<br/>Juez offline evalúa la respuesta y el contexto finales"]
+    Caveat["Validar citas no garantiza respaldo factual<br/>Sin checkpoints durables configurados"]
+    Limits -.-> Search
+    Limits -.-> Prepare
+    Limits -.-> GenerationBudget
+    Trace -.-> Search
+    Trace -.-> Generate
+    Study -.-> Request
+    Success -.-> Judge
+    Invalid -.-> Judge
+    Empty -.-> Judge
+    Check -.-> Caveat
+
+    classDef azure fill:#EDF6F2,stroke:#62788A,color:#172C42
+    classDef local fill:#EFF4F8,stroke:#62788A,color:#172C42
+    classDef note fill:#FFF7E8,stroke:#62788A,color:#172C42
+    classDef error fill:#FBECEC,stroke:#A84B4B,color:#172C42
+    class SearchToken,Search,OpenAIToken,Generate azure
+    class Auth,Simplify,Prepare,Check,Repair,Success local
+    class Trace,Limits,Study,Judge,Caveat note
+    class Empty,Invalid,Error error

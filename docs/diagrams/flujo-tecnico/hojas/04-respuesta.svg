@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-09-13T18:07:20.007114</dc:date>
+    <dc:date>2026-09-13T18:34:58.418490</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -32,97 +32,85 @@ z
    <g id="line2d_1">
     <path d="M 42.519685 34.015748 
 L 799.370079 34.015748 
-" clip-path="url(#pbc207ee162)" style="fill: none; stroke: #24567e; stroke-width: 2; stroke-linecap: square"/>
+" clip-path="url(#pf1b8e5c04a)" style="fill: none; stroke: #24567e; stroke-width: 2; stroke-linecap: square"/>
    </g>
    <g id="line2d_2">
     <path d="M 42.519685 558.425197 
 L 799.370079 558.425197 
-" clip-path="url(#pbc207ee162)" style="fill: none; stroke: #62788a; stroke-width: 0.65; stroke-linecap: square"/>
+" clip-path="url(#pf1b8e5c04a)" style="fill: none; stroke: #62788a; stroke-width: 0.65; stroke-linecap: square"/>
    </g>
    <g id="patch_2">
     <path d="M 282.047244 213.598441 
 Q 282.047244 226.772602 282.047244 238.828729 
-" clip-path="url(#pbc207ee162)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pf1b8e5c04a)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
     <path d="M 284.047244 234.828729 
 L 282.047244 238.828729 
 L 280.047244 234.828729 
 z
-" clip-path="url(#pbc207ee162)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pf1b8e5c04a)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
    </g>
    <g id="patch_3">
     <path d="M 282.047244 309.976393 
 Q 282.047244 323.150555 282.047244 335.206682 
-" clip-path="url(#pbc207ee162)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pf1b8e5c04a)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
     <path d="M 284.047244 331.206682 
 L 282.047244 335.206682 
 L 280.047244 331.206682 
 z
-" clip-path="url(#pbc207ee162)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pf1b8e5c04a)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
    </g>
    <g id="patch_4">
     <path d="M 522.558901 274.796614 
 Q 555.589484 269.291516 587.517245 263.970223 
-" clip-path="url(#pbc207ee162)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pf1b8e5c04a)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
     <path d="M 583.242872 262.655031 
 L 587.517245 263.970223 
 L 583.900468 266.600607 
 z
-" clip-path="url(#pbc207ee162)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pf1b8e5c04a)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
    </g>
    <g id="patch_5">
     <path d="M 389.344526 362.876818 
 Q 488.975797 367.08659 587.490031 371.249163 
-" clip-path="url(#pbc207ee162)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pf1b8e5c04a)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
     <path d="M 583.578029 369.082082 
 L 587.490031 371.249163 
 L 583.409165 373.078517 
 z
-" clip-path="url(#pbc207ee162)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pf1b8e5c04a)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
    </g>
    <g id="patch_6">
     <path d="M 282.047244 389.346126 
 Q 282.047244 401.101003 282.047244 411.737845 
-" clip-path="url(#pbc207ee162)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pf1b8e5c04a)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
     <path d="M 284.047244 407.737845 
 L 282.047244 411.737845 
 L 280.047244 407.737845 
 z
-" clip-path="url(#pbc207ee162)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pf1b8e5c04a)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
    </g>
    <g id="patch_7">
     <path d="M 522.417723 452.67037 
 Q 555.591672 474.095212 587.826429 494.913493 
-" clip-path="url(#pbc207ee162)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pf1b8e5c04a)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
     <path d="M 585.551323 491.063312 
 L 587.826429 494.913493 
 L 583.381221 494.42347 
 z
-" clip-path="url(#pbc207ee162)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pf1b8e5c04a)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
    </g>
    <g id="patch_8">
     <path d="M 282.047244 491.39337 
 Q 282.047244 503.148247 282.047244 513.785089 
-" clip-path="url(#pbc207ee162)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pf1b8e5c04a)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
     <path d="M 284.047244 509.785089 
 L 282.047244 513.785089 
 L 280.047244 509.785089 
 z
-" clip-path="url(#pbc207ee162)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pf1b8e5c04a)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
    </g>
    <g id="text_1">
-    <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #24567e" x="42.519685" y="53.610424" transform="rotate(-0 42.519685 53.610424)">RAG MANUAL / FLUJO TÉCNICO IMPLEMENTADO</text>
-   </g>
-   <g id="text_2">
-    <text style="font-weight: 700; font-size: 20px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="84.028371" transform="rotate(-0 42.519685 84.028371)">Consulta RAG: búsqueda, contexto y modelo</text>
-   </g>
-   <g id="text_3">
-    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="110.025603" transform="rotate(-0 42.519685 110.025603)">POST /api/v1/queries/answer · Pydantic: question, document_id opcional y top_k.</text>
-   </g>
-   <g id="text_4">
-    <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="576.562451" transform="rotate(-0 42.519685 576.562451)">Código revisado: 13 septiembre 2026 · A4 horizontal</text>
-   </g>
-   <g id="text_5">
-    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #172c42" x="799.370079" y="576.602373" transform="rotate(-0 799.370079 576.602373)">4 / 5</text>
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #172c42" x="799.370079" y="576.602373" transform="rotate(-0 799.370079 576.602373)">4 / 10</text>
    </g>
    <g id="patch_9">
     <path d="M 48.188976 147.401575 
@@ -135,14 +123,7 @@ Q 42.519685 212.598425 42.519685 206.929134
 L 42.519685 153.070866 
 Q 42.519685 147.401575 48.188976 147.401575 
 z
-" clip-path="url(#pbc207ee162)" style="fill: #eff4f8; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
-   </g>
-   <g id="text_6">
-    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="163.544895" transform="rotate(-0 53.858268 163.544895)">get_answer_service() → AnswerService.answer()</text>
-   </g>
-   <g id="text_7">
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 179.854186)">JWT → OBO(Search) → OBO(Cognitive Services).</text>
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 191.811842)">Ambos tokens se obtienen antes de buscar.</text>
+" clip-path="url(#pf1b8e5c04a)" style="fill: #eff4f8; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
    <g id="patch_10">
     <path d="M 48.188976 240.944882 
@@ -155,14 +136,7 @@ Q 42.519685 308.976378 42.519685 303.307087
 L 42.519685 246.614173 
 Q 42.519685 240.944882 48.188976 240.944882 
 z
-" clip-path="url(#pbc207ee162)" style="fill: #edf6f2; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
-   </g>
-   <g id="text_8">
-    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="257.088202" transform="rotate(-0 53.858268 257.088202)">AzureTextSearchAdapter → Azure AI Search</text>
-   </g>
-   <g id="text_9">
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 273.397493)">search_text = question; top = top_k.</text>
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 285.633274)">Filtro OData por document_id si se proporciona.</text>
+" clip-path="url(#pf1b8e5c04a)" style="fill: #edf6f2; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
    <g id="patch_11">
     <path d="M 282.047244 337.322835 
@@ -170,7 +144,7 @@ L 388.346457 362.834646
 L 282.047244 388.346457 
 L 175.748031 362.834646 
 z
-" clip-path="url(#pbc207ee162)" style="fill: #ffffff; stroke: #62788a; stroke-linejoin: miter"/>
+" clip-path="url(#pf1b8e5c04a)" style="fill: #ffffff; stroke: #62788a; stroke-linejoin: miter"/>
    </g>
    <g id="patch_12">
     <path d="M 48.188976 413.858268 
@@ -183,15 +157,7 @@ Q 42.519685 490.393701 42.519685 484.724409
 L 42.519685 419.527559 
 Q 42.519685 413.858268 48.188976 413.858268 
 z
-" clip-path="url(#pbc207ee162)" style="fill: #edf6f2; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
-   </g>
-   <g id="text_10">
-    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="430.001588" transform="rotate(-0 53.858268 430.001588)">API → AzureOpenAIChatClient.complete()</text>
-   </g>
-   <g id="text_11">
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 446.310878)">POST /openai/v1/chat/completions; model = deployment.</text>
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 458.268535)">messages: system + user JSON; max_completion_tokens = 2000.</text>
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 470.504316)">Pregunta + contexto con content, source y page.</text>
+" clip-path="url(#pf1b8e5c04a)" style="fill: #edf6f2; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
    <g id="patch_13">
     <path d="M 48.188976 515.905512 
@@ -204,10 +170,7 @@ Q 42.519685 547.086614 42.519685 541.417323
 L 42.519685 521.574803 
 Q 42.519685 515.905512 48.188976 515.905512 
 z
-" clip-path="url(#pbc207ee162)" style="fill: #eff4f8; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
-   </g>
-   <g id="text_12">
-    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="532.048832" transform="rotate(-0 53.858268 532.048832)">200 · RagAnswerResponse {answer, context}</text>
+" clip-path="url(#pf1b8e5c04a)" style="fill: #eff4f8; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
    <g id="patch_14">
     <path d="M 595.275591 221.102362 
@@ -220,14 +183,7 @@ Q 589.606299 306.141732 589.606299 300.472441
 L 589.606299 226.771654 
 Q 589.606299 221.102362 595.275591 221.102362 
 z
-" clip-path="url(#pbc207ee162)" style="fill: #fff0ec; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
-   </g>
-   <g id="text_13">
-    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="600.944882" y="237.245683" transform="rotate(-0 600.944882 237.245683)">403 / 503 / 502</text>
-   </g>
-   <g id="text_14">
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 253.554973)">Acceso / servicio Search / respuesta</text>
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 265.512629)">incompatible.</text>
+" clip-path="url(#pf1b8e5c04a)" style="fill: #fff0ec; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
    <g id="patch_15">
     <path d="M 595.275591 331.653543 
@@ -240,14 +196,7 @@ Q 589.606299 411.023622 589.606299 405.354331
 L 589.606299 337.322835 
 Q 589.606299 331.653543 595.275591 331.653543 
 z
-" clip-path="url(#pbc207ee162)" style="fill: #fff7e8; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
-   </g>
-   <g id="text_15">
-    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="600.944882" y="347.796864" transform="rotate(-0 600.944882 347.796864)">200 · Sin contexto</text>
-   </g>
-   <g id="text_16">
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 364.106154)">answer = aviso;</text>
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 376.06381)">context = []. No llama al modelo.</text>
+" clip-path="url(#pf1b8e5c04a)" style="fill: #fff7e8; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
    <g id="patch_16">
     <path d="M 595.275591 445.03937 
@@ -260,29 +209,80 @@ Q 589.606299 547.086614 589.606299 541.417323
 L 589.606299 450.708661 
 Q 589.606299 445.03937 595.275591 445.03937 
 z
-" clip-path="url(#pbc207ee162)" style="fill: #fff0ec; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+" clip-path="url(#pf1b8e5c04a)" style="fill: #fff0ec; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #24567e" x="42.519685" y="53.610424" transform="rotate(-0 42.519685 53.610424)">RAG MANUAL / FLUJO TÉCNICO IMPLEMENTADO</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 20px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="84.028371" transform="rotate(-0 42.519685 84.028371)">Consulta RAG: búsqueda, contexto y modelo</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="110.025603" transform="rotate(-0 42.519685 110.025603)">POST /api/v1/queries/answer · Pydantic: question, document_id opcional y top_k.</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="576.562451" transform="rotate(-0 42.519685 576.562451)">Código revisado: 13 septiembre 2026 · A4 horizontal</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="163.544895" transform="rotate(-0 53.858268 163.544895)">get_answer_service() → AnswerService.answer()</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 179.854186)">JWT → OBO(Search) → OBO(Cognitive Services).</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 191.811842)">Ambos tokens se obtienen antes de buscar.</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="257.088202" transform="rotate(-0 53.858268 257.088202)">AzureTextSearchAdapter → Azure AI Search</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 273.397493)">search_text = question; top = top_k.</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 285.633274)">Filtro OData por document_id si se proporciona.</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(260.692557 359.825427)">context</text>
+    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(247.626932 371.362614)">¿está vacío?</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="430.001588" transform="rotate(-0 53.858268 430.001588)">API → AzureOpenAIChatClient.complete()</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 446.310878)">POST /openai/v1/chat/completions; model = deployment.</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 458.268535)">messages: system + user JSON; max_completion_tokens = 2000.</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 470.504316)">Pregunta + contexto con content, source y page.</text>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="532.048832" transform="rotate(-0 53.858268 532.048832)">200 · RagAnswerResponse {answer, context}</text>
+   </g>
+   <g id="text_14">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="600.944882" y="237.245683" transform="rotate(-0 600.944882 237.245683)">403 / 503 / 502</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 253.554973)">Acceso / servicio Search / respuesta</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 265.512629)">incompatible.</text>
+   </g>
+   <g id="text_16">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="600.944882" y="347.796864" transform="rotate(-0 600.944882 347.796864)">200 · Sin contexto</text>
    </g>
    <g id="text_17">
-    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="600.944882" y="461.18269" transform="rotate(-0 600.944882 461.18269)">502 · rag_provider_error</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 364.106154)">answer = aviso;</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 376.06381)">context = []. No llama al modelo.</text>
    </g>
    <g id="text_18">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="600.944882" y="461.18269" transform="rotate(-0 600.944882 461.18269)">502 · rag_provider_error</text>
+   </g>
+   <g id="text_19">
     <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 477.491981)">Fallo de token, HTTP, rechazo o</text>
     <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 489.969637)">respuesta inválida/vacía.</text>
    </g>
-   <g id="text_19">
+   <g id="text_20">
     <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #24567e" x="481.889764" y="355.500011" transform="rotate(-0 481.889764 355.500011)">Sí</text>
    </g>
-   <g id="text_20">
-    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #24567e" x="291.968504" y="398.019696" transform="rotate(-0 291.968504 398.019696)">No</text>
-   </g>
    <g id="text_21">
-    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(260.692557 359.825427)">context</text>
-    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(247.626932 371.362614)">¿está vacío?</text>
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #24567e" x="291.968504" y="398.019696" transform="rotate(-0 291.968504 398.019696)">No</text>
    </g>
   </g>
  </g>
  <defs>
-  <clipPath id="pbc207ee162">
+  <clipPath id="pf1b8e5c04a">
    <rect x="0" y="0" width="841.889764" height="595.275591"/>
   </clipPath>
  </defs>

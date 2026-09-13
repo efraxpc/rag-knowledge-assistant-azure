@@ -16,6 +16,7 @@ from app.commands.generate_evaluation_answers import (
 from app.core.config import Settings
 from app.evaluation.models import EvaluationScenario
 from app.rag.models import RagAnswer, SearchHit
+from app.services.answer_graph import AnswerGraphOptions
 
 
 def scenario(case_id: str = "case-1") -> dict[str, object]:
@@ -219,6 +220,11 @@ def test_main_generates_dataset_with_candidate_service(
         azure_search_text_index_name="text-chunks",
         azure_openai_endpoint="https://example.openai.azure.com",
         azure_openai_chat_deployment="candidate-v1",
+        rag_max_search_attempts=1,
+        rag_max_generation_attempts=1,
+        rag_max_context_characters=2_000,
+        rag_verify_citations=False,
+        rag_trace_enabled=False,
     )
     monkeypatch.setattr(command, "get_settings", lambda: settings)
     monkeypatch.setattr(
@@ -230,8 +236,14 @@ def test_main_generates_dataset_with_candidate_service(
     monkeypatch.setattr(command, "AzureOpenAIChatClient", lambda **kwargs: object())
 
     class FakeAnswerService:
-        def __init__(self, store: object, client: object) -> None:
-            pass
+        def __init__(
+            self, store: object, client: object, *, options: AnswerGraphOptions
+        ) -> None:
+            assert options.max_search_attempts == 1
+            assert options.max_generation_attempts == 1
+            assert options.max_context_characters == 2_000
+            assert options.verify_citations is False
+            assert options.trace_enabled is False
 
         def answer(self, query: object) -> RagAnswer:
             return answer()

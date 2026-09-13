@@ -1,10 +1,9 @@
-"""Genera cinco láminas técnicas A4 con PDF, SVG y fuentes Mermaid."""
+"""Genera diez láminas técnicas A4 con PDF, SVG y fuentes Mermaid."""
 
 from __future__ import annotations
 
 import argparse
 import html
-import runpy
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -14,14 +13,19 @@ matplotlib.use("Agg")
 
 import matplotlib.pyplot as plt  # noqa: E402
 from matplotlib.backends.backend_pdf import PdfPages  # noqa: E402
+from matplotlib.font_manager import FontProperties  # noqa: E402
 from matplotlib.patches import FancyArrowPatch, FancyBboxPatch, Polygon  # noqa: E402
+from matplotlib.textpath import TextToPath  # noqa: E402
 
 OUTPUT = Path(__file__).resolve().parent
-DRAWING = runpy.run_path(str(OUTPUT.parent / "flujo-completo" / "generate.py"))
-BaseSheet = DRAWING["Sheet"]
-INK, BLUE, LINE, LOCAL, CLOUD, NOTE, WHITE = (
-    DRAWING[key] for key in ("INK", "BLUE", "LINE", "LOCAL", "CLOUD", "NOTE", "WHITE")
-)
+INK = "#172C42"
+BLUE = "#24567E"
+LINE = "#62788A"
+LOCAL = "#EFF4F8"
+CLOUD = "#EDF6F2"
+NOTE = "#FFF7E8"
+WHITE = "#FFFFFF"
+TEXT = TextToPath()
 ERROR = "#FFF0EC"
 PAGES = [
     ("01-secuencia", "Secuencia HTTP y llamadas a Azure"),
@@ -29,6 +33,11 @@ PAGES = [
     ("03-ingestion", "Ingestión: del archivo al índice textual"),
     ("04-respuesta", "Consulta RAG: búsqueda, contexto y modelo"),
     ("05-contratos", "Scopes, contratos HTTP y límites"),
+    ("06-entra-configuracion", "Entra ID: registros y consentimiento"),
+    ("07-rbac", "RBAC: autorización sobre los recursos"),
+    ("08-configuracion-local", "Configuración: archivos y procesos locales"),
+    ("09-origen-variables", "De dónde sale cada variable"),
+    ("10-configuracion-azure", "Configuración: Azure y GitHub Actions"),
 ]
 
 
@@ -52,7 +61,7 @@ class Node:
         }[side]
 
 
-class TechnicalSheet(BaseSheet):
+class TechnicalSheet:
     def __init__(self, page: int, subtitle: str) -> None:
         self.page = page
         self.nodes: dict[str, Node] = {}
@@ -81,6 +90,49 @@ class TechnicalSheet(BaseSheet):
             fontsize=9,
             color=INK,
         )
+
+    def text(
+        self,
+        x: float,
+        y: float,
+        content: str,
+        width: float,
+        size: float = 11.5,
+        weight: str = "normal",
+        color: str = INK,
+        max_height: float | None = None,
+    ) -> float:
+        prop = FontProperties(family="DejaVu Sans", size=size, weight=weight)
+        lines = []
+        for paragraph in content.split("\n"):
+            current = ""
+            for word in paragraph.split():
+                candidate = f"{current} {word}".strip()
+                points, _, _ = TEXT.get_text_width_height_descent(
+                    candidate, prop, False
+                )
+                if current and points * 25.4 / 72 > width:
+                    lines.append(current)
+                    current = word
+                else:
+                    current = candidate
+            lines.append(current)
+        height = len(lines) * size * 0.46
+        if max_height is not None and height > max_height:
+            raise ValueError(f"Hoja {self.page}: texto demasiado alto: {content}")
+        self.ax.text(
+            x,
+            y,
+            "\n".join(lines),
+            va="top",
+            ha="left",
+            fontsize=size,
+            fontweight=weight,
+            color=color,
+            linespacing=1.3,
+            zorder=4,
+        )
+        return height
 
     def add(self, node: Node) -> None:
         self.nodes[node.name] = node
@@ -700,6 +752,466 @@ def contracts() -> TechnicalSheet:
     return s
 
 
+def entra_configuration() -> TechnicalSheet:
+    s = TechnicalSheet(
+        6,
+        "Configuración previa: dos registros distintos, "
+        "permisos delegados y consentimiento.",
+    )
+    nodes = [
+        Node(
+            "tenant",
+            15,
+            51,
+            267,
+            20,
+            "Microsoft Entra ID → Directorio del proyecto",
+            "Directory (tenant) ID; usuarios miembros o invitados admitidos.",
+            "azure",
+        ),
+        Node(
+            "frontend",
+            15,
+            82,
+            127,
+            43,
+            "App registration: Streamlit",
+            "Application (client) ID + client secret del frontend.\n"
+            "Web redirect: localhost:8501/oauth2callback.\n"
+            "Destino: .streamlit/secrets.toml [auth.microsoft].",
+            "azure",
+        ),
+        Node(
+            "api_reg",
+            155,
+            82,
+            127,
+            43,
+            "App registration: FastAPI",
+            "Application (client) ID distinto; tokens v2 para la API.\n"
+            "Expose an API: api://<api-id>/access_as_user.\n"
+            "Client secret API → APP_ENTRA_API_CLIENT_SECRET.",
+            "azure",
+        ),
+        Node(
+            "frontend_grant",
+            15,
+            137,
+            267,
+            20,
+            "Permiso delegado del frontend → FastAPI",
+            "Streamlit solicita access_as_user; "
+            "preautorizar frontend o conceder consentimiento.",
+            "azure",
+        ),
+        Node(
+            "downstream_grant",
+            15,
+            170,
+            267,
+            23,
+            "Permisos delegados de FastAPI → Azure + consentimiento de administrador",
+            "Search user_impersonation + Microsoft Cognitive Services "
+            "user_impersonation.\n"
+            "Habilitan OBO; los roles RBAC del usuario autorizan después los datos.",
+            "azure",
+        ),
+    ]
+    for node in nodes:
+        s.add(node)
+    s.edge("tenant", "frontend", via=[(148.5, 76), (78.5, 76)])
+    s.edge("tenant", "api_reg", via=[(148.5, 76), (218.5, 76)])
+    s.edge("frontend", "frontend_grant", via=[(78.5, 131), (148.5, 131)])
+    s.edge("api_reg", "frontend_grant", via=[(218.5, 131), (148.5, 131)])
+    s.edge("frontend_grant", "downstream_grant")
+    return s
+
+
+def rbac_authorization() -> TechnicalSheet:
+    s = TechnicalSheet(
+        7, "RBAC = principal + rol + scope del recurso. Se evalúa en el servicio Azure."
+    )
+    nodes = [
+        Node(
+            "obo_identity",
+            15,
+            51,
+            267,
+            24,
+            "Entra emite un token OBO para cada destinatario",
+            "Principal: usuario (oid) y sus grupos. "
+            "El secreto identifica a la API en el intercambio.\n"
+            "El rol de la identidad de Container Apps "
+            "no sustituye los permisos del usuario.",
+            "azure",
+        ),
+        Node(
+            "search_role",
+            15,
+            88,
+            127,
+            37,
+            "Azure AI Search · Roles de datos",
+            "Principal: grupo autorizado de Entra.\n"
+            "Rol: Search Index Data Contributor (carga/consulta).\n"
+            "Scope: recurso Search; se asigna en Access control (IAM).\n"
+            "TF: search_user_group_object_id = Object ID del grupo.",
+            "azure",
+        ),
+        Node(
+            "openai_role",
+            155,
+            88,
+            127,
+            37,
+            "Azure OpenAI · Rol de datos",
+            "Principal: usuario o grupo autorizado de Entra.\n"
+            "Rol: Cognitive Services OpenAI User.\n"
+            "Scope: cuenta Azure OpenAI; Access control (IAM).\n"
+            "TF: openai_user_object_ids = Object IDs de usuarios.",
+            "azure",
+        ),
+        Node(
+            "search_allowed",
+            43,
+            137,
+            71,
+            19,
+            "Token + rol\n¿autorizan?",
+            kind="decision",
+        ),
+        Node(
+            "openai_allowed",
+            183,
+            137,
+            71,
+            19,
+            "Token + rol\n¿autorizan?",
+            kind="decision",
+        ),
+        Node(
+            "search_ok",
+            15,
+            174,
+            80,
+            18,
+            "Operación Search",
+            "Indexar o consultar.",
+            "azure",
+        ),
+        Node("search_deny", 103, 170, 39, 23, "403 API", "Search deniega.", "error"),
+        Node(
+            "openai_ok",
+            155,
+            174,
+            80,
+            18,
+            "Operación OpenAI",
+            "Generar respuesta.",
+            "azure",
+        ),
+        Node("openai_deny", 243, 170, 39, 23, "502 API", "OpenAI: HTTP 403.", "error"),
+    ]
+    for node in nodes:
+        s.add(node)
+    s.edge("obo_identity", "search_role", via=[(148.5, 81), (78.5, 81)])
+    s.edge("obo_identity", "openai_role", via=[(148.5, 81), (218.5, 81)])
+    s.edge("search_role", "search_allowed")
+    s.edge("openai_role", "openai_allowed")
+    s.edge("search_allowed", "search_ok", label="Sí", label_at=(54, 160))
+    s.edge(
+        "search_allowed",
+        "search_deny",
+        sp="E",
+        label="No",
+        label_at=(117, 159),
+        via=[(122.5, 146.5)],
+    )
+    s.edge("openai_allowed", "openai_ok", label="Sí", label_at=(194, 160))
+    s.edge(
+        "openai_allowed",
+        "openai_deny",
+        sp="E",
+        label="No",
+        label_at=(257, 159),
+        via=[(262.5, 146.5)],
+    )
+    return s
+
+
+def local_configuration() -> TechnicalSheet:
+    s = TechnicalSheet(
+        8,
+        "Archivos en la raíz del proyecto; "
+        "Settings y st.secrets leen configuraciones distintas.",
+    )
+    nodes = [
+        Node(
+            "dotenv",
+            15,
+            52,
+            127,
+            38,
+            ".env.example → .env",
+            "Copiar y completar APP_ENTRA_*, APP_AZURE_* y URL API.\n"
+            "Origen: registros Entra, recursos/índices y deployments.\n"
+            "Pydantic lo lee; el launcher no exporta todo el archivo.",
+            "note",
+        ),
+        Node(
+            "toml",
+            155,
+            52,
+            127,
+            38,
+            ".streamlit/secrets.toml.example → secrets.toml",
+            "[auth]: redirect_uri, cookie_secret, expose_tokens.\n"
+            "[auth.microsoft]: client_id, client_secret, metadata,\n"
+            "scope OIDC + api://<api-id>/access_as_user.",
+            "note",
+        ),
+        Node(
+            "settings",
+            15,
+            104,
+            127,
+            30,
+            "get_settings() → Settings(BaseSettings)",
+            "Prioridad: environment del proceso > .env > defaults.\n"
+            "env_prefix = APP_; valida IDs, endpoints y configuración.",
+        ),
+        Node(
+            "st_secrets",
+            155,
+            104,
+            127,
+            30,
+            "Streamlit → st.secrets / st.login()",
+            "Lee el TOML para OIDC. Frontend secret: valor de Entra.\n"
+            "cookie_secret: aleatorio local, no viene de Azure.",
+        ),
+        Node(
+            "processes",
+            15,
+            151,
+            127,
+            28,
+            "Procesos: Uvicorn + Streamlit",
+            "FastAPI: settings → JWT, OBO, Search y OpenAI.\n"
+            "Streamlit: settings.api_base_url → destino HTTP.",
+        ),
+        Node(
+            "session",
+            155,
+            151,
+            127,
+            28,
+            "Sesión Microsoft → access token API",
+            "expose_tokens = [access]; require_login() lo obtiene.\n"
+            "Token generado en sesión: no se escribe en .env.",
+        ),
+    ]
+    for node in nodes:
+        s.add(node)
+    s.edge("dotenv", "settings")
+    s.edge("settings", "processes")
+    s.edge("toml", "st_secrets")
+    s.edge("st_secrets", "session")
+    s.text(
+        15,
+        185,
+        "run_local.sh exporta APP_API_BASE_URL desde host/puerto "
+        "o environment existente; "
+        "prevalece sobre .env.",
+        267,
+        9.5,
+    )
+    return s
+
+
+def variable_origins() -> TechnicalSheet:
+    s = TechnicalSheet(
+        9,
+        "Tabla de origen → variable → consumidor. "
+        "Cada nombre de la primera columna lleva APP_.",
+    )
+    table(
+        s,
+        51,
+        [92, 90, 85],
+        ["Variable en .env (prefijo APP_)", "Dónde obtener el valor", "Dónde se usa"],
+        [
+            [
+                "ENTRA_TENANT_ID",
+                "Entra ID: Overview → Directory (tenant) ID",
+                "JWT issuer/tid + OBO; tenant también en metadata OIDC",
+            ],
+            [
+                "ENTRA_API_CLIENT_ID",
+                "App registration FastAPI → Application (client) ID",
+                "JWT aud; OBO client_id;\nscope API en el TOML",
+            ],
+            [
+                "ENTRA_FRONTEND_CLIENT_ID",
+                "App registration Streamlit → Application (client) ID",
+                "JWT azp; mismo ID en\n[auth.microsoft].client_id",
+            ],
+            [
+                "ENTRA_API_CLIENT_SECRET",
+                "Registro FastAPI → Certificates & secrets → VALUE",
+                "OBO; valor del secreto,\nno Secret ID",
+            ],
+            [
+                "AZURE_SEARCH_ENDPOINT",
+                "Recurso Search: Overview / output search_service_endpoint",
+                "SearchClient.endpoint",
+            ],
+            [
+                "AZURE_SEARCH_TEXT_INDEX_NAME",
+                "Search → Indexes; Terraform crea índice textual",
+                "SearchClient.index_name",
+            ],
+            [
+                "AZURE_OPENAI_ENDPOINT",
+                "Endpoint del recurso / output azure_openai_endpoint",
+                "Base HTTPS del cliente chat",
+            ],
+            [
+                "AZURE_OPENAI_CHAT_DEPLOYMENT",
+                "Deployment de modelo / output azure_openai_chat_deployment_name",
+                "Campo model de chat;\nno el ID del recurso",
+            ],
+            [
+                "API_BASE_URL",
+                "Local: launcher host/puerto. Azure: output container_app_url",
+                "Streamlit → destino FastAPI",
+            ],
+        ],
+        13.5,
+    )
+    s.text(
+        15,
+        184,
+        "TOML: client_secret = VALUE del secreto del frontend; "
+        "cookie_secret = aleatorio generado. "
+        "API y frontend usan secretos distintos.",
+        267,
+        9.5,
+    )
+    s.mermaid_override = """flowchart LR
+  Entra["Entra: tenant + dos app registrations"] --> IDs["Tenant / API ID / FE ID"]
+  IDs --> ENV[".env: APP_ENTRA_*"]
+  Entra --> APISecret["VALUE secreto API"]
+  APISecret --> ENV
+  Entra --> FESecret["VALUE secreto frontend"]
+  FESecret --> TOML[".streamlit/secrets.toml"]
+  IDs --> TOML
+  Random["Generador aleatorio local"] -->|"cookie_secret"| TOML
+  Search["Search: endpoint e índice"] --> ENV
+  Models["OpenAI: endpoint y deployment"] --> ENV
+  Launcher["run_local.sh: host/puerto"] --> Process["Environment: APP_API_BASE_URL"]
+  URL["Output container_app_url"] --> Frontend["Configuración del hosting Streamlit"]
+  Frontend --> Process
+  Process --> Settings
+  ENV --> Settings["Pydantic Settings"]
+  TOML --> OIDC["Streamlit OIDC"]
+"""
+    return s
+
+
+def azure_configuration() -> TechnicalSheet:
+    s = TechnicalSheet(
+        10,
+        "Terraform configura la API; "
+        "GitHub Environments configura los jobs. Son ámbitos distintos.",
+    )
+    nodes = [
+        Node(
+            "terraform_input",
+            15,
+            51,
+            127,
+            35,
+            "Terraform → recursos, outputs e inputs",
+            "Endpoints Search/OpenAI y nombre del deployment.\n"
+            "Inputs: entra_tenant_id, API/FE client IDs.\n"
+            "Secret API: TF_VAR_entra_api_client_secret o creación opcional.",
+            "azure",
+        ),
+        Node(
+            "github_input",
+            155,
+            51,
+            127,
+            35,
+            "GitHub → Environments: evaluation / production",
+            "vars: AZURE_CLIENT_ID, AZURE_TENANT_ID,\n"
+            "AZURE_SUBSCRIPTION_ID; desde Azure/outputs.\n"
+            "evaluation: EVAL_AZURE_* desde recursos/outputs.\n"
+            "production: nombres ACR, imagen, RG y Container App.",
+        ),
+        Node(
+            "container_env",
+            15,
+            100,
+            127,
+            44,
+            "Container Apps → env y secretRef",
+            "env: APP_AZURE_*, APP_ENTRA_* IDs, APP_ENVIRONMENT.\n"
+            "Secret: entra-api-client-secret.\n"
+            "env APP_ENTRA_API_CLIENT_SECRET → referencia al secret.\n"
+            "Terraform inyecta valores; no copia el .env local.",
+            "azure",
+        ),
+        Node(
+            "runner_env",
+            155,
+            100,
+            127,
+            44,
+            "GitHub Actions → environment del runner",
+            "Workflow mapea vars.EVAL_AZURE_* a APP_AZURE_*.\n"
+            "azure/login OIDC → identidades eval / producción.\n"
+            "Eval: Search + OpenAI. Prod: build ACR + update app.\n"
+            "Este workflow no usa client secret de Azure.",
+        ),
+        Node(
+            "runtime_env",
+            15,
+            159,
+            127,
+            21,
+            "FastAPI → Settings → JWT/OBO/clientes",
+            "Variables del proceso prevalecen sobre defaults.",
+        ),
+        Node(
+            "release",
+            155,
+            159,
+            127,
+            21,
+            "CI → imagen aprobada → nueva revisión",
+            "CI actualiza la imagen; Terraform mantiene los env.",
+            "azure",
+        ),
+    ]
+    for node in nodes:
+        s.add(node)
+    s.edge("terraform_input", "container_env")
+    s.edge("container_env", "runtime_env")
+    s.edge("github_input", "runner_env")
+    s.edge("runner_env", "release")
+    s.text(
+        15,
+        186,
+        "Key Vault está preparado, sin conexión actual como fuente de env. "
+        "Streamlit configura su TOML y URL API en su hosting.",
+        267,
+        9.5,
+    )
+    return s
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--preview-dir", type=Path)
@@ -721,13 +1233,26 @@ def main() -> None:
             {
                 "Title": "RAG Manual: flujo técnico de aplicación y Azure",
                 "Subject": (
-                    "Cinco hojas A4: secuencia, JWT/OBO, ingestión, RAG y contratos"
+                    "Diez hojas A4: flujo, Entra, RBAC y configuración local/Azure"
                 ),
                 "Author": "RAG Manual",
             }
         )
         for (slug, _), factory in zip(
-            PAGES, [sequence, authentication, ingestion, answer, contracts], strict=True
+            PAGES,
+            [
+                sequence,
+                authentication,
+                ingestion,
+                answer,
+                contracts,
+                entra_configuration,
+                rbac_authorization,
+                local_configuration,
+                variable_origins,
+                azure_configuration,
+            ],
+            strict=True,
         ):
             sheet = factory()
             pdf.savefig(sheet.fig)
@@ -762,7 +1287,7 @@ img { display:block; width:100%; height:100%; }
 }
 </style>
 <header><h1>Flujo técnico de la aplicación y Azure</h1>
-<p>Cinco hojas A4 horizontales. Imprime al 100 %, una página por hoja.</p>
+<p>Diez hojas A4 horizontales. Imprime al 100 %, una página por hoja.</p>
 <p><a href="flujo-tecnico-a4.pdf">Abrir PDF</a> ·
 <a href="README.md">Contratos, errores y fuentes</a></p></header>
 """

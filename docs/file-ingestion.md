@@ -86,8 +86,12 @@ curl -X POST http://localhost:8000/api/v1/queries/answer \
   -d '{"question":"¿Qué mantenimiento requiere?","document_id":"<hash>"}'
 ```
 
-La respuesta incluye `answer` y los fragmentos de `context` usados. Si no se
-recupera contexto, devuelve una respuesta segura y no llama al modelo generador.
+La respuesta incluye `answer` y los fragmentos de `context` usados. El
+[flujo con LangGraph](langgraph-flow.md) puede simplificar localmente una consulta
+vacía y volver a buscar; por defecto permite dos búsquedas en total. Si sigue
+sin contexto, devuelve una respuesta segura sin obtener un token OpenAI ni
+llamar al generador. Con contexto, comprueba las citas y puede repararlas una
+vez; si siguen siendo inválidas, devuelve una abstención conservando el contexto.
 
 Se admite un archivo por petición de hasta **10 MiB**:
 

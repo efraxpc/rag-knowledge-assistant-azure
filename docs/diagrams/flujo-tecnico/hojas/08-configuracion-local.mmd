@@ -1,0 +1,16 @@
+flowchart TB
+  dotenv[".env.example → .env<br/>Copiar y completar APP_ENTRA_*, APP_AZURE_* y URL API.<br/>Origen: registros Entra, recursos/índices y deployments.<br/>Pydantic lo lee; el launcher no exporta todo el archivo."]:::note
+  toml[".streamlit/secrets.toml.example → secrets.toml<br/>[auth]: redirect_uri, cookie_secret, expose_tokens.<br/>[auth.microsoft]: client_id, client_secret, metadata,<br/>scope OIDC + api://&lt;api-id&gt;/access_as_user."]:::note
+  settings["get_settings() → Settings(BaseSettings)<br/>Prioridad: environment del proceso &gt; .env &gt; defaults.<br/>env_prefix = APP_; valida IDs, endpoints y configuración."]:::local
+  st_secrets["Streamlit → st.secrets / st.login()<br/>Lee el TOML para OIDC. Frontend secret: valor de Entra.<br/>cookie_secret: aleatorio local, no viene de Azure."]:::local
+  processes["Procesos: Uvicorn + Streamlit<br/>FastAPI: settings → JWT, OBO, Search y OpenAI.<br/>Streamlit: settings.api_base_url → destino HTTP."]:::local
+  session["Sesión Microsoft → access token API<br/>expose_tokens = [access]; require_login() lo obtiene.<br/>Token generado en sesión: no se escribe en .env."]:::local
+  dotenv --> settings
+  settings --> processes
+  toml --> st_secrets
+  st_secrets --> session
+  classDef local fill:#EFF4F8,stroke:#62788A,color:#172C42
+  classDef azure fill:#EDF6F2,stroke:#62788A,color:#172C42
+  classDef error fill:#FFF0EC,stroke:#62788A,color:#172C42
+  classDef note fill:#FFF7E8,stroke:#62788A,color:#172C42
+  classDef decision fill:#FFFFFF,stroke:#62788A,color:#172C42

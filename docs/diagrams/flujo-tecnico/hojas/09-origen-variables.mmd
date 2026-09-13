@@ -1,0 +1,17 @@
+flowchart LR
+  Entra["Entra: tenant + dos app registrations"] --> IDs["Tenant / API ID / FE ID"]
+  IDs --> ENV[".env: APP_ENTRA_*"]
+  Entra --> APISecret["VALUE secreto API"]
+  APISecret --> ENV
+  Entra --> FESecret["VALUE secreto frontend"]
+  FESecret --> TOML[".streamlit/secrets.toml"]
+  IDs --> TOML
+  Random["Generador aleatorio local"] -->|"cookie_secret"| TOML
+  Search["Search: endpoint e índice"] --> ENV
+  Models["OpenAI: endpoint y deployment"] --> ENV
+  Launcher["run_local.sh: host/puerto"] --> Process["Environment: APP_API_BASE_URL"]
+  URL["Output container_app_url"] --> Frontend["Configuración del hosting Streamlit"]
+  Frontend --> Process
+  Process --> Settings
+  ENV --> Settings["Pydantic Settings"]
+  TOML --> OIDC["Streamlit OIDC"]

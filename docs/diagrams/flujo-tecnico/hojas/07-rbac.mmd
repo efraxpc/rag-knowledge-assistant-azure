@@ -1,0 +1,23 @@
+flowchart TB
+  obo_identity["Entra emite un token OBO para cada destinatario<br/>Principal: usuario (oid) y sus grupos. El secreto identifica a la API en el intercambio.<br/>El rol de la identidad de Container Apps no sustituye los permisos del usuario."]:::azure
+  search_role["Azure AI Search · Roles de datos<br/>Principal: grupo autorizado de Entra.<br/>Rol: Search Index Data Contributor (carga/consulta).<br/>Scope: recurso Search; se asigna en Access control (IAM).<br/>TF: search_user_group_object_id = Object ID del grupo."]:::azure
+  openai_role["Azure OpenAI · Rol de datos<br/>Principal: usuario o grupo autorizado de Entra.<br/>Rol: Cognitive Services OpenAI User.<br/>Scope: cuenta Azure OpenAI; Access control (IAM).<br/>TF: openai_user_object_ids = Object IDs de usuarios."]:::azure
+  search_allowed{"Token + rol<br/>¿autorizan?"}:::decision
+  openai_allowed{"Token + rol<br/>¿autorizan?"}:::decision
+  search_ok["Operación Search<br/>Indexar o consultar."]:::azure
+  search_deny["403 API<br/>Search deniega."]:::error
+  openai_ok["Operación OpenAI<br/>Generar respuesta."]:::azure
+  openai_deny["502 API<br/>OpenAI: HTTP 403."]:::error
+  obo_identity --> search_role
+  obo_identity --> openai_role
+  search_role --> search_allowed
+  openai_role --> openai_allowed
+  search_allowed -->|"Sí"| search_ok
+  search_allowed -->|"No"| search_deny
+  openai_allowed -->|"Sí"| openai_ok
+  openai_allowed -->|"No"| openai_deny
+  classDef local fill:#EFF4F8,stroke:#62788A,color:#172C42
+  classDef azure fill:#EDF6F2,stroke:#62788A,color:#172C42
+  classDef error fill:#FFF0EC,stroke:#62788A,color:#172C42
+  classDef note fill:#FFF7E8,stroke:#62788A,color:#172C42
+  classDef decision fill:#FFFFFF,stroke:#62788A,color:#172C42

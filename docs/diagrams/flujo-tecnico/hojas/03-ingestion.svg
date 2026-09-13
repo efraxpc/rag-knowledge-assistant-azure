@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-09-13T18:07:19.714686</dc:date>
+    <dc:date>2026-09-13T18:34:58.109292</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -32,97 +32,85 @@ z
    <g id="line2d_1">
     <path d="M 42.519685 34.015748 
 L 799.370079 34.015748 
-" clip-path="url(#pf771bf08ba)" style="fill: none; stroke: #24567e; stroke-width: 2; stroke-linecap: square"/>
+" clip-path="url(#pccefdbe53b)" style="fill: none; stroke: #24567e; stroke-width: 2; stroke-linecap: square"/>
    </g>
    <g id="line2d_2">
     <path d="M 42.519685 558.425197 
 L 799.370079 558.425197 
-" clip-path="url(#pf771bf08ba)" style="fill: none; stroke: #62788a; stroke-width: 0.65; stroke-linecap: square"/>
+" clip-path="url(#pccefdbe53b)" style="fill: none; stroke: #62788a; stroke-width: 0.65; stroke-linecap: square"/>
    </g>
    <g id="patch_2">
     <path d="M 282.047244 205.094158 
 Q 282.047244 216.849034 282.047244 227.485877 
-" clip-path="url(#pf771bf08ba)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pccefdbe53b)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
     <path d="M 284.047244 223.485877 
 L 282.047244 227.485877 
 L 280.047244 223.485877 
 z
-" clip-path="url(#pf771bf08ba)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pccefdbe53b)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
    </g>
    <g id="patch_3">
     <path d="M 282.047244 281.629591 
 Q 282.047244 293.384467 282.047244 304.02131 
-" clip-path="url(#pf771bf08ba)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pccefdbe53b)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
     <path d="M 284.047244 300.02131 
 L 282.047244 304.02131 
 L 280.047244 300.02131 
 z
-" clip-path="url(#pf771bf08ba)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pccefdbe53b)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
    </g>
    <g id="patch_4">
     <path d="M 409.1883 255.055653 
 Q 498.897637 249.448819 587.491118 243.911726 
-" clip-path="url(#pf771bf08ba)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pccefdbe53b)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
     <path d="M 583.374151 242.165134 
 L 587.491118 243.911726 
 L 583.623664 246.157345 
 z
-" clip-path="url(#pf771bf08ba)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pccefdbe53b)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
    </g>
    <g id="patch_5">
     <path d="M 522.567206 354.475434 
 Q 555.593698 359.291797 587.513858 363.946821 
-" clip-path="url(#pf771bf08ba)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pccefdbe53b)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
     <path d="M 583.84434 361.390527 
 L 587.513858 363.946821 
 L 583.267112 365.348659 
 z
-" clip-path="url(#pf771bf08ba)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pccefdbe53b)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
    </g>
    <g id="patch_6">
     <path d="M 282.047244 403.5197 
 Q 282.047244 416.693862 282.047244 428.749989 
-" clip-path="url(#pf771bf08ba)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pccefdbe53b)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
     <path d="M 284.047244 424.749989 
 L 282.047244 428.749989 
 L 280.047244 424.749989 
 z
-" clip-path="url(#pf771bf08ba)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pccefdbe53b)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
    </g>
    <g id="patch_7">
     <path d="M 522.500769 463.831095 
 Q 555.588661 476.928386 587.636998 489.614186 
-" clip-path="url(#pf771bf08ba)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pccefdbe53b)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
     <path d="M 584.653868 486.282379 
 L 587.636998 489.614186 
 L 583.181675 490.001605 
 z
-" clip-path="url(#pf771bf08ba)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pccefdbe53b)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
    </g>
    <g id="patch_8">
     <path d="M 282.047244 497.0637 
 Q 282.047244 504.569013 282.047244 510.956292 
-" clip-path="url(#pf771bf08ba)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pccefdbe53b)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
     <path d="M 284.047244 506.956292 
 L 282.047244 510.956292 
 L 280.047244 506.956292 
 z
-" clip-path="url(#pf771bf08ba)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pccefdbe53b)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
    </g>
    <g id="text_1">
-    <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #24567e" x="42.519685" y="53.610424" transform="rotate(-0 42.519685 53.610424)">RAG MANUAL / FLUJO TÉCNICO IMPLEMENTADO</text>
-   </g>
-   <g id="text_2">
-    <text style="font-weight: 700; font-size: 20px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="84.028371" transform="rotate(-0 42.519685 84.028371)">Ingestión: del archivo al índice textual</text>
-   </g>
-   <g id="text_3">
-    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="110.025603" transform="rotate(-0 42.519685 110.025603)">POST /api/v1/documents/upload · Dependencias: JWT → OBO(Search) → FileIngestionService.</text>
-   </g>
-   <g id="text_4">
-    <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="576.562451" transform="rotate(-0 42.519685 576.562451)">Código revisado: 13 septiembre 2026 · A4 horizontal</text>
-   </g>
-   <g id="text_5">
-    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #172c42" x="799.370079" y="576.602373" transform="rotate(-0 799.370079 576.602373)">3 / 5</text>
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #172c42" x="799.370079" y="576.602373" transform="rotate(-0 799.370079 576.602373)">3 / 10</text>
    </g>
    <g id="patch_9">
     <path d="M 48.188976 147.401575 
@@ -135,13 +123,7 @@ Q 42.519685 204.094488 42.519685 198.425197
 L 42.519685 153.070866 
 Q 42.519685 147.401575 48.188976 147.401575 
 z
-" clip-path="url(#pf771bf08ba)" style="fill: #eff4f8; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
-   </g>
-   <g id="text_6">
-    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="163.544895" transform="rotate(-0 53.858268 163.544895)">upload_document(file: UploadFile)</text>
-   </g>
-   <g id="text_7">
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="179.854186" transform="rotate(-0 53.858268 179.854186)">multipart/form-data; ingest(filename, file.file).</text>
+" clip-path="url(#pccefdbe53b)" style="fill: #eff4f8; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
    <g id="patch_10">
     <path d="M 282.047244 229.606299 
@@ -149,7 +131,7 @@ L 408.188976 255.11811
 L 282.047244 280.629921 
 L 155.905512 255.11811 
 z
-" clip-path="url(#pf771bf08ba)" style="fill: #ffffff; stroke: #62788a; stroke-linejoin: miter"/>
+" clip-path="url(#pccefdbe53b)" style="fill: #ffffff; stroke: #62788a; stroke-linejoin: miter"/>
    </g>
    <g id="patch_11">
     <path d="M 48.188976 306.141732 
@@ -162,15 +144,7 @@ Q 42.519685 402.519685 42.519685 396.850394
 L 42.519685 311.811024 
 Q 42.519685 306.141732 48.188976 306.141732 
 z
-" clip-path="url(#pf771bf08ba)" style="fill: #eff4f8; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
-   </g>
-   <g id="text_8">
-    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="322.285053" transform="rotate(-0 53.858268 322.285053)">extract_text() → chunk_pages()</text>
-   </g>
-   <g id="text_9">
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 338.594343)">PDF: pypdf; TXT/MD: UTF-8-SIG; sin OCR.</text>
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 351.071999)">Ventana: 1000 caracteres; solape: 200; no cruza páginas.</text>
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 363.029656)">document_id = SHA256(source + NUL + bytes).</text>
+" clip-path="url(#pccefdbe53b)" style="fill: #eff4f8; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
    <g id="patch_12">
     <path d="M 48.188976 430.866142 
@@ -183,14 +157,7 @@ Q 42.519685 496.062992 42.519685 490.393701
 L 42.519685 436.535433 
 Q 42.519685 430.866142 48.188976 430.866142 
 z
-" clip-path="url(#pf771bf08ba)" style="fill: #edf6f2; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
-   </g>
-   <g id="text_10">
-    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="447.009462" transform="rotate(-0 53.858268 447.009462)">API → Azure AI Search: upload_documents()</text>
-   </g>
-   <g id="text_11">
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 463.718752)">Lotes: hasta 1000 registros y límite conservador de 15 MB.</text>
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 475.676409)">IDs estables; se verifica succeeded por registro.</text>
+" clip-path="url(#pccefdbe53b)" style="fill: #edf6f2; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
    <g id="patch_13">
     <path d="M 48.188976 513.070866 
@@ -203,10 +170,7 @@ Q 42.519685 547.086614 42.519685 541.417323
 L 42.519685 518.740157 
 Q 42.519685 513.070866 48.188976 513.070866 
 z
-" clip-path="url(#pf771bf08ba)" style="fill: #eff4f8; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
-   </g>
-   <g id="text_12">
-    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="529.214187" transform="rotate(-0 53.858268 529.214187)">200 · UploadDocumentResponse</text>
+" clip-path="url(#pccefdbe53b)" style="fill: #eff4f8; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
    <g id="patch_14">
     <path d="M 595.275591 189.92126 
@@ -219,15 +183,7 @@ Q 589.606299 297.637795 589.606299 291.968504
 L 589.606299 195.590551 
 Q 589.606299 189.92126 595.275591 189.92126 
 z
-" clip-path="url(#pf771bf08ba)" style="fill: #fff0ec; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
-   </g>
-   <g id="text_13">
-    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="600.944882" y="206.06458" transform="rotate(-0 600.944882 206.06458)">415 / 413 / 422</text>
-   </g>
-   <g id="text_14">
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 222.373871)">415: extensión no admitida.</text>
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 234.331527)">413: archivo &gt; 10 MiB.</text>
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 246.289183)">422: nombre inválido.</text>
+" clip-path="url(#pccefdbe53b)" style="fill: #fff0ec; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
    <g id="patch_15">
     <path d="M 595.275591 323.149606 
@@ -240,14 +196,7 @@ Q 589.606299 405.354331 589.606299 399.685039
 L 589.606299 328.818898 
 Q 589.606299 323.149606 595.275591 323.149606 
 z
-" clip-path="url(#pf771bf08ba)" style="fill: #fff0ec; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
-   </g>
-   <g id="text_15">
-    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="600.944882" y="339.292927" transform="rotate(-0 600.944882 339.292927)">422 · invalid_document</text>
-   </g>
-   <g id="text_16">
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 356.002217)">UTF-8 inválido; PDF cifrado, ilegible o</text>
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 367.959873)">sin texto.</text>
+" clip-path="url(#pccefdbe53b)" style="fill: #fff0ec; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
    <g id="patch_16">
     <path d="M 595.275591 433.700787 
@@ -260,30 +209,81 @@ Q 589.606299 547.086614 589.606299 541.417323
 L 589.606299 439.370079 
 Q 589.606299 433.700787 595.275591 433.700787 
 z
-" clip-path="url(#pf771bf08ba)" style="fill: #fff0ec; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+" clip-path="url(#pccefdbe53b)" style="fill: #fff0ec; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #24567e" x="42.519685" y="53.610424" transform="rotate(-0 42.519685 53.610424)">RAG MANUAL / FLUJO TÉCNICO IMPLEMENTADO</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 20px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="84.028371" transform="rotate(-0 42.519685 84.028371)">Ingestión: del archivo al índice textual</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="110.025603" transform="rotate(-0 42.519685 110.025603)">POST /api/v1/documents/upload · Dependencias: JWT → OBO(Search) → FileIngestionService.</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="576.562451" transform="rotate(-0 42.519685 576.562451)">Código revisado: 13 septiembre 2026 · A4 horizontal</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="163.544895" transform="rotate(-0 53.858268 163.544895)">upload_document(file: UploadFile)</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="179.854186" transform="rotate(-0 53.858268 179.854186)">multipart/form-data; ingest(filename, file.file).</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(205.573025 252.159673)">Nombre, formato y tamaño</text>
+    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(256.194119 263.774985)">¿válidos?</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="322.285053" transform="rotate(-0 53.858268 322.285053)">extract_text() → chunk_pages()</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 338.594343)">PDF: pypdf; TXT/MD: UTF-8-SIG; sin OCR.</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 351.071999)">Ventana: 1000 caracteres; solape: 200; no cruza páginas.</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 363.029656)">document_id = SHA256(source + NUL + bytes).</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="447.009462" transform="rotate(-0 53.858268 447.009462)">API → Azure AI Search: upload_documents()</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 463.718752)">Lotes: hasta 1000 registros y límite conservador de 15 MB.</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 475.676409)">IDs estables; se verifica succeeded por registro.</text>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="529.214187" transform="rotate(-0 53.858268 529.214187)">200 · UploadDocumentResponse</text>
+   </g>
+   <g id="text_14">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="600.944882" y="206.06458" transform="rotate(-0 600.944882 206.06458)">415 / 413 / 422</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 222.373871)">415: extensión no admitida.</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 234.331527)">413: archivo &gt; 10 MiB.</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 246.289183)">422: nombre inválido.</text>
+   </g>
+   <g id="text_16">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="600.944882" y="339.292927" transform="rotate(-0 600.944882 339.292927)">422 · invalid_document</text>
    </g>
    <g id="text_17">
-    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="600.944882" y="449.844108" transform="rotate(-0 600.944882 449.844108)">403 / 502 / 503</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 356.002217)">UTF-8 inválido; PDF cifrado, ilegible o</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 367.959873)">sin texto.</text>
    </g>
    <g id="text_18">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="600.944882" y="449.844108" transform="rotate(-0 600.944882 449.844108)">403 / 502 / 503</text>
+   </g>
+   <g id="text_19">
     <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 466.153398)">403: acceso denegado.</text>
     <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 478.631054)">502: algún registro falló.</text>
     <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 490.588711)">503: índice inaccesible.</text>
    </g>
-   <g id="text_19">
+   <g id="text_20">
     <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #24567e" x="291.968504" y="290.303161" transform="rotate(-0 291.968504 290.303161)">Sí</text>
    </g>
-   <g id="text_20">
-    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #24567e" x="473.385827" y="239.279539" transform="rotate(-0 473.385827 239.279539)">No</text>
-   </g>
    <g id="text_21">
-    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(205.573025 252.159673)">Nombre, formato y tamaño</text>
-    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(256.194119 263.774985)">¿válidos?</text>
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #24567e" x="473.385827" y="239.279539" transform="rotate(-0 473.385827 239.279539)">No</text>
    </g>
   </g>
  </g>
  <defs>
-  <clipPath id="pf771bf08ba">
+  <clipPath id="pccefdbe53b">
    <rect x="0" y="0" width="841.889764" height="595.275591"/>
   </clipPath>
  </defs>

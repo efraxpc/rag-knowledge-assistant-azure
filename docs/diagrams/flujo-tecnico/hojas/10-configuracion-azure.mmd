@@ -1,0 +1,16 @@
+flowchart TB
+  terraform_input["Terraform → recursos, outputs e inputs<br/>Endpoints Search/OpenAI y nombre del deployment.<br/>Inputs: entra_tenant_id, API/FE client IDs.<br/>Secret API: TF_VAR_entra_api_client_secret o creación opcional."]:::azure
+  github_input["GitHub → Environments: evaluation / production<br/>vars: AZURE_CLIENT_ID, AZURE_TENANT_ID,<br/>AZURE_SUBSCRIPTION_ID; desde Azure/outputs.<br/>evaluation: EVAL_AZURE_* desde recursos/outputs.<br/>production: nombres ACR, imagen, RG y Container App."]:::local
+  container_env["Container Apps → env y secretRef<br/>env: APP_AZURE_*, APP_ENTRA_* IDs, APP_ENVIRONMENT.<br/>Secret: entra-api-client-secret.<br/>env APP_ENTRA_API_CLIENT_SECRET → referencia al secret.<br/>Terraform inyecta valores; no copia el .env local."]:::azure
+  runner_env["GitHub Actions → environment del runner<br/>Workflow mapea vars.EVAL_AZURE_* a APP_AZURE_*.<br/>azure/login OIDC → identidades eval / producción.<br/>Eval: Search + OpenAI. Prod: build ACR + update app.<br/>Este workflow no usa client secret de Azure."]:::local
+  runtime_env["FastAPI → Settings → JWT/OBO/clientes<br/>Variables del proceso prevalecen sobre defaults."]:::local
+  release["CI → imagen aprobada → nueva revisión<br/>CI actualiza la imagen; Terraform mantiene los env."]:::azure
+  terraform_input --> container_env
+  container_env --> runtime_env
+  github_input --> runner_env
+  runner_env --> release
+  classDef local fill:#EFF4F8,stroke:#62788A,color:#172C42
+  classDef azure fill:#EDF6F2,stroke:#62788A,color:#172C42
+  classDef error fill:#FFF0EC,stroke:#62788A,color:#172C42
+  classDef note fill:#FFF7E8,stroke:#62788A,color:#172C42
+  classDef decision fill:#FFFFFF,stroke:#62788A,color:#172C42

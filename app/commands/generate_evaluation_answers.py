@@ -25,6 +25,7 @@ from app.integrations.azure_text_search import AzureTextSearchAdapter
 from app.rag.contracts import TextChunkStore
 from app.rag.models import TextQuery
 from app.services.answer import AnswerService
+from app.services.answer_graph import AnswerGraphOptions
 from app.services.file_ingestion import SUPPORTED_EXTENSIONS, FileIngestionService
 
 
@@ -263,6 +264,13 @@ def main(argv: list[str] | None = None) -> int:
                     deployment=settings.azure_openai_chat_deployment,
                     credential=credential,
                     http_client=http_client,
+                ),
+                options=AnswerGraphOptions(
+                    max_search_attempts=settings.rag_max_search_attempts,
+                    max_generation_attempts=settings.rag_max_generation_attempts,
+                    max_context_characters=settings.rag_max_context_characters,
+                    verify_citations=settings.rag_verify_citations,
+                    trace_enabled=settings.rag_trace_enabled,
                 ),
             )
             document_ids = (

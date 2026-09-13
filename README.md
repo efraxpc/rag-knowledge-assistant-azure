@@ -10,8 +10,15 @@ También está disponible el [flujo de la aplicación y sus partes de Azure en c
 desde el inicio de sesión hasta la respuesta, con pasos numerados y la función
 de cada servicio.
 
-Para revisar endpoints, JWT/OBO, llamadas a Azure y ramas de error, consulta el
-[diagrama de flujo técnico en cinco hojas A4](docs/diagrams/flujo-tecnico/flujo-tecnico-a4.pdf).
+Para revisar endpoints, JWT/OBO, RBAC, registros de Entra y el origen/destino de
+la configuración local y Azure, consulta el
+[diagrama de flujo técnico en diez hojas A4](docs/diagrams/flujo-tecnico/flujo-tecnico-a4.pdf).
+
+La [visión técnica global en una página A4](docs/diagrams/vision-global/vision-global-a4.pdf)
+resume el flujo, la identidad, RBAC y la configuración en un solo mapa.
+
+El [flujo RAG con LangGraph](docs/langgraph-flow.md) explica las decisiones,
+límites, verificación de citas y una demostración offline paso a paso.
 
 ## Requisitos
 
@@ -91,8 +98,9 @@ para preparar el índice de texto y configurar el entorno.
 
 La API también permite indexar y recuperar chunks con embeddings precalculados
 mediante el patrón Adapter. La generación de embeddings y el OCR siguen pendientes.
-Las respuestas interactivas y el gate de CI comparten el mismo baseline RAG sobre
-el índice textual, de modo que CI evalúa el código candidato que atiende la API.
+Las respuestas interactivas y el gate de CI comparten el mismo flujo RAG con
+LangGraph sobre el índice textual, de modo que CI evalúa el código candidato
+que atiende la API.
 
 Consulta la [guía del almacén vectorial](docs/vector-store.md) para configurar
 Entra ID, preparar el índice y probar los endpoints:

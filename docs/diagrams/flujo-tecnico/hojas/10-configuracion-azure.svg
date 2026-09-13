@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="841.889764pt" height="595.275591pt" viewBox="0 0 841.889764 595.275591" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-09-13T18:35:00.588348</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 595.275591 
+L 841.889764 595.275591 
+L 841.889764 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="line2d_1">
+    <path d="M 42.519685 34.015748 
+L 799.370079 34.015748 
+" clip-path="url(#pa20ea44408)" style="fill: none; stroke: #24567e; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_2">
+    <path d="M 42.519685 558.425197 
+L 799.370079 558.425197 
+" clip-path="url(#pa20ea44408)" style="fill: none; stroke: #62788a; stroke-width: 0.65; stroke-linecap: square"/>
+   </g>
+   <g id="patch_2">
+    <path d="M 222.519685 244.782311 
+Q 222.519685 263.625273 222.519685 281.3502 
+" clip-path="url(#pa20ea44408)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
+    <path d="M 224.519685 277.3502 
+L 222.519685 281.3502 
+L 220.519685 277.3502 
+z
+" clip-path="url(#pa20ea44408)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 222.519685 409.188127 
+Q 222.519685 429.447887 222.519685 448.589614 
+" clip-path="url(#pa20ea44408)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
+    <path d="M 224.519685 444.589614 
+L 222.519685 448.589614 
+L 220.519685 444.589614 
+z
+" clip-path="url(#pa20ea44408)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 619.370079 244.782311 
+Q 619.370079 263.625273 619.370079 281.3502 
+" clip-path="url(#pa20ea44408)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
+    <path d="M 621.370079 277.3502 
+L 619.370079 281.3502 
+L 617.370079 277.3502 
+z
+" clip-path="url(#pa20ea44408)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 619.370079 409.188127 
+Q 619.370079 429.447887 619.370079 448.589614 
+" clip-path="url(#pa20ea44408)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
+    <path d="M 621.370079 444.589614 
+L 619.370079 448.589614 
+L 617.370079 444.589614 
+z
+" clip-path="url(#pa20ea44408)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
+   </g>
+   <g id="text_1">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #172c42" x="799.370079" y="576.602373" transform="rotate(-0 799.370079 576.602373)">10 / 10</text>
+   </g>
+   <g id="patch_6">
+    <path d="M 48.188976 144.566929 
+L 396.850394 144.566929 
+Q 402.519685 144.566929 402.519685 150.23622 
+L 402.519685 238.110236 
+Q 402.519685 243.779528 396.850394 243.779528 
+L 48.188976 243.779528 
+Q 42.519685 243.779528 42.519685 238.110236 
+L 42.519685 150.23622 
+Q 42.519685 144.566929 48.188976 144.566929 
+z
+" clip-path="url(#pa20ea44408)" style="fill: #edf6f2; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 445.03937 144.566929 
+L 793.700787 144.566929 
+Q 799.370079 144.566929 799.370079 150.23622 
+L 799.370079 238.110236 
+Q 799.370079 243.779528 793.700787 243.779528 
+L 445.03937 243.779528 
+Q 439.370079 243.779528 439.370079 238.110236 
+L 439.370079 150.23622 
+Q 439.370079 144.566929 445.03937 144.566929 
+z
+" clip-path="url(#pa20ea44408)" style="fill: #eff4f8; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 48.188976 283.464567 
+L 396.850394 283.464567 
+Q 402.519685 283.464567 402.519685 289.133858 
+L 402.519685 402.519685 
+Q 402.519685 408.188976 396.850394 408.188976 
+L 48.188976 408.188976 
+Q 42.519685 408.188976 42.519685 402.519685 
+L 42.519685 289.133858 
+Q 42.519685 283.464567 48.188976 283.464567 
+z
+" clip-path="url(#pa20ea44408)" style="fill: #edf6f2; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 445.03937 283.464567 
+L 793.700787 283.464567 
+Q 799.370079 283.464567 799.370079 289.133858 
+L 799.370079 402.519685 
+Q 799.370079 408.188976 793.700787 408.188976 
+L 445.03937 408.188976 
+Q 439.370079 408.188976 439.370079 402.519685 
+L 439.370079 289.133858 
+Q 439.370079 283.464567 445.03937 283.464567 
+z
+" clip-path="url(#pa20ea44408)" style="fill: #eff4f8; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 48.188976 450.708661 
+L 396.850394 450.708661 
+Q 402.519685 450.708661 402.519685 456.377953 
+L 402.519685 504.566929 
+Q 402.519685 510.23622 396.850394 510.23622 
+L 48.188976 510.23622 
+Q 42.519685 510.23622 42.519685 504.566929 
+L 42.519685 456.377953 
+Q 42.519685 450.708661 48.188976 450.708661 
+z
+" clip-path="url(#pa20ea44408)" style="fill: #eff4f8; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 445.03937 450.708661 
+L 793.700787 450.708661 
+Q 799.370079 450.708661 799.370079 456.377953 
+L 799.370079 504.566929 
+Q 799.370079 510.23622 793.700787 510.23622 
+L 445.03937 510.23622 
+Q 439.370079 510.23622 439.370079 504.566929 
+L 439.370079 456.377953 
+Q 439.370079 450.708661 445.03937 450.708661 
+z
+" clip-path="url(#pa20ea44408)" style="fill: #edf6f2; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #24567e" x="42.519685" y="53.610424" transform="rotate(-0 42.519685 53.610424)">RAG MANUAL / FLUJO TÉCNICO IMPLEMENTADO</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 20px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="84.028371" transform="rotate(-0 42.519685 84.028371)">Configuración: Azure y GitHub Actions</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="110.445603" transform="rotate(-0 42.519685 110.445603)">Terraform configura la API; GitHub Environments configura los jobs. Son ámbitos distintos.</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="576.562451" transform="rotate(-0 42.519685 576.562451)">Código revisado: 13 septiembre 2026 · A4 horizontal</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="160.71025" transform="rotate(-0 53.858268 160.71025)">Terraform → recursos, outputs e inputs</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 177.01954)">Endpoints Search/OpenAI y nombre del deployment.</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 188.977196)">Inputs: entra_tenant_id, API/FE client IDs.</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 201.732977)">Secret API: TF_VAR_entra_api_client_secret o creación opcional.</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="450.708661" y="160.71025" transform="rotate(-0 450.708661 160.71025)">GitHub → Environments: evaluation / production</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(450.708661 176.842977)">vars: AZURE_CLIENT_ID, AZURE_TENANT_ID,</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(450.708661 189.078759)">AZURE_SUBSCRIPTION_ID; desde Azure/outputs.</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(450.708661 201.31454)">evaluation: EVAL_AZURE_* desde recursos/outputs.</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(450.708661 213.550321)">production: nombres ACR, imagen, RG y Container App.</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="299.607887" transform="rotate(-0 53.858268 299.607887)">Container Apps → env y secretRef</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 315.740615)">env: APP_AZURE_*, APP_ENTRA_* IDs, APP_ENVIRONMENT.</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 327.976396)">Secret: entra-api-client-secret.</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 339.934053)">env APP_ENTRA_API_CLIENT_SECRET → referencia al secret.</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 352.169834)">Terraform inyecta valores; no copia el .env local.</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="450.708661" y="299.607887" transform="rotate(-0 450.708661 299.607887)">GitHub Actions → environment del runner</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(450.708661 315.917178)">Workflow mapea vars.EVAL_AZURE_* a APP_AZURE_*.</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(450.708661 328.672959)">azure/login OIDC → identidades eval / producción.</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(450.708661 340.630615)">Eval: Search + OpenAI. Prod: build ACR + update app.</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(450.708661 352.588271)">Este workflow no usa client secret de Azure.</text>
+   </g>
+   <g id="text_14">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="466.851982" transform="rotate(-0 53.858268 466.851982)">FastAPI → Settings → JWT/OBO/clientes</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="483.161272" transform="rotate(-0 53.858268 483.161272)">Variables del proceso prevalecen sobre defaults.</text>
+   </g>
+   <g id="text_16">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="450.708661" y="467.283982" transform="rotate(-0 450.708661 467.283982)">CI → imagen aprobada → nueva revisión</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="450.708661" y="483.161272" transform="rotate(-0 450.708661 483.161272)">CI actualiza la imagen; Terraform mantiene los env.</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="534.84261" transform="rotate(-0 42.519685 534.84261)">Key Vault está preparado, sin conexión actual como fuente de env. Streamlit configura su TOML y URL API en su hosting.</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pa20ea44408">
+   <rect x="0" y="0" width="841.889764" height="595.275591"/>
+  </clipPath>
+ </defs>
+</svg>

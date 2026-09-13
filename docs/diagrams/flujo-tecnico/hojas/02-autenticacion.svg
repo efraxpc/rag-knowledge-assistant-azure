@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-09-13T18:07:19.425108</dc:date>
+    <dc:date>2026-09-13T18:34:57.799817</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -32,87 +32,75 @@ z
    <g id="line2d_1">
     <path d="M 42.519685 34.015748 
 L 799.370079 34.015748 
-" clip-path="url(#pc7dbe4e27f)" style="fill: none; stroke: #24567e; stroke-width: 2; stroke-linecap: square"/>
+" clip-path="url(#pc968e69225)" style="fill: none; stroke: #24567e; stroke-width: 2; stroke-linecap: square"/>
    </g>
    <g id="line2d_2">
     <path d="M 42.519685 558.425197 
 L 799.370079 558.425197 
-" clip-path="url(#pc7dbe4e27f)" style="fill: none; stroke: #62788a; stroke-width: 0.65; stroke-linecap: square"/>
+" clip-path="url(#pc968e69225)" style="fill: none; stroke: #62788a; stroke-width: 0.65; stroke-linecap: square"/>
    </g>
    <g id="patch_2">
     <path d="M 282.047244 205.094504 
 Q 282.047244 218.268665 282.047244 230.324792 
-" clip-path="url(#pc7dbe4e27f)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pc968e69225)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
     <path d="M 284.047244 226.324792 
 L 282.047244 230.324792 
 L 280.047244 226.324792 
 z
-" clip-path="url(#pc7dbe4e27f)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pc968e69225)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
    </g>
    <g id="patch_3">
     <path d="M 282.047244 318.481368 
 Q 282.047244 333.072199 282.047244 346.544995 
-" clip-path="url(#pc7dbe4e27f)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pc968e69225)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
     <path d="M 284.047244 342.544995 
 L 282.047244 346.544995 
 L 280.047244 342.544995 
 z
-" clip-path="url(#pc7dbe4e27f)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pc968e69225)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
    </g>
    <g id="patch_4">
     <path d="M 282.047244 400.688169 
 Q 282.047244 418.110762 282.047244 434.415321 
-" clip-path="url(#pc7dbe4e27f)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pc968e69225)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
     <path d="M 284.047244 430.415321 
 L 282.047244 434.415321 
 L 280.047244 430.415321 
 z
-" clip-path="url(#pc7dbe4e27f)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pc968e69225)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
    </g>
    <g id="patch_5">
     <path d="M 380.844352 374.179997 
 Q 484.726802 374.881906 587.491243 375.57626 
-" clip-path="url(#pc7dbe4e27f)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pc968e69225)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
     <path d="M 583.504848 373.54928 
 L 587.491243 375.57626 
 L 583.477822 377.549188 
 z
-" clip-path="url(#pc7dbe4e27f)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pc968e69225)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
    </g>
    <g id="patch_6">
     <path d="M 522.567206 274.815905 
 Q 555.593698 269.999541 587.513858 265.344518 
-" clip-path="url(#pc7dbe4e27f)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pc968e69225)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
     <path d="M 583.267112 263.942679 
 L 587.513858 265.344518 
 L 583.84434 267.900811 
 z
-" clip-path="url(#pc7dbe4e27f)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pc968e69225)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
    </g>
    <g id="patch_7">
     <path d="M 522.550597 484.9277 
 Q 555.589364 491.810776 587.533597 498.465825 
-" clip-path="url(#pc7dbe4e27f)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pc968e69225)" style="fill: none; stroke: #62788a; stroke-linecap: round"/>
     <path d="M 584.025584 495.692047 
 L 587.533597 498.465825 
 L 583.209767 499.607969 
 z
-" clip-path="url(#pc7dbe4e27f)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
+" clip-path="url(#pc968e69225)" style="fill: #62788a; stroke: #62788a; stroke-linecap: round"/>
    </g>
    <g id="text_1">
-    <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #24567e" x="42.519685" y="53.610424" transform="rotate(-0 42.519685 53.610424)">RAG MANUAL / FLUJO TÉCNICO IMPLEMENTADO</text>
-   </g>
-   <g id="text_2">
-    <text style="font-weight: 700; font-size: 20px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="84.028371" transform="rotate(-0 42.519685 84.028371)">Autenticación: JWT y acceso delegado</text>
-   </g>
-   <g id="text_3">
-    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="110.025603" transform="rotate(-0 42.519685 110.025603)">Pipeline compartido por documentos y consultas; el secreto de FastAPI autentica el intercambio OBO.</text>
-   </g>
-   <g id="text_4">
-    <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="576.562451" transform="rotate(-0 42.519685 576.562451)">Código revisado: 13 septiembre 2026 · A4 horizontal</text>
-   </g>
-   <g id="text_5">
-    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #172c42" x="799.370079" y="576.602373" transform="rotate(-0 799.370079 576.602373)">2 / 5</text>
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #172c42" x="799.370079" y="576.602373" transform="rotate(-0 799.370079 576.602373)">2 / 10</text>
    </g>
    <g id="patch_8">
     <path d="M 48.188976 147.401575 
@@ -125,13 +113,7 @@ Q 42.519685 204.094488 42.519685 198.425197
 L 42.519685 153.070866 
 Q 42.519685 147.401575 48.188976 147.401575 
 z
-" clip-path="url(#pc7dbe4e27f)" style="fill: #eff4f8; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
-   </g>
-   <g id="text_6">
-    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="163.544895" transform="rotate(-0 53.858268 163.544895)">require_user() → HTTPBearer</text>
-   </g>
-   <g id="text_7">
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="179.854186" transform="rotate(-0 53.858268 179.854186)">Lee Authorization: Bearer. Si falta, devuelve 401.</text>
+" clip-path="url(#pc968e69225)" style="fill: #eff4f8; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
    <g id="patch_9">
     <path d="M 48.188976 232.440945 
@@ -144,15 +126,7 @@ Q 42.519685 317.480315 42.519685 311.811024
 L 42.519685 238.110236 
 Q 42.519685 232.440945 48.188976 232.440945 
 z
-" clip-path="url(#pc7dbe4e27f)" style="fill: #eff4f8; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
-   </g>
-   <g id="text_8">
-    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="248.584265" transform="rotate(-0 53.858268 248.584265)">EntraTokenVerifier.verify() → JWKS del tenant</text>
-   </g>
-   <g id="text_9">
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 264.893556)">RS256 + kid; firma, iss, aud estricto; exp/iat/nbf (leeway: 30 s).</text>
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 276.851212)">tid = tenant; ver = 2.0; oid = UUID.</text>
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 288.808868)">scp contiene access_as_user; azp = client ID de Streamlit.</text>
+" clip-path="url(#pc968e69225)" style="fill: #eff4f8; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
    <g id="patch_10">
     <path d="M 282.047244 348.661417 
@@ -160,7 +134,7 @@ L 379.84252 374.173228
 L 282.047244 399.685039 
 L 184.251969 374.173228 
 z
-" clip-path="url(#pc7dbe4e27f)" style="fill: #ffffff; stroke: #62788a; stroke-linejoin: miter"/>
+" clip-path="url(#pc968e69225)" style="fill: #ffffff; stroke: #62788a; stroke-linejoin: miter"/>
    </g>
    <g id="patch_11">
     <path d="M 48.188976 436.535433 
@@ -173,15 +147,7 @@ Q 42.519685 532.913386 42.519685 527.244094
 L 42.519685 442.204724 
 Q 42.519685 436.535433 48.188976 436.535433 
 z
-" clip-path="url(#pc7dbe4e27f)" style="fill: #edf6f2; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
-   </g>
-   <g id="text_10">
-    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="452.678753" transform="rotate(-0 53.858268 452.678753)">API → Entra ID: OnBehalfOfCredential</text>
-   </g>
-   <g id="text_11">
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 468.988044)">tenant_id + client_id API + client_secret API + user_assertion.</text>
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 481.223825)">get_token(scope) antes de ejecutar el servicio.</text>
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 493.459606)">Upload: Search. Answer: Search y luego Azure OpenAI.</text>
+" clip-path="url(#pc968e69225)" style="fill: #edf6f2; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
    <g id="patch_12">
     <path d="M 595.275591 223.937008 
@@ -194,13 +160,7 @@ Q 589.606299 306.141732 589.606299 300.472441
 L 589.606299 229.606299 
 Q 589.606299 223.937008 595.275591 223.937008 
 z
-" clip-path="url(#pc7dbe4e27f)" style="fill: #fff0ec; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
-   </g>
-   <g id="text_12">
-    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="600.944882" y="240.080328" transform="rotate(-0 600.944882 240.080328)">503 · Fallo JWKS</text>
-   </g>
-   <g id="text_13">
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="600.944882" y="256.389619" transform="rotate(-0 600.944882 256.389619)">identity_provider_unavailable</text>
+" clip-path="url(#pc968e69225)" style="fill: #fff0ec; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
    <g id="patch_13">
     <path d="M 595.275591 328.818898 
@@ -213,14 +173,7 @@ Q 589.606299 422.362205 589.606299 416.692913
 L 589.606299 334.488189 
 Q 589.606299 328.818898 595.275591 328.818898 
 z
-" clip-path="url(#pc7dbe4e27f)" style="fill: #fff0ec; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
-   </g>
-   <g id="text_14">
-    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="600.944882" y="344.962218" transform="rotate(-0 600.944882 344.962218)">401 / 403</text>
-   </g>
-   <g id="text_15">
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 361.593383)">401: JWT ausente o inválido.</text>
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 373.55104)">403: scp o azp no permiten acceso.</text>
+" clip-path="url(#pc968e69225)" style="fill: #fff0ec; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
    </g>
    <g id="patch_14">
     <path d="M 595.275591 450.708661 
@@ -233,32 +186,79 @@ Q 589.606299 547.086614 589.606299 541.417323
 L 589.606299 456.377953 
 Q 589.606299 450.708661 595.275591 450.708661 
 z
-" clip-path="url(#pc7dbe4e27f)" style="fill: #fff0ec; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+" clip-path="url(#pc968e69225)" style="fill: #fff0ec; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #24567e" x="42.519685" y="53.610424" transform="rotate(-0 42.519685 53.610424)">RAG MANUAL / FLUJO TÉCNICO IMPLEMENTADO</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 20px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="84.028371" transform="rotate(-0 42.519685 84.028371)">Autenticación: JWT y acceso delegado</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="110.025603" transform="rotate(-0 42.519685 110.025603)">Pipeline compartido por documentos y consultas; el secreto de FastAPI autentica el intercambio OBO.</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="576.562451" transform="rotate(-0 42.519685 576.562451)">Código revisado: 13 septiembre 2026 · A4 horizontal</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="163.544895" transform="rotate(-0 53.858268 163.544895)">require_user() → HTTPBearer</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="179.854186" transform="rotate(-0 53.858268 179.854186)">Lee Authorization: Bearer. Si falta, devuelve 401.</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="248.584265" transform="rotate(-0 53.858268 248.584265)">EntraTokenVerifier.verify() → JWKS del tenant</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 264.893556)">RS256 + kid; firma, iss, aud estricto; exp/iat/nbf (leeway: 30 s).</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 276.851212)">tid = tenant; ver = 2.0; oid = UUID.</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 288.808868)">scp contiene access_as_user; azp = client ID de Streamlit.</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(238.773807 371.124947)">JWT y permisos</text>
+    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(256.194119 382.74026)">¿válidos?</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="53.858268" y="452.678753" transform="rotate(-0 53.858268 452.678753)">API → Entra ID: OnBehalfOfCredential</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 468.988044)">tenant_id + client_id API + client_secret API + user_assertion.</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 481.223825)">get_token(scope) antes de ejecutar el servicio.</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(53.858268 493.459606)">Upload: Search. Answer: Search y luego Azure OpenAI.</text>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="600.944882" y="240.080328" transform="rotate(-0 600.944882 240.080328)">503 · Fallo JWKS</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="600.944882" y="256.389619" transform="rotate(-0 600.944882 256.389619)">identity_provider_unavailable</text>
+   </g>
+   <g id="text_15">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="600.944882" y="344.962218" transform="rotate(-0 600.944882 344.962218)">401 / 403</text>
    </g>
    <g id="text_16">
-    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="600.944882" y="466.851982" transform="rotate(-0 600.944882 466.851982)">403 / 503 · Fallo OBO</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 361.593383)">401: JWT ausente o inválido.</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 373.55104)">403: scp o azp no permiten acceso.</text>
    </g>
    <g id="text_17">
+    <text style="font-weight: 700; font-size: 10.8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="600.944882" y="466.851982" transform="rotate(-0 600.944882 466.851982)">403 / 503 · Fallo OBO</text>
+   </g>
+   <g id="text_18">
     <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 483.161272)">403: intercambio rechazado.</text>
     <text style="font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(600.944882 495.118928)">503: Entra no disponible.</text>
    </g>
-   <g id="text_18">
+   <g id="text_19">
     <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #24567e" x="291.968504" y="415.02757" transform="rotate(-0 291.968504 415.02757)">Sí</text>
    </g>
-   <g id="text_19">
+   <g id="text_20">
     <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #24567e" x="447.874016" y="366.838594" transform="rotate(-0 447.874016 366.838594)">No</text>
    </g>
-   <g id="text_20">
-    <text style="font-size: 8.6px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="549.373667" transform="rotate(-0 42.519685 549.373667)">Éxito → clientes por petición. RBAC autoriza después la operación en Search/OpenAI.</text>
-   </g>
    <g id="text_21">
-    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(238.773807 371.124947)">JWT y permisos</text>
-    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(256.194119 382.74026)">¿válidos?</text>
+    <text style="font-size: 8.6px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="549.373667" transform="rotate(-0 42.519685 549.373667)">Éxito → clientes por petición. RBAC autoriza después la operación en Search/OpenAI.</text>
    </g>
   </g>
  </g>
  <defs>
-  <clipPath id="pc7dbe4e27f">
+  <clipPath id="pc968e69225">
    <rect x="0" y="0" width="841.889764" height="595.275591"/>
   </clipPath>
  </defs>

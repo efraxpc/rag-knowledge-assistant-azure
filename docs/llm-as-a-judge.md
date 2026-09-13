@@ -49,8 +49,13 @@ tests + lint
     → desplegar únicamente si el juez devuelve 0
 ```
 
-La recuperación del baseline actual es textual. No se presenta como vectorial
-porque la generación de embeddings todavía no existe en la aplicación.
+La recuperación sigue siendo textual porque la generación de embeddings todavía
+no existe en la aplicación. La API y el generador candidato comparten el
+[flujo RAG con LangGraph](langgraph-flow.md) y sus opciones de `Settings`: búsqueda
+adicional tras simplificar una consulta vacía, presupuesto de contexto y
+verificación local de citas con reparación limitada. El juez evalúa la respuesta
+y el contexto finales; no se ejecuta dentro del grafo ni durante una petición.
+La verificación local de citas no sustituye la evaluación del respaldo factual.
 
 ## Configuración
 
