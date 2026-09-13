@@ -3,6 +3,12 @@
 Estructura base de una API con FastAPI, configuración por variables de entorno,
 rutas versionadas y pruebas automatizadas.
 
+Consulta el [flujo completo en ocho hojas A4](docs/diagrams/flujo-completo/flujo-completo-a4.pdf),
+explicado con palabras simples y listo para imprimir.
+
+También está disponible el [diagrama de arquitectura en cuatro hojas A4](docs/diagrams/arquitectura/arquitectura-a4.pdf),
+con las piezas del proyecto y sus conexiones explicadas paso a paso.
+
 ## Requisitos
 
 - Python 3.11 o superior
