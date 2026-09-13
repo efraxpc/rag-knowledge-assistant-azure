@@ -1,0 +1,26 @@
+sequenceDiagram
+  autonumber
+  participant UI as Streamlit (localhost:8501)
+  participant API as FastAPI (localhost:8000)
+  participant Entra as Entra ID (OIDC / OBO)
+  participant Search as AI Search (Índice textual)
+  participant OpenAI as Azure OpenAI (Chat completions)
+  UI->>Entra: st.login("microsoft"): OIDC
+  Entra-->>UI: GET /oauth2callback: code + state
+  UI->>Entra: Canje de code + credencial frontend
+  Entra-->>UI: id_token + access_token para API
+  UI->>API: POST /documents/upload
+  API->>Entra: OBO: scope Search
+  Entra-->>API: Access token Search
+  API->>Search: upload_documents(chunks)
+  Search-->>API: IndexingResult[]
+  API->>UI: 200 UploadDocumentResponse
+  UI->>API: POST /queries/answer
+  API->>Entra: OBO: Search y OpenAI
+  Entra-->>API: Resultado de la operación
+  API->>Search: search(question, document_id, top_k)
+  Search-->>API: Resultado de la operación
+  API->>OpenAI: POST /openai/v1/chat/completions
+  OpenAI-->>API: Resultado de la operación
+  API->>UI: 200 RagAnswerResponse
+  Note over API,OpenAI: Sin contexto se omite chat; ambos tokens OBO ya se obtuvieron.

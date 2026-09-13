@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="841.889764pt" height="595.275591pt" viewBox="0 0 841.889764 595.275591" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-09-13T17:38:02.883853</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 595.275591 
+L 841.889764 595.275591 
+L 841.889764 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 73.700787 147.401575 
+L 558.425197 147.401575 
+Q 564.094488 147.401575 564.094488 153.070866 
+L 564.094488 198.425197 
+Q 564.094488 204.094488 558.425197 204.094488 
+L 73.700787 204.094488 
+Q 68.031496 204.094488 68.031496 198.425197 
+L 68.031496 153.070866 
+Q 68.031496 147.401575 73.700787 147.401575 
+z
+" clip-path="url(#p0f0c02329e)" style="fill: #eff4f8; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 68.031496 165.259843 
+C 70.812996 165.259843 73.480948 166.364944 75.447766 168.331762 
+C 77.414583 170.29858 78.519685 172.966531 78.519685 175.748031 
+C 78.519685 178.529532 77.414583 181.197483 75.447766 183.164301 
+C 73.480948 185.131119 70.812996 186.23622 68.031496 186.23622 
+C 65.249996 186.23622 62.582044 185.131119 60.615227 183.164301 
+C 58.648409 181.197483 57.543307 178.529532 57.543307 175.748031 
+C 57.543307 172.966531 58.648409 170.29858 60.615227 168.331762 
+C 62.582044 166.364944 65.249996 165.259843 68.031496 165.259843 
+z
+" clip-path="url(#p0f0c02329e)" style="fill: #ffffff; stroke: #24567e; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 73.700787 215.433071 
+L 558.425197 215.433071 
+Q 564.094488 215.433071 564.094488 221.102362 
+L 564.094488 266.456693 
+Q 564.094488 272.125984 558.425197 272.125984 
+L 73.700787 272.125984 
+Q 68.031496 272.125984 68.031496 266.456693 
+L 68.031496 221.102362 
+Q 68.031496 215.433071 73.700787 215.433071 
+z
+" clip-path="url(#p0f0c02329e)" style="fill: #eff4f8; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 68.031496 233.291339 
+C 70.812996 233.291339 73.480948 234.39644 75.447766 236.363258 
+C 77.414583 238.330076 78.519685 240.998027 78.519685 243.779528 
+C 78.519685 246.561028 77.414583 249.228979 75.447766 251.195797 
+C 73.480948 253.162615 70.812996 254.267717 68.031496 254.267717 
+C 65.249996 254.267717 62.582044 253.162615 60.615227 251.195797 
+C 58.648409 249.228979 57.543307 246.561028 57.543307 243.779528 
+C 57.543307 240.998027 58.648409 238.330076 60.615227 236.363258 
+C 62.582044 234.39644 65.249996 233.291339 68.031496 233.291339 
+z
+" clip-path="url(#p0f0c02329e)" style="fill: #ffffff; stroke: #24567e; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 73.700787 283.464567 
+L 558.425197 283.464567 
+Q 564.094488 283.464567 564.094488 289.133858 
+L 564.094488 334.488189 
+Q 564.094488 340.15748 558.425197 340.15748 
+L 73.700787 340.15748 
+Q 68.031496 340.15748 68.031496 334.488189 
+L 68.031496 289.133858 
+Q 68.031496 283.464567 73.700787 283.464567 
+z
+" clip-path="url(#p0f0c02329e)" style="fill: #edf6f2; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 68.031496 301.322835 
+C 70.812996 301.322835 73.480948 302.427936 75.447766 304.394754 
+C 77.414583 306.361572 78.519685 309.029523 78.519685 311.811024 
+C 78.519685 314.592524 77.414583 317.260475 75.447766 319.227293 
+C 73.480948 321.194111 70.812996 322.299213 68.031496 322.299213 
+C 65.249996 322.299213 62.582044 321.194111 60.615227 319.227293 
+C 58.648409 317.260475 57.543307 314.592524 57.543307 311.811024 
+C 57.543307 309.029523 58.648409 306.361572 60.615227 304.394754 
+C 62.582044 302.427936 65.249996 301.322835 68.031496 301.322835 
+z
+" clip-path="url(#p0f0c02329e)" style="fill: #ffffff; stroke: #24567e; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 73.700787 351.496063 
+L 558.425197 351.496063 
+Q 564.094488 351.496063 564.094488 357.165354 
+L 564.094488 402.519685 
+Q 564.094488 408.188976 558.425197 408.188976 
+L 73.700787 408.188976 
+Q 68.031496 408.188976 68.031496 402.519685 
+L 68.031496 357.165354 
+Q 68.031496 351.496063 73.700787 351.496063 
+z
+" clip-path="url(#p0f0c02329e)" style="fill: #eff4f8; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 68.031496 369.354331 
+C 70.812996 369.354331 73.480948 370.459432 75.447766 372.42625 
+C 77.414583 374.393068 78.519685 377.061019 78.519685 379.84252 
+C 78.519685 382.62402 77.414583 385.291972 75.447766 387.258789 
+C 73.480948 389.225607 70.812996 390.330709 68.031496 390.330709 
+C 65.249996 390.330709 62.582044 389.225607 60.615227 387.258789 
+C 58.648409 385.291972 57.543307 382.62402 57.543307 379.84252 
+C 57.543307 377.061019 58.648409 374.393068 60.615227 372.42625 
+C 62.582044 370.459432 65.249996 369.354331 68.031496 369.354331 
+z
+" clip-path="url(#p0f0c02329e)" style="fill: #ffffff; stroke: #24567e; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 73.700787 419.527559 
+L 558.425197 419.527559 
+Q 564.094488 419.527559 564.094488 425.19685 
+L 564.094488 470.551181 
+Q 564.094488 476.220472 558.425197 476.220472 
+L 73.700787 476.220472 
+Q 68.031496 476.220472 68.031496 470.551181 
+L 68.031496 425.19685 
+Q 68.031496 419.527559 73.700787 419.527559 
+z
+" clip-path="url(#p0f0c02329e)" style="fill: #edf6f2; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 68.031496 437.385827 
+C 70.812996 437.385827 73.480948 438.490929 75.447766 440.457746 
+C 77.414583 442.424564 78.519685 445.092516 78.519685 447.874016 
+C 78.519685 450.655516 77.414583 453.323468 75.447766 455.290285 
+C 73.480948 457.257103 70.812996 458.362205 68.031496 458.362205 
+C 65.249996 458.362205 62.582044 457.257103 60.615227 455.290285 
+C 58.648409 453.323468 57.543307 450.655516 57.543307 447.874016 
+C 57.543307 445.092516 58.648409 442.424564 60.615227 440.457746 
+C 62.582044 438.490929 65.249996 437.385827 68.031496 437.385827 
+z
+" clip-path="url(#p0f0c02329e)" style="fill: #ffffff; stroke: #24567e; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 73.700787 487.559055 
+L 558.425197 487.559055 
+Q 564.094488 487.559055 564.094488 493.228346 
+L 564.094488 538.582677 
+Q 564.094488 544.251969 558.425197 544.251969 
+L 73.700787 544.251969 
+Q 68.031496 544.251969 68.031496 538.582677 
+L 68.031496 493.228346 
+Q 68.031496 487.559055 73.700787 487.559055 
+z
+" clip-path="url(#p0f0c02329e)" style="fill: #eff4f8; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 68.031496 505.417323 
+C 70.812996 505.417323 73.480948 506.522425 75.447766 508.489242 
+C 77.414583 510.45606 78.519685 513.124012 78.519685 515.905512 
+C 78.519685 518.687012 77.414583 521.354964 75.447766 523.321781 
+C 73.480948 525.288599 70.812996 526.393701 68.031496 526.393701 
+C 65.249996 526.393701 62.582044 525.288599 60.615227 523.321781 
+C 58.648409 521.354964 57.543307 518.687012 57.543307 515.905512 
+C 57.543307 513.124012 58.648409 510.45606 60.615227 508.489242 
+C 62.582044 506.522425 65.249996 505.417323 68.031496 505.417323 
+z
+" clip-path="url(#p0f0c02329e)" style="fill: #ffffff; stroke: #24567e; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_14">
+    <path d="M 603.779528 147.401575 
+L 793.700787 147.401575 
+Q 799.370079 147.401575 799.370079 153.070866 
+L 799.370079 260.787402 
+Q 799.370079 266.456693 793.700787 266.456693 
+L 603.779528 266.456693 
+Q 598.110236 266.456693 598.110236 260.787402 
+L 598.110236 153.070866 
+Q 598.110236 147.401575 603.779528 147.401575 
+z
+" clip-path="url(#p0f0c02329e)" style="fill: #edf6f2; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_15">
+    <path d="M 603.779528 291.968504 
+L 793.700787 291.968504 
+Q 799.370079 291.968504 799.370079 297.637795 
+L 799.370079 408.188976 
+Q 799.370079 413.858268 793.700787 413.858268 
+L 603.779528 413.858268 
+Q 598.110236 413.858268 598.110236 408.188976 
+L 598.110236 297.637795 
+Q 598.110236 291.968504 603.779528 291.968504 
+z
+" clip-path="url(#p0f0c02329e)" style="fill: #edf6f2; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_16">
+    <path d="M 603.779528 439.370079 
+L 793.700787 439.370079 
+Q 799.370079 439.370079 799.370079 445.03937 
+L 799.370079 538.582677 
+Q 799.370079 544.251969 793.700787 544.251969 
+L 603.779528 544.251969 
+Q 598.110236 544.251969 598.110236 538.582677 
+L 598.110236 445.03937 
+Q 598.110236 439.370079 603.779528 439.370079 
+z
+" clip-path="url(#p0f0c02329e)" style="fill: #fff7e8; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_1">
+    <path d="M 42.519685 34.015748 
+L 799.370079 34.015748 
+" clip-path="url(#p0f0c02329e)" style="fill: none; stroke: #24567e; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_2">
+    <path d="M 42.519685 558.425197 
+L 799.370079 558.425197 
+" clip-path="url(#p0f0c02329e)" style="fill: none; stroke: #62788a; stroke-width: 0.65; stroke-linecap: square"/>
+   </g>
+   <g id="patch_17">
+    <path d="M 316.062992 205.093812 
+Q 316.062992 209.762381 316.062992 213.201113 
+" clip-path="url(#p0f0c02329e)" style="fill: none; stroke: #62788a; stroke-width: 1.1; stroke-linecap: round"/>
+    <path d="M 318.062992 209.201113 
+L 316.062992 213.201113 
+L 314.062992 209.201113 
+z
+" clip-path="url(#p0f0c02329e)" style="fill: #62788a; stroke: #62788a; stroke-width: 1.1; stroke-linecap: round"/>
+   </g>
+   <g id="patch_18">
+    <path d="M 316.062992 273.125308 
+Q 316.062992 277.793877 316.062992 281.232609 
+" clip-path="url(#p0f0c02329e)" style="fill: none; stroke: #62788a; stroke-width: 1.1; stroke-linecap: round"/>
+    <path d="M 318.062992 277.232609 
+L 316.062992 281.232609 
+L 314.062992 277.232609 
+z
+" clip-path="url(#p0f0c02329e)" style="fill: #62788a; stroke: #62788a; stroke-width: 1.1; stroke-linecap: round"/>
+   </g>
+   <g id="patch_19">
+    <path d="M 316.062992 341.156804 
+Q 316.062992 345.825373 316.062992 349.264105 
+" clip-path="url(#p0f0c02329e)" style="fill: none; stroke: #62788a; stroke-width: 1.1; stroke-linecap: round"/>
+    <path d="M 318.062992 345.264105 
+L 316.062992 349.264105 
+L 314.062992 345.264105 
+z
+" clip-path="url(#p0f0c02329e)" style="fill: #62788a; stroke: #62788a; stroke-width: 1.1; stroke-linecap: round"/>
+   </g>
+   <g id="patch_20">
+    <path d="M 316.062992 409.1883 
+Q 316.062992 413.856869 316.062992 417.295601 
+" clip-path="url(#p0f0c02329e)" style="fill: none; stroke: #62788a; stroke-width: 1.1; stroke-linecap: round"/>
+    <path d="M 318.062992 413.295601 
+L 316.062992 417.295601 
+L 314.062992 413.295601 
+z
+" clip-path="url(#p0f0c02329e)" style="fill: #62788a; stroke: #62788a; stroke-width: 1.1; stroke-linecap: round"/>
+   </g>
+   <g id="patch_21">
+    <path d="M 316.062992 477.219796 
+Q 316.062992 481.888365 316.062992 485.327097 
+" clip-path="url(#p0f0c02329e)" style="fill: none; stroke: #62788a; stroke-width: 1.1; stroke-linecap: round"/>
+    <path d="M 318.062992 481.327097 
+L 316.062992 485.327097 
+L 314.062992 481.327097 
+z
+" clip-path="url(#p0f0c02329e)" style="fill: #62788a; stroke: #62788a; stroke-width: 1.1; stroke-linecap: round"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #24567e" x="42.519685" y="53.610424" transform="rotate(-0 42.519685 53.610424)">RAG MANUAL / FLUJO DE LA APLICACIÓN Y AZURE</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 20px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="84.028371" transform="rotate(-0 42.519685 84.028371)">Después: subir y guardar el documento</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="110.405525" transform="rotate(-0 42.519685 110.405525)">El archivo pasa por la API; su texto queda guardado en Azure AI Search.</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="576.222451" transform="rotate(-0 42.519685 576.222451)">Flujo implementado · 13 septiembre 2026 · A4 horizontal</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #172c42" x="799.370079" y="576.602373" transform="rotate(-0 799.370079 576.602373)">3 / 5</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #24567e" x="68.031496" y="178.783344" transform="rotate(-0 68.031496 178.783344)">1</text>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="87.874016" y="161.996077" transform="rotate(-0 87.874016 161.996077)">Streamlit → FastAPI: envía el documento</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="87.874016" y="178.624029" transform="rotate(-0 87.874016 178.624029)">Eliges el archivo y pulsas Procesar y guardar. Viaja junto al token.</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #24567e" x="68.031496" y="246.81484" transform="rotate(-0 68.031496 246.81484)">2</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="87.874016" y="230.027573" transform="rotate(-0 87.874016 230.027573)">FastAPI: comprueba el acceso</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="87.874016" y="247.075525" transform="rotate(-0 87.874016 247.075525)">Valida que el pase sea correcto y que la petición venga de la pantalla.</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #24567e" x="68.031496" y="314.846336" transform="rotate(-0 68.031496 314.846336)">3</text>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="87.874016" y="298.059069" transform="rotate(-0 87.874016 298.059069)">Microsoft Entra ID: da acceso a Search</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="87.874016" y="315.107021" transform="rotate(-0 87.874016 315.107021)">La API pide otro pase, válido para usar Search en tu nombre.</text>
+   </g>
+   <g id="text_15">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #24567e" x="68.031496" y="382.877832" transform="rotate(-0 68.031496 382.877832)">4</text>
+   </g>
+   <g id="text_16">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="87.874016" y="366.090565" transform="rotate(-0 87.874016 366.090565)">FastAPI: prepara el texto</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(87.874016 383.138517)">Lee el archivo y lo divide en partes con el nombre del documento y la página cuando</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(87.874016 395.694056)">existe.</text>
+   </g>
+   <g id="text_18">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #24567e" x="68.031496" y="450.909328" transform="rotate(-0 68.031496 450.909328)">5</text>
+   </g>
+   <g id="text_19">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="87.874016" y="434.122061" transform="rotate(-0 87.874016 434.122061)">Azure AI Search: guarda las partes</text>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="87.874016" y="451.170013" transform="rotate(-0 87.874016 451.170013)">Comprueba tus permisos y almacena el texto para poder buscarlo después.</text>
+   </g>
+   <g id="text_21">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #24567e" x="68.031496" y="518.940824" transform="rotate(-0 68.031496 518.940824)">6</text>
+   </g>
+   <g id="text_22">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="87.874016" y="502.153557" transform="rotate(-0 87.874016 502.153557)">FastAPI → Streamlit: confirma la carga</text>
+   </g>
+   <g id="text_23">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="87.874016" y="519.201509" transform="rotate(-0 87.874016 519.201509)">Ves el documento procesado y puedes empezar a preguntar sobre él.</text>
+   </g>
+   <g id="text_24">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="612.283465" y="168.238204" transform="rotate(-0 612.283465 168.238204)">Microsoft Entra ID</text>
+   </g>
+   <g id="text_25">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(612.283465 185.852375)">Entrega el pase de Search. La</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(612.283465 198.953914)">API actúa con los permisos de tu</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(612.283465 211.509453)">cuenta o grupo.</text>
+   </g>
+   <g id="text_26">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="612.283465" y="312.805133" transform="rotate(-0 612.283465 312.805133)">Azure AI Search</text>
+   </g>
+   <g id="text_27">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(612.283465 330.839304)">Es el almacén y buscador del</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(612.283465 343.394843)">texto. Conserva las partes, el</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(612.283465 356.496382)">nombre del archivo y la página</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(612.283465 369.051921)">cuando existe.</text>
+   </g>
+   <g id="text_28">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="612.283465" y="460.706708" transform="rotate(-0 612.283465 460.706708)">Qué se guarda</text>
+   </g>
+   <g id="text_29">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(612.283465 477.820879)">Texto dividido, no el archivo</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(612.283465 490.376418)">original. PDF con texto, TXT o</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(612.283465 502.931957)">Markdown; hasta 10 MiB.</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p0f0c02329e">
+   <rect x="0" y="0" width="841.889764" height="595.275591"/>
+  </clipPath>
+ </defs>
+</svg>

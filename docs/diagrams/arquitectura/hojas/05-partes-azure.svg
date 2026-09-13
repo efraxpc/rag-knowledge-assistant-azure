@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="841.889764pt" height="595.275591pt" viewBox="0 0 841.889764 595.275591" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-09-13T17:38:03.691014</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.9, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 595.275591 
+L 841.889764 595.275591 
+L 841.889764 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 48.188976 167.244094 
+L 405.354331 167.244094 
+Q 411.023622 167.244094 411.023622 172.913386 
+L 411.023622 243.779528 
+Q 411.023622 249.448819 405.354331 249.448819 
+L 48.188976 249.448819 
+Q 42.519685 249.448819 42.519685 243.779528 
+L 42.519685 172.913386 
+Q 42.519685 167.244094 48.188976 167.244094 
+z
+" clip-path="url(#p507ed68685)" style="fill: #edf6f2; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 48.188976 266.456693 
+L 405.354331 266.456693 
+Q 411.023622 266.456693 411.023622 272.125984 
+L 411.023622 342.992126 
+Q 411.023622 348.661417 405.354331 348.661417 
+L 48.188976 348.661417 
+Q 42.519685 348.661417 42.519685 342.992126 
+L 42.519685 272.125984 
+Q 42.519685 266.456693 48.188976 266.456693 
+z
+" clip-path="url(#p507ed68685)" style="fill: #edf6f2; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 48.188976 365.669291 
+L 405.354331 365.669291 
+Q 411.023622 365.669291 411.023622 371.338583 
+L 411.023622 442.204724 
+Q 411.023622 447.874016 405.354331 447.874016 
+L 48.188976 447.874016 
+Q 42.519685 447.874016 42.519685 442.204724 
+L 42.519685 371.338583 
+Q 42.519685 365.669291 48.188976 365.669291 
+z
+" clip-path="url(#p507ed68685)" style="fill: #edf6f2; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 48.188976 464.88189 
+L 405.354331 464.88189 
+Q 411.023622 464.88189 411.023622 470.551181 
+L 411.023622 541.417323 
+Q 411.023622 547.086614 405.354331 547.086614 
+L 48.188976 547.086614 
+Q 42.519685 547.086614 42.519685 541.417323 
+L 42.519685 470.551181 
+Q 42.519685 464.88189 48.188976 464.88189 
+z
+" clip-path="url(#p507ed68685)" style="fill: #eff4f8; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 436.535433 167.244094 
+L 793.700787 167.244094 
+Q 799.370079 167.244094 799.370079 172.913386 
+L 799.370079 243.779528 
+Q 799.370079 249.448819 793.700787 249.448819 
+L 436.535433 249.448819 
+Q 430.866142 249.448819 430.866142 243.779528 
+L 430.866142 172.913386 
+Q 430.866142 167.244094 436.535433 167.244094 
+z
+" clip-path="url(#p507ed68685)" style="fill: #edf6f2; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 436.535433 266.456693 
+L 793.700787 266.456693 
+Q 799.370079 266.456693 799.370079 272.125984 
+L 799.370079 342.992126 
+Q 799.370079 348.661417 793.700787 348.661417 
+L 436.535433 348.661417 
+Q 430.866142 348.661417 430.866142 342.992126 
+L 430.866142 272.125984 
+Q 430.866142 266.456693 436.535433 266.456693 
+z
+" clip-path="url(#p507ed68685)" style="fill: #edf6f2; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 436.535433 365.669291 
+L 793.700787 365.669291 
+Q 799.370079 365.669291 799.370079 371.338583 
+L 799.370079 442.204724 
+Q 799.370079 447.874016 793.700787 447.874016 
+L 436.535433 447.874016 
+Q 430.866142 447.874016 430.866142 442.204724 
+L 430.866142 371.338583 
+Q 430.866142 365.669291 436.535433 365.669291 
+z
+" clip-path="url(#p507ed68685)" style="fill: #edf6f2; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 436.535433 464.88189 
+L 793.700787 464.88189 
+Q 799.370079 464.88189 799.370079 470.551181 
+L 799.370079 541.417323 
+Q 799.370079 547.086614 793.700787 547.086614 
+L 436.535433 547.086614 
+Q 430.866142 547.086614 430.866142 541.417323 
+L 430.866142 470.551181 
+Q 430.866142 464.88189 436.535433 464.88189 
+z
+" clip-path="url(#p507ed68685)" style="fill: #edf6f2; stroke: #62788a; stroke-width: 0.8; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_1">
+    <path d="M 42.519685 34.015748 
+L 799.370079 34.015748 
+" clip-path="url(#p507ed68685)" style="fill: none; stroke: #24567e; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_2">
+    <path d="M 42.519685 558.425197 
+L 799.370079 558.425197 
+" clip-path="url(#p507ed68685)" style="fill: none; stroke: #62788a; stroke-width: 0.65; stroke-linecap: square"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #24567e" x="42.519685" y="53.610424" transform="rotate(-0 42.519685 53.610424)">RAG MANUAL / FLUJO DE LA APLICACIÓN Y AZURE</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 20px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="84.028371" transform="rotate(-0 42.519685 84.028371)">Qué hace cada parte de Azure</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="110.405525" transform="rotate(-0 42.519685 110.405525)">Cada pieza tiene un trabajo. Estas son las que usa o prepara el proyecto.</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="42.519685" y="576.222451" transform="rotate(-0 42.519685 576.222451)">Flujo implementado · 13 septiembre 2026 · A4 horizontal</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #172c42" x="799.370079" y="576.602373" transform="rotate(-0 799.370079 576.602373)">5 / 5</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #24567e" x="42.519685" y="146.116153" transform="rotate(-0 42.519685 146.116153)">AL ENTRAR, CARGAR Y PREGUNTAR</text>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #24567e" x="430.866142" y="146.116153" transform="rotate(-0 430.866142 146.116153)">AL EJECUTAR LA API PUBLICADA EN AZURE</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="56.692913" y="188.080724" transform="rotate(-0 56.692913 188.080724)">Microsoft Entra ID</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(56.692913 206.114895)">Comprueba tu identidad y entrega pases. Actúa al iniciar sesión</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(56.692913 218.670434)">y cuando la API pide acceso a Search u OpenAI.</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="56.692913" y="287.293322" transform="rotate(-0 56.692913 287.293322)">Azure AI Search</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(56.692913 304.907493)">Guarda partes del documento durante la carga. Al preguntar,</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(56.692913 317.463032)">busca texto relacionado y lo devuelve a la API.</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="56.692913" y="386.505921" transform="rotate(-0 56.692913 386.505921)">Azure OpenAI</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(56.692913 404.540092)">El modelo de chat redacta con el texto que envía la API.</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(56.692913 417.641631)">También se usa otro modelo para evaluar calidad antes de</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(56.692913 430.19717)">publicar.</text>
+   </g>
+   <g id="text_14">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="56.692913" y="485.718519" transform="rotate(-0 56.692913 485.718519)">FastAPI: quien une las piezas</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(56.692913 503.33269)">En local corre en tu equipo; publicada, en Container Apps. Lleva</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(56.692913 515.888229)">las peticiones y los resultados entre pantalla y Azure.</text>
+   </g>
+   <g id="text_16">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="445.03937" y="188.080724" transform="rotate(-0 445.03937 188.080724)">Azure Container Apps</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(445.03937 205.694895)">Ejecuta la API en Azure y recibe las peticiones de la pantalla.</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(445.03937 218.250434)">Streamlit necesita alojamiento por separado.</text>
+   </g>
+   <g id="text_18">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="445.03937" y="287.293322" transform="rotate(-0 445.03937 287.293322)">Azure Container Registry</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(445.03937 304.907493)">Guarda el paquete de la API, llamado imagen. Container Apps lo</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(445.03937 318.009032)">descarga para ejecutar esa versión.</text>
+   </g>
+   <g id="text_20">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="445.03937" y="386.505921" transform="rotate(-0 445.03937 386.505921)">Azure Log Analytics</text>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(445.03937 404.120092)">Recoge registros del entorno de Container Apps. Sirven para</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(445.03937 417.221631)">revisar qué ocurrió cuando hay un problema.</text>
+   </g>
+   <g id="text_22">
+    <text style="font-weight: 700; font-size: 12.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #172c42" x="445.03937" y="485.718519" transform="rotate(-0 445.03937 485.718519)">Azure Key Vault</text>
+   </g>
+   <g id="text_23">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(445.03937 503.75269)">Es un almacén de secretos preparado por Terraform. La API</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #172c42" transform="translate(445.03937 516.308229)">actual todavía no lo consulta directamente.</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p507ed68685">
+   <rect x="0" y="0" width="841.889764" height="595.275591"/>
+  </clipPath>
+ </defs>
+</svg>

@@ -1,0 +1,21 @@
+flowchart TB
+  upload["upload_document(file: UploadFile)<br/>multipart/form-data; ingest(filename, file.file)."]:::local
+  valid{"Nombre, formato y tamaño<br/>¿válidos?"}:::decision
+  extract["extract_text() → chunk_pages()<br/>PDF: pypdf; TXT/MD: UTF-8-SIG; sin OCR.<br/>Ventana: 1000 caracteres; solape: 200; no cruza páginas.<br/>document_id = SHA256(source + NUL + bytes)."]:::local
+  index["API → Azure AI Search: upload_documents()<br/>Lotes: hasta 1000 registros y límite conservador de 15 MB.<br/>IDs estables; se verifica succeeded por registro."]:::azure
+  result["200 · UploadDocumentResponse"]:::local
+  file_error["415 / 413 / 422<br/>415: extensión no admitida.<br/>413: archivo &gt; 10 MiB.<br/>422: nombre inválido."]:::error
+  text_error["422 · invalid_document<br/>UTF-8 inválido; PDF cifrado, ilegible o sin texto."]:::error
+  index_error["403 / 502 / 503<br/>403: acceso denegado.<br/>502: algún registro falló.<br/>503: índice inaccesible."]:::error
+  upload --> valid
+  valid -->|"Sí"| extract
+  valid -->|"No"| file_error
+  extract --> text_error
+  extract --> index
+  index --> index_error
+  index --> result
+  classDef local fill:#EFF4F8,stroke:#62788A,color:#172C42
+  classDef azure fill:#EDF6F2,stroke:#62788A,color:#172C42
+  classDef error fill:#FFF0EC,stroke:#62788A,color:#172C42
+  classDef note fill:#FFF7E8,stroke:#62788A,color:#172C42
+  classDef decision fill:#FFFFFF,stroke:#62788A,color:#172C42

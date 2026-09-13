@@ -1,4 +1,4 @@
-"""Dibuja la arquitectura implementada en cuatro hojas A4 horizontales."""
+"""Dibuja el flujo de la aplicación y las partes de Azure en cinco hojas A4."""
 
 from __future__ import annotations
 
@@ -17,18 +17,16 @@ from matplotlib.patches import Circle, FancyArrowPatch, FancyBboxPatch  # noqa: 
 OUTPUT = Path(__file__).resolve().parent
 DRAWING = runpy.run_path(str(OUTPUT.parent / "flujo-completo" / "generate.py"))
 BaseSheet = DRAWING["Sheet"]
-INK = DRAWING["INK"]
-BLUE = DRAWING["BLUE"]
-LINE = DRAWING["LINE"]
-LOCAL = DRAWING["LOCAL"]
-CLOUD = DRAWING["CLOUD"]
-NOTE = DRAWING["NOTE"]
-WHITE = DRAWING["WHITE"]
+INK, BLUE, LINE = (DRAWING[key] for key in ("INK", "BLUE", "LINE"))
+LOCAL, CLOUD, NOTE, WHITE = (
+    DRAWING[key] for key in ("LOCAL", "CLOUD", "NOTE", "WHITE")
+)
 PAGES = [
-    ("01-mapa-general", "Qué hace cada parte"),
-    ("02-dentro-de-la-api", "Cómo se organiza la API"),
-    ("03-recorrido-pregunta", "Una pregunta, paso a paso"),
-    ("04-publicacion-azure", "Cuando la API se publica en Azure"),
+    ("01-flujo-completo", "El recorrido completo de la aplicación"),
+    ("02-iniciar-sesion", "Primero: entrar y llegar a la home"),
+    ("03-guardar-documento", "Después: subir y guardar el documento"),
+    ("04-preguntar", "Ahora: preguntar y recibir una respuesta"),
+    ("05-partes-azure", "Qué hace cada parte de Azure"),
 ]
 
 
@@ -40,19 +38,29 @@ class ArchitectureSheet(BaseSheet):
         self.ax.set(xlim=(0, 297), ylim=(210, 0))
         self.ax.axis("off")
         self.ax.plot([15, 282], [12, 12], color=BLUE, linewidth=2)
-        self.text(15, 16, "RAG MANUAL  /  ARQUITECTURA EXPLICADA", 267, 9, "bold", BLUE)
-        self.text(15, 24, PAGES[page - 1][1], 267, 21, "bold")
+        self.text(
+            15,
+            16,
+            "RAG MANUAL  /  FLUJO DE LA APLICACIÓN Y AZURE",
+            267,
+            9,
+            "bold",
+            BLUE,
+        )
+        self.text(15, 24, PAGES[page - 1][1], 267, 20, "bold")
         self.text(15, 36, subtitle, 267, 11)
         self.ax.plot([15, 282], [197, 197], color=LINE, linewidth=0.65)
         self.text(
-            15,
-            201,
-            "Arquitectura implementada · 13 septiembre 2026 · A4 horizontal",
-            245,
-            8.5,
+            15, 201, "Flujo implementado · 13 septiembre 2026 · A4 horizontal", 245, 8.5
         )
         self.ax.text(
-            282, 201, f"{page} / 4", ha="right", va="top", fontsize=9, color=INK
+            282,
+            201,
+            f"{page} / {len(PAGES)}",
+            ha="right",
+            va="top",
+            fontsize=9,
+            color=INK,
         )
 
     def group(
@@ -71,7 +79,7 @@ class ArchitectureSheet(BaseSheet):
                 zorder=0,
             )
         )
-        self.text(x + 4, y + 3, title, w - 8, 9.5, "bold", BLUE)
+        self.text(x + 4, y + 3, title, w - 8, 9, "bold", BLUE)
 
     def route(
         self,
@@ -84,14 +92,21 @@ class ArchitectureSheet(BaseSheet):
     ) -> None:
         if len(points) > 2:
             xs, ys = zip(*points[:-1], strict=True)
-            self.ax.plot(xs, ys, color=LINE, linewidth=1.15, zorder=2)
+            self.ax.plot(
+                xs,
+                ys,
+                color=LINE,
+                linewidth=1.1,
+                linestyle="--" if dashed else "-",
+                zorder=2,
+            )
         self.ax.add_patch(
             FancyArrowPatch(
                 points[-2],
                 points[-1],
                 arrowstyle="<->" if both else "-|>",
-                mutation_scale=11,
-                linewidth=1.15,
+                mutation_scale=10,
+                linewidth=1.1,
                 color=LINE,
                 linestyle="--" if dashed else "-",
                 shrinkA=1,
@@ -102,7 +117,12 @@ class ArchitectureSheet(BaseSheet):
         if number and badge:
             self.ax.add_patch(
                 Circle(
-                    badge, 2.6, facecolor=WHITE, edgecolor=BLUE, linewidth=0.8, zorder=4
+                    badge,
+                    2.3,
+                    facecolor=WHITE,
+                    edgecolor=BLUE,
+                    linewidth=0.8,
+                    zorder=4,
                 )
             )
             self.ax.text(
@@ -110,312 +130,412 @@ class ArchitectureSheet(BaseSheet):
                 number,
                 ha="center",
                 va="center",
-                fontsize=9,
+                fontsize=8.3,
                 fontweight="bold",
                 color=BLUE,
                 zorder=5,
             )
 
-    def legend(self, left: list[str], right: list[str], y: float = 173) -> None:
-        for x, items in [(15, left), (152, right)]:
-            for row, item in enumerate(items):
-                self.text(x, y + row * 5.3, item, 130, 10)
+    def step(
+        self,
+        number: int,
+        y: float,
+        title: str,
+        body: str,
+        *,
+        azure: bool = False,
+        h: float = 20,
+    ) -> None:
+        self.ax.add_patch(
+            FancyBboxPatch(
+                (24, y),
+                175,
+                h,
+                boxstyle="round,pad=0,rounding_size=2",
+                facecolor=CLOUD if azure else LOCAL,
+                edgecolor=LINE,
+                linewidth=0.8,
+            )
+        )
+        self.ax.add_patch(
+            Circle(
+                (24, y + h / 2),
+                3.7,
+                facecolor=WHITE,
+                edgecolor=BLUE,
+                linewidth=0.8,
+            )
+        )
+        self.ax.text(
+            24,
+            y + h / 2,
+            str(number),
+            ha="center",
+            va="center",
+            fontsize=11,
+            fontweight="bold",
+            color=BLUE,
+        )
+        self.text(31, y + 2.2, title, 163, 11, "bold", max_height=5.2)
+        self.text(31, y + 8.2, body, 163, 10.5, max_height=h - 9.1)
+
+    def role(self, y: float, h: float, title: str, body: str) -> None:
+        self.box(211, y, 71, h, title, body, CLOUD, size=10.5)
 
 
 def overview() -> ArchitectureSheet:
     s = ArchitectureSheet(
-        1,
-        "Los recuadros muestran las piezas. Los números indican el recorrido; "
-        "algunas flechas van y vuelven.",
+        1, "Lee de arriba hacia abajo: entras, guardas un documento y preguntas."
     )
-    s.group(15, 50, 132, 118, "EN TU EQUIPO", LOCAL)
-    s.group(162, 50, 120, 118, "EN AZURE", CLOUD)
-    s.box(22, 70, 34, 30, "Tú", "Archivo y pregunta", WHITE, size=11)
-    s.box(68, 68, 71, 33, "Streamlit", "La pantalla de la home\nlocalhost:8501", WHITE)
-    s.box(68, 123, 71, 34, "FastAPI", "La API hace el trabajo\n127.0.0.1:8000", WHITE)
-    s.box(
-        173,
-        65,
-        99,
-        29,
-        "Entra ID",
-        "Comprueba tu cuenta y entrega tokens de acceso.",
-        WHITE,
-    )
-    s.box(173, 104, 99, 25, "AI Search", "Guarda y busca partes del texto.", WHITE)
-    s.box(
-        173, 140, 99, 25, "Azure OpenAI", "Redacta usando el texto encontrado.", WHITE
-    )
-    s.route([(56, 84), (68, 84)], number="1", badge=(62, 79), both=True)
-    s.route([(139, 80), (173, 80)], number="2", badge=(156, 75), both=True)
-    s.route([(92, 101), (92, 123)], number="3", badge=(92, 112))
-    s.route(
-        [(139, 128), (152, 128), (152, 98), (183, 98), (183, 94)],
-        number="4",
-        badge=(152, 111),
-    )
-    s.route(
-        [(139, 137), (159, 137), (159, 116), (173, 116)], number="5", badge=(159, 130)
-    )
-    s.route([(139, 151), (173, 151)], number="6", badge=(156, 151), both=True)
-    s.route([(117, 123), (117, 101)], number="7", badge=(117, 112))
-    s.legend(
-        [
-            "1 Abres la home.",
-            "2 Microsoft comprueba tu cuenta.",
-            "3 Envías un archivo o una pregunta.",
-            "4 La API pide acceso en tu nombre.",
-        ],
-        [
-            "5 Search guarda o busca texto.",
-            "6 OpenAI redacta cuando hay información.",
-            "7 El resultado vuelve a la pantalla.",
-            "Un token es un comprobante temporal de acceso.",
-        ],
+    s.group(15, 49, 107, 142, "EN TU EQUIPO", LOCAL)
+    s.group(128, 49, 154, 142, "SERVICIOS DE AZURE", CLOUD)
+    columns = [
+        (19, "Streamlit", "Tu pantalla"),
+        (73, "FastAPI", "Coordina todo"),
+        (132, "Entra ID", "Da acceso"),
+        (183, "AI Search", "Guarda y busca"),
+        (234, "OpenAI", "Redacta"),
+    ]
+    centers = []
+    for x, title, body in columns:
+        s.box(x, 60, 44, 23, title, body, WHITE, size=9.5)
+        center = x + 22
+        centers.append(center)
+        s.ax.plot(
+            [center, center],
+            [83, 189],
+            color=LINE,
+            linestyle=(0, (2, 3)),
+            linewidth=0.65,
+            zorder=1,
+        )
+    events = [
+        (0, 2, "Inicias sesión", False),
+        (2, 0, "Acceso; vuelves a la home", False),
+        (0, 1, "Archivo + token", False),
+        (1, 2, "Acceso a Search", True),
+        (1, 3, "Guarda el texto dividido", False),
+        (3, 1, "Confirma guardado", False),
+        (1, 0, "Documento listo", False),
+        (0, 1, "Pregunta + token", False),
+        (1, 2, "Acceso a Search y OpenAI", True),
+        (1, 3, "Busca y recibe partes del texto", True),
+        (1, 4, "Envía pregunta + texto; recibe respuesta", True),
+        (1, 0, "Respuesta y fuentes", False),
+    ]
+    for index, (source, destination, label, both) in enumerate(events, 1):
+        y = 89 + (index - 1) * 8.7
+        x1, x2 = centers[source], centers[destination]
+        s.route(
+            [(x1, y), (x2, y)],
+            number=str(index),
+            badge=(min(x1, x2) + 4, y),
+            both=both,
+            dashed=source > destination,
+        )
+        s.text(min(x1, x2) + 9, y - 4.5, label, abs(x1 - x2) - 10, 9)
+    s.text(
+        15,
+        192,
+        "Flecha doble: envío y regreso. Token: pase temporal. "
+        "La API lleva el texto de Search a OpenAI.",
+        267,
+        9,
     )
     return s
 
 
-def inside_api() -> ArchitectureSheet:
+def login() -> ArchitectureSheet:
     s = ArchitectureSheet(
-        2,
-        "La pantalla envía una petición. La API reparte el trabajo "
-        "y se comunica con Azure.",
+        2, "Azure comprueba quién eres. La pantalla abre la home para subir documentos."
     )
-    s.group(15, 51, 65, 118, "PANTALLA", LOCAL)
-    s.group(86, 51, 114, 118, "DENTRO DE FASTAPI", LOCAL)
-    s.group(213, 51, 69, 118, "SERVICIOS AZURE", CLOUD)
+    items = [
+        (
+            "Streamlit: abres la pantalla",
+            "Entras en localhost:8501 y pulsas Iniciar sesión con Microsoft.",
+            False,
+        ),
+        (
+            "Microsoft Entra ID: comprueba tu cuenta",
+            "Inicias sesión con una cuenta admitida en el directorio del proyecto.",
+            True,
+        ),
+        (
+            "Streamlit + Entra ID: preparan el acceso a la API",
+            "La pantalla obtiene un token: un pase temporal destinado a FastAPI.",
+            True,
+        ),
+        (
+            "Streamlit: muestra la home",
+            "Vuelves a la página principal, donde aparece Subir documentos.",
+            False,
+        ),
+    ]
+    for index, (title, body, azure) in enumerate(items, 1):
+        y = 58 + (index - 1) * 32
+        s.step(index, y, title, body, azure=azure, h=25)
+        if index < len(items):
+            s.route([(111.5, y + 25), (111.5, y + 32)])
+    s.role(
+        58,
+        46,
+        "Microsoft Entra ID",
+        "Es la puerta de acceso de Microsoft. Comprueba tu identidad "
+        "y entrega pases para las aplicaciones.",
+    )
     s.box(
-        21,
-        85,
-        53,
-        45,
-        "Streamlit",
-        "Envía tu archivo o pregunta y muestra el resultado.",
-        WHITE,
+        211,
+        113,
+        71,
+        38,
+        "El pase para la API",
+        "La pantalla lo envía al cargar un archivo o hacer una pregunta.",
+        NOTE,
+        size=10.5,
     )
     s.box(
-        92,
-        65,
-        102,
-        27,
-        "Puerta de entrada",
-        "Recibe la petición y comprueba tu token.",
-        WHITE,
-    )
-    s.box(
-        92,
-        102,
-        102,
-        27,
-        "Trabajo principal",
-        "Al cargar: prepara texto.\nAl preguntar: busca y responde.",
-        WHITE,
-    )
-    s.box(
-        92,
-        140,
-        102,
-        26,
-        "Conectores con Azure",
-        "Envían el trabajo a cada servicio y recogen su resultado.",
-        WHITE,
-    )
-    s.box(219, 64, 57, 28, "Entra ID", "Comprueba quién pide acceso.", WHITE, size=10.5)
-    s.box(219, 102, 57, 28, "AI Search", "Guarda y encuentra texto.", WHITE, size=10.5)
-    s.box(219, 140, 57, 26, "Azure OpenAI", "Genera la respuesta.", WHITE, size=10.5)
-    s.route([(74, 94), (83, 94), (83, 79), (92, 79)], number="1", badge=(83, 87))
-    s.route([(194, 78), (219, 78)], number="2", badge=(206, 78), both=True)
-    s.route([(143, 92), (143, 102)], number="3", badge=(143, 97))
-    s.route([(143, 129), (143, 140)], number="4", badge=(143, 134.5))
-    s.route(
-        [(194, 146), (206, 146), (206, 117), (219, 117)], number="5", badge=(206, 133)
-    )
-    s.route([(194, 158), (219, 158)], number="5", badge=(206, 158), both=True)
-    s.route([(92, 154), (82, 154), (82, 118), (74, 118)], number="6", badge=(82, 144))
-    s.legend(
-        [
-            "1 Recibir el archivo o la pregunta.",
-            "2 Comprobar el token y pedir acceso.",
-            "3 Elegir y realizar el trabajo solicitado.",
-        ],
-        [
-            "4 Preparar las llamadas a Azure.",
-            "5 Guardar, buscar o generar según la petición.",
-            "6 Entregar el resultado a la pantalla.",
-        ],
+        211,
+        160,
+        71,
+        32,
+        "Permisos del usuario",
+        "Search y OpenAI comprueban qué puedes hacer en cada recurso.",
+        NOTE,
+        size=10.5,
     )
     s.text(
-        15,
-        190,
-        "La carga guarda texto dividido; la pregunta usa ese texto "
-        "como base para la respuesta.",
-        267,
+        24,
+        186,
+        "Resultado: ya estás en la home. Continúa con la hoja 3.",
+        175,
         10,
+        "bold",
+    )
+    return s
+
+
+def upload() -> ArchitectureSheet:
+    s = ArchitectureSheet(
+        3, "El archivo pasa por la API; su texto queda guardado en Azure AI Search."
+    )
+    items = [
+        (
+            "Streamlit → FastAPI: envía el documento",
+            "Eliges el archivo y pulsas Procesar y guardar. Viaja junto al token.",
+            False,
+        ),
+        (
+            "FastAPI: comprueba el acceso",
+            "Valida que el pase sea correcto y que la petición venga de la pantalla.",
+            False,
+        ),
+        (
+            "Microsoft Entra ID: da acceso a Search",
+            "La API pide otro pase, válido para usar Search en tu nombre.",
+            True,
+        ),
+        (
+            "FastAPI: prepara el texto",
+            "Lee el archivo y lo divide en partes con el nombre "
+            "del documento y la página cuando existe.",
+            False,
+        ),
+        (
+            "Azure AI Search: guarda las partes",
+            "Comprueba tus permisos y almacena el texto para poder buscarlo después.",
+            True,
+        ),
+        (
+            "FastAPI → Streamlit: confirma la carga",
+            "Ves el documento procesado y puedes empezar a preguntar sobre él.",
+            False,
+        ),
+    ]
+    for index, (title, body, azure) in enumerate(items, 1):
+        y = 52 + (index - 1) * 24
+        s.step(index, y, title, body, azure=azure)
+        if index < len(items):
+            s.route([(111.5, y + 20), (111.5, y + 24)])
+    s.role(
+        52,
+        42,
+        "Microsoft Entra ID",
+        "Entrega el pase de Search. La API actúa con los permisos "
+        "de tu cuenta o grupo.",
+    )
+    s.role(
+        103,
+        43,
+        "Azure AI Search",
+        "Es el almacén y buscador del texto. Conserva las partes, "
+        "el nombre del archivo y la página cuando existe.",
+    )
+    s.box(
+        211,
+        155,
+        71,
+        37,
+        "Qué se guarda",
+        "Texto dividido, no el archivo original. PDF con texto, TXT "
+        "o Markdown; hasta 10 MiB.",
+        NOTE,
+        size=10.5,
     )
     return s
 
 
 def question() -> ArchitectureSheet:
     s = ArchitectureSheet(
-        3,
-        "Lee las flechas de arriba hacia abajo. Cada columna "
-        "es una pieza de la arquitectura.",
+        4,
+        "La API busca información primero y entrega ese texto "
+        "al modelo para responder.",
     )
-    s.group(15, 49, 107, 127, "EN TU EQUIPO", LOCAL)
-    s.group(128, 49, 154, 127, "EN AZURE", CLOUD)
-    columns = [
-        (19, "Streamlit", "Tu pantalla"),
-        (73, "FastAPI", "Coordina"),
-        (132, "Entra ID", "Da acceso"),
-        (183, "AI Search", "Busca texto"),
-        (234, "OpenAI", "Redacta"),
+    items = [
+        (
+            "Streamlit → FastAPI: envía tu pregunta",
+            "La API recibe pregunta, referencia del documento y token. "
+            "Comprueba el acceso.",
+            False,
+        ),
+        (
+            "Microsoft Entra ID: da dos pases",
+            "La API obtiene acceso a Search y a Azure OpenAI, siempre en tu nombre.",
+            True,
+        ),
+        (
+            "Azure AI Search: busca en el documento",
+            "Recibe la consulta de la API y le devuelve "
+            "hasta cinco partes relacionadas.",
+            True,
+        ),
+        (
+            "FastAPI: revisa lo encontrado",
+            "Con texto, prepara la pregunta y sus fuentes. "
+            "Sin texto, salta al paso 6 con un aviso.",
+            False,
+        ),
+        (
+            "Azure OpenAI: redacta la respuesta",
+            "La API le envía pregunta y partes del texto; "
+            "le pide responder usando esas fuentes.",
+            True,
+        ),
+        (
+            "FastAPI → Streamlit: muestra el resultado",
+            "Ves la respuesta y sus fuentes, o el aviso de información insuficiente.",
+            False,
+        ),
     ]
-    centers = []
-    for x, title, body in columns:
-        s.box(x, 60, 44, 20, title, body, WHITE, size=10)
-        center = x + 22
-        centers.append(center)
-        s.ax.plot(
-            [center, center],
-            [80, 173],
-            color=LINE,
-            linestyle=(0, (2, 3)),
-            linewidth=0.7,
-        )
-    events = [
-        (0, 1, "Pregunta + token"),
-        (1, 2, "Pide acceso"),
-        (2, 1, "Devuelve tokens"),
-        (1, 3, "Busca en el documento"),
-        (3, 1, "Devuelve partes del texto"),
-        (1, 4, "Pregunta + partes encontradas"),
-        (4, 1, "Respuesta con fuentes"),
-        (1, 0, "Muestra la respuesta"),
-    ]
-    for index, (source, destination, label) in enumerate(events, start=1):
-        y = 88 + (index - 1) * 11.2
-        x1, x2 = centers[source], centers[destination]
-        s.route(
-            [(x1, y), (x2, y)],
-            number=str(index),
-            badge=(min(x1, x2) + 5, y),
-            dashed=source > destination,
-        )
-        s.text(min(x1, x2) + 11, y - 5, label, abs(x1 - x2) - 12, 9.5)
-    s.text(
-        15,
-        180,
-        "En el paso 3, la API obtiene acceso a Search y a OpenAI en tu nombre.",
-        267,
-        10,
+    for index, (title, body, azure) in enumerate(items, 1):
+        y = 52 + (index - 1) * 24
+        s.step(index, y, title, body, azure=azure)
+        if index < len(items):
+            s.route([(111.5, y + 20), (111.5, y + 24)])
+    s.route([(24, 137), (16, 137), (16, 182), (20, 182)], dashed=True)
+    s.role(
+        52,
+        32,
+        "Microsoft Entra ID",
+        "Entrega un pase para Search y otro para OpenAI.",
+    )
+    s.role(
+        93,
+        35,
+        "Azure AI Search",
+        "Encuentra texto útil. Lo devuelve a la API, "
+        "que prepara la consulta al modelo.",
+    )
+    s.role(
+        137,
+        35,
+        "Azure OpenAI",
+        "Es el redactor. Recibe las partes elegidas y genera una respuesta.",
     )
     s.text(
-        15,
-        187,
-        "Si Search no encuentra texto, la API avisa que falta información "
-        "y no pide al modelo una respuesta.",
-        267,
+        211,
+        178,
+        "Cognitive Services es el nombre del permiso para OpenAI; no añade otro paso.",
+        71,
         10,
+        max_height=16,
     )
     return s
 
 
-def deployed() -> ArchitectureSheet:
+def azure_parts() -> ArchitectureSheet:
     s = ArchitectureSheet(
-        4,
-        "La API pasa de tu equipo a un servicio de Azure. "
-        "El texto de los documentos sigue en Search.",
+        5, "Cada pieza tiene un trabajo. Estas son las que usa o prepara el proyecto."
     )
-    s.group(15, 50, 76, 119, "PREPARAR Y PUBLICAR", LOCAL)
-    s.group(104, 50, 178, 119, "EN AZURE", CLOUD)
-    s.box(
-        21,
-        65,
-        64,
-        38,
-        "GitHub Actions",
-        "Prueba el código y las respuestas. Publica cuando los controles pasan.",
-        WHITE,
-        size=11,
-    )
-    s.box(
-        21,
-        122,
-        64,
-        39,
-        "Terraform",
-        "Crea los recursos y configura sus permisos y conexiones.",
-        WHITE,
-        size=11,
-    )
-    s.box(
-        113,
-        65,
-        73,
-        37,
-        "Container Registry",
-        "Guarda la imagen: el paquete con la API lista para ejecutar.",
-        WHITE,
-        size=11,
-    )
-    s.box(
-        204,
-        65,
-        69,
-        37,
-        "Container Apps",
-        "Ejecuta FastAPI en Azure y recibe las peticiones.",
-        WHITE,
-        size=11,
-    )
-    s.box(
-        113,
-        130,
-        73,
-        28,
-        "Azure OpenAI",
-        "Genera respuestas y permite evaluar su calidad.",
-        WHITE,
-        size=11,
-    )
-    s.box(
-        204,
-        130,
-        69,
-        28,
-        "AI Search",
-        "Conserva y busca los fragmentos de documentos.",
-        WHITE,
-        size=11,
-    )
-    s.route([(85, 142), (96, 142), (96, 162), (104, 162)], number="1", badge=(96, 151))
-    s.route([(85, 83), (113, 83)], number="2", badge=(99, 83))
-    s.route([(186, 83), (204, 83)], number="3", badge=(195, 83))
-    s.route([(230, 102), (230, 130)], number="4", badge=(230, 122), both=True)
-    s.route(
-        [(215, 102), (215, 109), (149, 109), (149, 130)], number="4", badge=(149, 121)
-    )
-    s.legend(
-        [
-            "1 Terraform prepara y mantiene la infraestructura.",
-            "2 GitHub prepara y guarda el paquete aprobado.",
-            "3 Container Apps ejecuta la nueva API.",
-        ],
-        [
-            "4 La API usa Search y OpenAI en nombre del usuario.",
-            "Streamlit se aloja por separado; apunta a esa API.",
-            "Entra mantiene el inicio de sesión y el acceso.",
-        ],
-    )
-    s.text(
-        15,
-        190,
-        "Apoyo de infraestructura: Log Analytics guarda registros "
-        "y Key Vault ofrece un almacén de secretos.",
-        267,
-        9.5,
-    )
+    s.text(15, 49, "AL ENTRAR, CARGAR Y PREGUNTAR", 130, 9.5, "bold", BLUE)
+    s.text(152, 49, "AL EJECUTAR LA API PUBLICADA EN AZURE", 130, 9.5, "bold", BLUE)
+    cards = [
+        (
+            15,
+            59,
+            "Microsoft Entra ID",
+            "Comprueba tu identidad y entrega pases. Actúa al iniciar sesión "
+            "y cuando la API pide acceso a Search u OpenAI.",
+            CLOUD,
+        ),
+        (
+            15,
+            94,
+            "Azure AI Search",
+            "Guarda partes del documento durante la carga. Al preguntar, "
+            "busca texto relacionado y lo devuelve a la API.",
+            CLOUD,
+        ),
+        (
+            15,
+            129,
+            "Azure OpenAI",
+            "El modelo de chat redacta con el texto que envía la API. "
+            "También se usa otro modelo para evaluar calidad antes de publicar.",
+            CLOUD,
+        ),
+        (
+            15,
+            164,
+            "FastAPI: quien une las piezas",
+            "En local corre en tu equipo; publicada, en Container Apps. "
+            "Lleva las peticiones y los resultados entre pantalla y Azure.",
+            LOCAL,
+        ),
+        (
+            152,
+            59,
+            "Azure Container Apps",
+            "Ejecuta la API en Azure y recibe las peticiones de la pantalla. "
+            "Streamlit necesita alojamiento por separado.",
+            CLOUD,
+        ),
+        (
+            152,
+            94,
+            "Azure Container Registry",
+            "Guarda el paquete de la API, llamado imagen. "
+            "Container Apps lo descarga para ejecutar esa versión.",
+            CLOUD,
+        ),
+        (
+            152,
+            129,
+            "Azure Log Analytics",
+            "Recoge registros del entorno de Container Apps. "
+            "Sirven para revisar qué ocurrió cuando hay un problema.",
+            CLOUD,
+        ),
+        (
+            152,
+            164,
+            "Azure Key Vault",
+            "Es un almacén de secretos preparado por Terraform. "
+            "La API actual todavía no lo consulta directamente.",
+            CLOUD,
+        ),
+    ]
+    for x, y, title, body, color in cards:
+        s.box(x, y, 130, 29, title, body, color, size=10.5)
     return s
 
 
@@ -438,13 +558,13 @@ def main() -> None:
     with PdfPages(OUTPUT / "arquitectura-a4.pdf") as pdf:
         pdf.infodict().update(
             {
-                "Title": "RAG Manual: arquitectura paso a paso",
+                "Title": "RAG Manual: flujo completo de la aplicación y Azure",
                 "Author": "RAG Manual",
-                "Subject": "Cuatro hojas A4 horizontales",
+                "Subject": "Cinco hojas A4 horizontales",
             }
         )
         for (slug, _), factory in zip(
-            PAGES, [overview, inside_api, question, deployed], strict=True
+            PAGES, [overview, login, upload, question, azure_parts], strict=True
         ):
             sheet = factory()
             pdf.savefig(sheet.fig)
@@ -460,7 +580,7 @@ def main() -> None:
         """<!doctype html>
 <html lang="es"><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>RAG Manual · Arquitectura paso a paso</title>
+<title>RAG Manual · Flujo de la aplicación y Azure</title>
 <style>
 body { margin:0; background:#e8ecf0; font-family:system-ui,sans-serif; }
 header { max-width:1060px; margin:24px auto; padding:0 16px; }
@@ -477,15 +597,16 @@ img { display:block; width:100%; height:100%; }
   section:last-child { break-after:auto; }
 }
 </style>
-<header><h1>Arquitectura del proyecto, paso a paso</h1>
-<p>Cuatro hojas A4 horizontales. Imprime al 100 %, una página por hoja.</p>
+<header><h1>El flujo de la aplicación y sus partes de Azure</h1>
+<p>Cinco hojas A4 horizontales. Sigue los pasos desde la entrada hasta la respuesta.</p>
+<p>Imprime al 100 %, una página por hoja, sin encabezados del navegador.</p>
 <p><a href="arquitectura-a4.pdf">Abrir el PDF para imprimir</a></p></header>
 """
         + sections
         + "\n</html>\n"
     )
     (OUTPUT / "index.html").write_text(html, encoding="utf-8")
-    print(f"Generadas {len(PAGES)} hojas de arquitectura en {OUTPUT}")
+    print(f"Generadas {len(PAGES)} hojas del flujo de la aplicación en {OUTPUT}")
 
 
 if __name__ == "__main__":

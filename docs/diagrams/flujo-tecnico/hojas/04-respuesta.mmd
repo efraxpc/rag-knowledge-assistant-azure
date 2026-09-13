@@ -1,0 +1,21 @@
+flowchart TB
+  dependencies["get_answer_service() → AnswerService.answer()<br/>JWT → OBO(Search) → OBO(Cognitive Services).<br/>Ambos tokens se obtienen antes de buscar."]:::local
+  search["AzureTextSearchAdapter → Azure AI Search<br/>search_text = question; top = top_k.<br/>Filtro OData por document_id si se proporciona."]:::azure
+  empty{"context<br/>¿está vacío?"}:::decision
+  chat["API → AzureOpenAIChatClient.complete()<br/>POST /openai/v1/chat/completions; model = deployment.<br/>messages: system + user JSON; max_completion_tokens = 2000.<br/>Pregunta + contexto con content, source y page."]:::azure
+  result["200 · RagAnswerResponse {answer, context}"]:::local
+  search_error["403 / 503 / 502<br/>Acceso / servicio Search / respuesta incompatible."]:::error
+  no_context["200 · Sin contexto<br/>answer = aviso;<br/>context = []. No llama al modelo."]:::note
+  chat_error["502 · rag_provider_error<br/>Fallo de token, HTTP, rechazo o respuesta inválida/vacía."]:::error
+  dependencies --> search
+  search --> empty
+  search --> search_error
+  empty -->|"Sí"| no_context
+  empty -->|"No"| chat
+  chat --> chat_error
+  chat --> result
+  classDef local fill:#EFF4F8,stroke:#62788A,color:#172C42
+  classDef azure fill:#EDF6F2,stroke:#62788A,color:#172C42
+  classDef error fill:#FFF0EC,stroke:#62788A,color:#172C42
+  classDef note fill:#FFF7E8,stroke:#62788A,color:#172C42
+  classDef decision fill:#FFFFFF,stroke:#62788A,color:#172C42

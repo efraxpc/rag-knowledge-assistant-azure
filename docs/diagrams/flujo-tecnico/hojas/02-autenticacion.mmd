@@ -1,0 +1,19 @@
+flowchart TB
+  request["require_user() → HTTPBearer<br/>Lee Authorization: Bearer. Si falta, devuelve 401."]:::local
+  jwt["EntraTokenVerifier.verify() → JWKS del tenant<br/>RS256 + kid; firma, iss, aud estricto; exp/iat/nbf (leeway: 30 s).<br/>tid = tenant; ver = 2.0; oid = UUID.<br/>scp contiene access_as_user; azp = client ID de Streamlit."]:::local
+  valid{"JWT y permisos<br/>¿válidos?"}:::decision
+  obo["API → Entra ID: OnBehalfOfCredential<br/>tenant_id + client_id API + client_secret API + user_assertion.<br/>get_token(scope) antes de ejecutar el servicio.<br/>Upload: Search. Answer: Search y luego Azure OpenAI."]:::azure
+  jwks_error["503 · Fallo JWKS<br/>identity_provider_unavailable"]:::error
+  auth_error["401 / 403<br/>401: JWT ausente o inválido.<br/>403: scp o azp no permiten acceso."]:::error
+  obo_error["403 / 503 · Fallo OBO<br/>403: intercambio rechazado.<br/>503: Entra no disponible."]:::error
+  request --> jwt
+  jwt --> valid
+  valid -->|"Sí"| obo
+  valid -->|"No"| auth_error
+  jwt --> jwks_error
+  obo --> obo_error
+  classDef local fill:#EFF4F8,stroke:#62788A,color:#172C42
+  classDef azure fill:#EDF6F2,stroke:#62788A,color:#172C42
+  classDef error fill:#FFF0EC,stroke:#62788A,color:#172C42
+  classDef note fill:#FFF7E8,stroke:#62788A,color:#172C42
+  classDef decision fill:#FFFFFF,stroke:#62788A,color:#172C42

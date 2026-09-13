@@ -6,8 +6,12 @@ rutas versionadas y pruebas automatizadas.
 Consulta el [flujo completo en ocho hojas A4](docs/diagrams/flujo-completo/flujo-completo-a4.pdf),
 explicado con palabras simples y listo para imprimir.
 
-También está disponible el [diagrama de arquitectura en cuatro hojas A4](docs/diagrams/arquitectura/arquitectura-a4.pdf),
-con las piezas del proyecto y sus conexiones explicadas paso a paso.
+También está disponible el [flujo de la aplicación y sus partes de Azure en cinco hojas A4](docs/diagrams/arquitectura/arquitectura-a4.pdf),
+desde el inicio de sesión hasta la respuesta, con pasos numerados y la función
+de cada servicio.
+
+Para revisar endpoints, JWT/OBO, llamadas a Azure y ramas de error, consulta el
+[diagrama de flujo técnico en cinco hojas A4](docs/diagrams/flujo-tecnico/flujo-tecnico-a4.pdf).
 
 ## Requisitos
 

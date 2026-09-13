@@ -1,0 +1,15 @@
+sequenceDiagram
+  participant UI as Streamlit
+  participant API as FastAPI
+  participant Entra as Microsoft Entra ID
+  participant Search as Azure AI Search
+  participant OpenAI as Azure OpenAI
+  UI->>API: Bearer API; scp access_as_user; aud client ID API
+  API->>Entra: OBO; scope https://search.azure.com/.default
+  Entra-->>API: Access token Search
+  API->>Entra: OBO; scope https://cognitiveservices.azure.com/.default
+  Entra-->>API: Access token OpenAI
+  API->>Search: Bearer Search; servicio aplica RBAC
+  Search-->>API: Contexto
+  API->>OpenAI: Bearer OpenAI; servicio aplica RBAC
+  OpenAI-->>API: Respuesta
