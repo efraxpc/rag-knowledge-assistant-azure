@@ -36,6 +36,14 @@ En **API permissions**, añade los permisos delegados `user_impersonation` de
 Azure AI Search y Azure AI Services, y concede consentimiento de administrador
 para el tenant. OBO requiere ese consentimiento en el registro de la API.
 
+Para administrar el permiso de Azure AI Services y su consentimiento con
+Terraform, configura `manage_entra_openai_access = true`, junto con
+`entra_tenant_id` y `entra_api_client_id`. Solo administra `user_impersonation`
+de Microsoft Cognitive Services; conserva los permisos de Search y Microsoft
+Graph. El consentimiento permite el intercambio OBO, pero los usuarios siguen
+necesitando el rol `Cognitive Services OpenAI User` sobre el recurso de Azure.
+Puedes asignar ese rol a usuarios concretos mediante `openai_user_object_ids`.
+
 Crea una credencial para la aplicación de la API. El código admite actualmente
 un client secret. Guárdalo fuera de Git; en producción debe llegar mediante un
 almacén de secretos y no como un valor versionado.

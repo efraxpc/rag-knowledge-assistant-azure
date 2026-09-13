@@ -346,6 +346,18 @@ variable "create_entra_api_client_secret" {
   default     = false
 }
 
+variable "manage_entra_openai_access" {
+  description = "Administrar el permiso delegado user_impersonation de Azure AI Services y su consentimiento de administrador para FastAPI."
+  type        = bool
+  default     = false
+}
+
+variable "openai_user_object_ids" {
+  description = "Object IDs de usuarios autorizados a generar respuestas en la cuenta Azure OpenAI."
+  type        = set(string)
+  default     = []
+}
+
 variable "entra_frontend_client_id" {
   description = "Client ID del registro de aplicación de Streamlit autorizado para llamar a FastAPI."
   type        = string

@@ -54,6 +54,10 @@ search_user_group_object_id = null
 # Alternativamente, activa create_entra_api_client_secret para que Terraform cree
 # una credencial adicional en el registro de FastAPI. Se almacena en el estado.
 create_entra_api_client_secret = false
+# Declara user_impersonation de Azure AI Services y concede consentimiento OBO.
+manage_entra_openai_access = false
+# Usuarios autorizados a usar el modelo generador mediante OBO.
+openai_user_object_ids = []
 entra_tenant_id         = null
 entra_api_client_id     = null
 entra_frontend_client_id = null
