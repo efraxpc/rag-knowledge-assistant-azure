@@ -11,7 +11,6 @@ from app.api import dependencies
 from app.core import resources
 from app.core.auth import require_user
 from app.core.config import Settings
-from app.integrations.azure_openai_chat import AZURE_AI_SCOPE
 from app.integrations.azure_text_search import AzureTextSearchAdapter
 from app.rag.contracts import TextChunkStore
 from tests.auth_helpers import authenticated_user, entra_settings
@@ -141,7 +140,9 @@ def test_chat_client_uses_user_obo_identity_and_closes(
     ) as client:
         assert client is chat_client
 
-    credential.get_token.assert_called_once_with(AZURE_AI_SCOPE)
+    credential.get_token.assert_called_once_with(
+        "https://cognitiveservices.azure.com/.default"
+    )
     chat_factory.assert_called_once_with(
         endpoint="https://example.openai.azure.com/",
         deployment="candidate-v1",

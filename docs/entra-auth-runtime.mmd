@@ -9,7 +9,7 @@ flowchart TB
   obo["7. On-Behalf-Of<br/>user_assertion + credencial de FastAPI"]
   entra_exchange["8. Microsoft Entra ID<br/>intercambia el token"]
   search_token["9a. Token de Azure AI Search<br/>https://search.azure.com/.default<br/>identidad del mismo usuario"]
-  openai_token["9b. Token de Azure OpenAI<br/>https://ai.azure.com/.default<br/>identidad del mismo usuario"]
+  openai_token["9b. Token de Azure OpenAI<br/>https://cognitiveservices.azure.com/.default<br/>identidad del mismo usuario"]
   search_rbac{"10a. Azure RBAC<br/>permiso de datos Search"}
   openai_rbac{"10b. Azure RBAC<br/>permiso de inferencia OpenAI"}
   search["11a. Azure AI Search<br/>carga o consulta chunks"]

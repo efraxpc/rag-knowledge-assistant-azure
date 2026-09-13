@@ -8,7 +8,6 @@ from azure.core.credentials import AccessToken
 from azure.core.exceptions import ClientAuthenticationError
 
 from app.integrations.azure_openai_judge import (
-    AZURE_AI_SCOPE,
     AzureOpenAIJudgeClient,
     JudgeProviderError,
 )
@@ -74,7 +73,9 @@ def test_sends_structured_request_with_entra_token() -> None:
     assert "maximum" not in sent_schema["properties"]["score"]
     assert "minLength" not in sent_schema["properties"]["reason"]
     assert result == {"score": 5}
-    credential.get_token.assert_called_once_with(AZURE_AI_SCOPE)
+    credential.get_token.assert_called_once_with(
+        "https://cognitiveservices.azure.com/.default"
+    )
 
 
 def test_hides_provider_response_on_http_error() -> None:

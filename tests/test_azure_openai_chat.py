@@ -8,7 +8,6 @@ from azure.core.credentials import AccessToken
 from azure.core.exceptions import ClientAuthenticationError
 
 from app.integrations.azure_openai_chat import (
-    AZURE_AI_SCOPE,
     AzureOpenAIChatClient,
     RagProviderError,
 )
@@ -56,7 +55,9 @@ def test_generates_answer_with_entra_token() -> None:
     assert body["model"] == "candidate-deployment"
     assert body["messages"][0] == {"role": "system", "content": "system"}
     assert result == "Respuesta citada."
-    credential.get_token.assert_called_once_with(AZURE_AI_SCOPE)
+    credential.get_token.assert_called_once_with(
+        "https://cognitiveservices.azure.com/.default"
+    )
 
 
 def test_hides_provider_body_on_http_error() -> None:

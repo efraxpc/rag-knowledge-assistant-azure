@@ -2,6 +2,7 @@ from unittest.mock import MagicMock
 
 import pytest
 from streamlit.errors import StreamlitSecretNotFoundError
+from streamlit.testing.v1 import AppTest
 
 from app import streamlit_app, ui_auth
 
@@ -140,15 +141,17 @@ def test_app_renders_upload_view_after_successful_login(
 ) -> None:
     ui = MagicMock()
     ui.form_submit_button.return_value = False
+    ui.file_uploader.return_value = None
     monkeypatch.setattr(streamlit_app, "st", ui)
     monkeypatch.setattr(streamlit_app, "require_login", lambda: "access-token")
-    sidebar = MagicMock(return_value=(None, "http://api.example"))
+    sidebar = MagicMock(return_value="http://api.example")
     monkeypatch.setattr(streamlit_app, "render_sidebar", sidebar)
 
     streamlit_app.render_app()
 
     sidebar.assert_called_once_with()
-    assert "Carga un manual desde la barra lateral" in str(ui.info.call_args_list)
+    ui.file_uploader.assert_called_once()
+    assert "Selecciona un documento para comenzar" in str(ui.info.call_args_list)
 
 
 def test_sidebar_uses_configured_api_destination(
@@ -161,6 +164,83 @@ def test_sidebar_uses_configured_api_destination(
     monkeypatch.setattr(streamlit_app, "st", ui)
     monkeypatch.setattr(streamlit_app, "get_settings", lambda: settings)
     monkeypatch.setattr(streamlit_app, "fetch_api_health", lambda url: {"version": "1"})
-    _, url = streamlit_app.render_sidebar()
+    url = streamlit_app.render_sidebar()
     assert url == "https://trusted-api.example"
     ui.text_input.assert_not_called()
+    ui.file_uploader.assert_not_called()
+
+
+@pytest.fixture
+def home_app(monkeypatch: pytest.MonkeyPatch) -> AppTest:
+    monkeypatch.setattr(ui_auth.st, "user", FakeUser(is_logged_in=False))
+    monkeypatch.setattr(
+        streamlit_app,
+        "get_settings",
+        lambda: MagicMock(api_base_url="http://api.example"),
+    )
+    monkeypatch.setattr(
+        streamlit_app, "fetch_api_health", MagicMock(return_value={"version": "1"})
+    )
+    app = AppTest.from_string("from app.streamlit_app import render_app\nrender_app()")
+    app.secrets = {
+        "auth": {
+            "redirect_uri": "http://localhost:8501/oauth2callback",
+            "microsoft": {"client_id": "frontend"},
+        }
+    }
+    return app
+
+
+def test_login_return_opens_document_home(
+    home_app: AppTest, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    login = MagicMock()
+    monkeypatch.setattr(ui_auth.st, "login", login)
+    home_app.run()
+    assert not home_app.exception
+    assert not home_app.file_uploader
+
+    home_app.button[0].click().run()
+    login.assert_called_once_with("microsoft")
+    assert not home_app.file_uploader
+
+    # El callback OIDC abre una sesión autenticada en la raíz de Streamlit.
+    monkeypatch.setattr(ui_auth.st, "user", FakeUser())
+    home_app.run()
+
+    assert not home_app.exception
+    assert home_app.main.subheader[0].value == "Subir documentos"
+    assert len(home_app.main.file_uploader) == 1
+    assert not home_app.sidebar.file_uploader
+    assert "Iniciar sesión con Microsoft" not in [b.label for b in home_app.button]
+    assert home_app.text_area[0].disabled
+
+
+def test_login_without_access_token_keeps_document_home_protected(
+    home_app: AppTest, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(ui_auth.st, "user", FakeUser(token=None))
+
+    home_app.run()
+
+    assert not home_app.exception
+    assert not home_app.file_uploader
+    assert not home_app.text_area
+    assert "Tu sesión necesita renovarse" in home_app.warning[0].value
+
+
+def test_document_home_stays_visible_when_api_is_unavailable(
+    home_app: AppTest, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(ui_auth.st, "user", FakeUser())
+    monkeypatch.setattr(
+        streamlit_app,
+        "fetch_api_health",
+        MagicMock(side_effect=streamlit_app.ApiUnavailableError),
+    )
+
+    home_app.run()
+
+    assert not home_app.exception
+    assert len(home_app.main.file_uploader) == 1
+    assert home_app.sidebar.error[0].value == "API no disponible"

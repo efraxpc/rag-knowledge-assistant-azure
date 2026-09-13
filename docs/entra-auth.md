@@ -36,6 +36,12 @@ En **API permissions**, añade los permisos delegados `user_impersonation` de
 Azure AI Search y Azure AI Services, y concede consentimiento de administrador
 para el tenant. OBO requiere ese consentimiento en el registro de la API.
 
+Para Azure OpenAI, el código solicita
+`https://cognitiveservices.azure.com/.default`, correspondiente al permiso
+`user_impersonation` de Microsoft Cognitive Services que se configura aquí.
+Es el scope documentado para el
+[endpoint OpenAI v1 de chat](https://learn.microsoft.com/en-us/rest/api/microsoft-foundry/azureopenai/chat).
+
 Para administrar el permiso de Azure AI Services y su consentimiento con
 Terraform, configura `manage_entra_openai_access = true`, junto con
 `entra_tenant_id` y `entra_api_client_id`. Solo administra `user_impersonation`
@@ -130,7 +136,11 @@ pip install -e ".[dev]"
 ```
 
 Abre `http://localhost:8501`, inicia sesión, carga un archivo y formula una
-pregunta. `az login` no se usa para las peticiones de la aplicación. Sigue siendo
+pregunta. Tras autenticarte, Streamlit vuelve automáticamente a la home, donde
+aparece **Subir documentos** en el contenido principal. Selecciona un archivo y
+pulsa **Procesar y guardar** antes de consultar su contenido.
+
+`az login` no se usa para las peticiones de la aplicación. Sigue siendo
 necesario para Terraform y los comandos administrativos o de evaluación.
 Si se accede mediante otro alias local, como `127.0.0.1`, la interfaz navega
 primero a `localhost` antes de iniciar OIDC para que el callback conserve las

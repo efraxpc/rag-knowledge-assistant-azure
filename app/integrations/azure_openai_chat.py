@@ -8,7 +8,8 @@ from azure.core.exceptions import AzureError
 
 from app.core.exceptions import ApplicationError
 
-AZURE_AI_SCOPE = "https://ai.azure.com/.default"
+# El endpoint OpenAI v1 usa el permiso delegado de Microsoft Cognitive Services.
+AZURE_AI_SCOPE = "https://cognitiveservices.azure.com/.default"
 
 
 class RagProviderError(ApplicationError):

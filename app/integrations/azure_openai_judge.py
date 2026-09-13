@@ -8,7 +8,7 @@ import httpx
 from azure.core.credentials import TokenCredential
 from azure.core.exceptions import AzureError
 
-AZURE_AI_SCOPE = "https://ai.azure.com/.default"
+AZURE_AI_SCOPE = "https://cognitiveservices.azure.com/.default"
 UNSUPPORTED_STRUCTURED_OUTPUT_KEYWORDS = frozenset(
     {
         "minLength",

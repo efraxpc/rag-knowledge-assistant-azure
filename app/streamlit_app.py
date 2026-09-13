@@ -148,14 +148,14 @@ def fetch_api_health(api_url: str) -> dict[str, Any]:
     return payload
 
 
-def render_sidebar() -> tuple[Any, str]:
-    """Muestra la configuración y devuelve el manual seleccionado."""
+def render_sidebar() -> str:
+    """Muestra el estado de la API y devuelve su URL configurada."""
     with st.sidebar:
         st.header("Configuración")
         # El destino del token lo fija el despliegue, no un campo editable del usuario.
         api_url = get_settings().api_base_url
 
-        if st.button("Actualizar estado", use_container_width=True):
+        if st.button("Actualizar estado", width="stretch"):
             fetch_api_health.clear()
 
         try:
@@ -166,18 +166,7 @@ def render_sidebar() -> tuple[Any, str]:
             version = health.get("version", "desconocida")
             st.success(f"API conectada · v{version}")
 
-        st.divider()
-        st.subheader("Manual")
-        manual = st.file_uploader(
-            "Carga un archivo",
-            type=SUPPORTED_FILE_TYPES,
-            help="PDF con texto, TXT y Markdown. Máximo 10 MiB; sin OCR.",
-        )
-        if manual is not None:
-            size_kb = manual.size / 1024
-            st.caption(f"{manual.name} · {size_kb:.1f} KB")
-
-    return manual, api_url
+    return api_url
 
 
 def render_document_upload(manual: Any, api_url: str, access_token: str) -> None:
@@ -226,17 +215,24 @@ def render_app() -> None:
     if access_token is None:
         return
 
-    manual, api_url = render_sidebar()
-
     st.title("📚 RAG Manual")
-    st.write("Consulta información de tus manuales desde una interfaz sencilla.")
+    st.write("Sube un documento para guardarlo y hacer preguntas sobre su contenido.")
+
+    st.subheader("Subir documentos")
+    manual = st.file_uploader(
+        "Carga un archivo",
+        type=SUPPORTED_FILE_TYPES,
+        help="PDF con texto, TXT y Markdown. Máximo 10 MiB; sin OCR.",
+    )
+    api_url = render_sidebar()
 
     if manual is None:
         st.session_state.pop("upload_selection", None)
         st.session_state.pop("upload_result", None)
-        st.info("Carga un manual desde la barra lateral para comenzar.")
+        st.info("Selecciona un documento para comenzar.")
     else:
         st.write(f"Manual seleccionado: **{manual.name}**")
+        st.caption(f"{manual.size / 1024:.1f} KB")
         render_document_upload(manual, api_url, access_token)
 
     st.subheader("Haz una pregunta")
@@ -251,7 +247,7 @@ def render_app() -> None:
         submitted = st.form_submit_button(
             "Consultar",
             type="primary",
-            use_container_width=True,
+            width="stretch",
             disabled=upload_result is None,
         )
 
