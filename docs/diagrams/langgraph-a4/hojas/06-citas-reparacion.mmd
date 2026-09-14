@@ -1,0 +1,22 @@
+flowchart LR
+    accTitle: Validación local de citas y reparación limitada
+    Validate["5 · validate_citations<br/>Comprobar o desactivar"]
+    Accepted{"¿issues está vacío?"}
+    Budget{"¿Quedan generaciones?"}
+    Repair["6 · repair<br/>Preparar corrección"]
+    Generate["4 · generate · hoja 5<br/>Otra llamada al modelo"]
+    Abstain["7 · abstain · hoja 7<br/>Aviso con contexto"]
+    Finish["8 · finish · hoja 7<br/>Aceptar borrador"]
+    Validate --> Accepted
+    Accepted -->|Sí| Finish
+    Accepted -->|No| Budget
+    Budget -->|Sí| Repair --> Generate --> Validate
+    Budget -->|No| Abstain
+    classDef local fill:#EFF4F8,stroke:#526D82,color:#172C42
+    classDef decision fill:#FFF4D8,stroke:#987536,color:#172C42
+    classDef output fill:#E9F5EC,stroke:#41794C,color:#172C42
+    classDef error fill:#FBECEC,stroke:#A84B4B,color:#172C42
+    class Validate,Repair,Generate local
+    class Accepted,Budget decision
+    class Finish output
+    class Abstain error

@@ -1,0 +1,22 @@
+flowchart LR
+    accTitle: Contexto preparado y estado por pregunta
+    Hits["Fragmentos recuperados<br/>Texto, fuente y página"]
+    Prepare["3 · prepare_context<br/>Copiar y recortar texto"]
+    Prompt["Preparar prompt JSON<br/>Pregunta original + datos"]
+    Next["4 · generate<br/>Continuar: hoja 5"]
+    State["AnswerState<br/>Memoria por pregunta"]
+    Hits --> Prepare --> Prompt --> Next
+    Prepare -.-> State
+    Prompt -.-> State
+    %% Presupuesto: 12.000 caracteres de content; no cuenta tokens,
+    %% pregunta, fuentes, páginas, JSON ni instrucciones del prompt.
+    %% Las copias preparadas acompañan a la respuesta; originales intactos.
+    %% query, search_question, context, prompt, draft, issues, answer, contadores,
+    %% request_id: datos del estado. Puede contener texto privado durante invoke.
+    %% Sin clientes, credenciales ni checkpoints durables en AnswerState.
+    classDef local fill:#EFF4F8,stroke:#526D82,color:#172C42
+    classDef note fill:#F3EFF9,stroke:#79608C,color:#172C42
+    classDef output fill:#E9F5EC,stroke:#41794C,color:#172C42
+    class Hits,Prepare,Prompt local
+    class State note
+    class Next output

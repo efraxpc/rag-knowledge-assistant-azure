@@ -1,0 +1,27 @@
+flowchart LR
+    accTitle: Respuesta final, cierre y errores controlados
+    Valid["Citas aceptadas<br/>Respuesta con contexto"]
+    Empty["Sin fragmentos<br/>context = []"]
+    Invalid["Citas inválidas agotadas<br/>Conservar contexto"]
+    Abstain["7 · abstain<br/>Elegir aviso sin modelo"]
+    Finish["8 · finish<br/>Borrador aceptado o aviso"]
+    End(["END"])
+    Close["Cerrar recursos<br/>Search y generador"]
+    Response["HTTP 200 · Streamlit<br/>answer + context"]
+    Error["Fallo interrumpe el grafo<br/>Cerrar recursos"]
+    AuthErrors["401 / 403 / 503<br/>Identidad o servicio"]
+    ProviderErrors["502 · generador<br/>Incluye OpenAI 403 / 429"]
+    ErrorResponse["Error HTTP · Streamlit<br/>code, message, details"]
+    Valid --> Finish
+    Empty --> Abstain
+    Invalid --> Abstain
+    Abstain --> Finish --> End --> Close --> Response
+    Error --> ErrorResponse
+    AuthErrors -.-> Error
+    ProviderErrors -.-> Error
+    classDef local fill:#EFF4F8,stroke:#526D82,color:#172C42
+    classDef output fill:#E9F5EC,stroke:#41794C,color:#172C42
+    classDef error fill:#FBECEC,stroke:#A84B4B,color:#172C42
+    class Close local
+    class Valid,Empty,Invalid,Finish,End,Response output
+    class Abstain,Error,AuthErrors,ProviderErrors,ErrorResponse error

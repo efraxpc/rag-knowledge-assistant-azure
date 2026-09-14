@@ -1,0 +1,27 @@
+flowchart LR
+    accTitle: Búsqueda textual y simplificación local
+    Search["1 · search<br/>Buscar y filtrar"]
+    Azure["Azure AI Search<br/>Texto y fuentes"]
+    Found{"¿Hay texto?"}
+    Budget{"¿Queda intento?"}
+    Rewrite["2 · rewrite_<br/>query · sin LLM"]
+    Changed{"¿Nueva consulta<br/>con términos?"}
+    Prepare["3 · prepare_<br/>context · hoja 4"]
+    Abstain["7 · abstain<br/>Sin contexto · hoja 7"]
+    Search -.->|Consulta| Azure
+    Azure -.->|Resultados| Search
+    Search --> Found
+    Found -->|Sí| Prepare
+    Found -->|No| Budget
+    Budget -->|Sí| Rewrite --> Changed
+    Changed -->|Sí| Search
+    Changed -->|No| Abstain
+    Budget -->|No| Abstain
+    classDef local fill:#EFF4F8,stroke:#526D82,color:#172C42
+    classDef decision fill:#FFF4D8,stroke:#987536,color:#172C42
+    classDef azure fill:#E6F3FF,stroke:#0078D4,color:#172C42
+    classDef error fill:#FBECEC,stroke:#A84B4B,color:#172C42
+    class Search,Rewrite,Prepare local
+    class Found,Budget,Changed decision
+    class Azure azure
+    class Abstain error

@@ -1,0 +1,20 @@
+flowchart LR
+    accTitle: Configuración del grafo, trazas y modos de ejecución
+    accDescr: API y evaluación ejecutan el mismo servicio con identidades distintas. Settings configura sus límites. La demo usa dobles y defaults; el juez permanece fuera del grafo.
+    Config["Settings<br/>env > .env > defaults"]
+    API["API<br/>OBO del usuario"]
+    CLI["Evaluación CLI<br/>DefaultAzureCredential"]
+    Demo["Demo offline<br/>Dobles + defaults"]
+    Service["AnswerService<br/>Mismo grafo; otro acceso"]
+    Trace["Trazas por nodo<br/>INFO · uvicorn.error"]
+    Judge["Juez fuera del grafo<br/>Respuesta + contexto"]
+    Config -.->|API y CLI| Service
+    API --> Service
+    CLI --> Service
+    Demo --> Service
+    Service -.->|Si trace_enabled| Trace
+    CLI -.->|Evaluación posterior| Judge
+    classDef local fill:#EFF4F8,stroke:#526D82,color:#172C42
+    classDef note fill:#F3EFF9,stroke:#79608C,color:#172C42
+    class Service local
+    class Config,API,CLI,Demo,Trace,Judge note

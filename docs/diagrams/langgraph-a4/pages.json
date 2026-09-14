@@ -1,0 +1,98 @@
+[
+  {
+    "slug": "01-vision-general",
+    "title": "Visión general de los ocho nodos",
+    "subtitle": "Mapa del grafo: las siguientes hojas detallan cada decisión y su interacción con Azure.",
+    "continuation": "Hoja 2: entrada, identidad y clientes. Hojas 3–6: decisiones. Hoja 7: salida. Hoja 8: configuración y trazas.",
+    "notes": [
+      "START inicia los contadores en 0. Por defecto: hasta 2 búsquedas y 2 generaciones por pregunta.",
+      "rewrite_query simplifica; prepare_context limita; validate_citations comprueba citas. Son reglas de Python.",
+      "Búsqueda y simplificación: hoja 3. Contexto: hoja 4. Generación Azure: hoja 5.",
+      "END devuelve answer y context. Citas: hoja 6. Salidas: hoja 7. Configuración y trazas: hoja 8."
+    ]
+  },
+  {
+    "slug": "02-entrada-identidad",
+    "title": "Entrada, identidad y recursos",
+    "subtitle": "FastAPI valida el token y prepara Search; OpenAI se abre únicamente cuando se necesita generar.",
+    "continuation": "Con la identidad validada y Search preparado, continúa en la hoja 3. El cierre de recursos se explica en la hoja 7.",
+    "notes": [
+      "Ruta: /api/v1/queries/answer; JSON: question, document_id y top_k; Authorization: Bearer.",
+      "JWT: RS256/JWKS, iss, aud, tid y exp; scp contiene access_as_user; azp es el frontend autorizado.",
+      "Scope: https://search.azure.com/.default. RBAC: Search Index Data Contributor sobre el recurso Search.",
+      "OBO: token API + secreto. Consentimiento Entra y RBAC son distintos. OpenAI abre en generate y cierra al salir."
+    ]
+  },
+  {
+    "slug": "03-busqueda-alternativa",
+    "title": "Búsqueda y consulta alternativa",
+    "subtitle": "Segunda búsqueda por contexto vacío; la simplificación local conserva el documento solicitado.",
+    "continuation": "Con fragmentos: hoja 4. Sin alternativa o presupuesto: abstención en la hoja 7.",
+    "notes": [
+      "search cuenta intentos, conserva document_id y top_k y descarta duplicados u otros documentos. Máximo 2; rango 1..2.",
+      "Azure AI Search devuelve texto, fuentes, páginas y scores. La recuperación es textual, sin embeddings.",
+      "rewrite_query quita puntuación y palabras frecuentes ES/EN, sin LLM. La pregunta original permanece intacta.",
+      "Solo repite con términos y una alternativa diferente. Sin alternativa o intentos: aviso; no abre OpenAI."
+    ]
+  },
+  {
+    "slug": "04-preparar-contexto",
+    "title": "Preparar contexto y estado",
+    "subtitle": "Presupuesto en caracteres del contenido; el contexto preparado acompaña a la respuesta final.",
+    "continuation": "El contexto y la pregunta original pasan a generate en la hoja 5. El estado solo vive durante esta ejecución.",
+    "notes": [
+      "12.000 caracteres de content por defecto; no cuenta pregunta, metadatos, JSON ni tokens.",
+      "El prompt mantiene la pregunta original. La respuesta devuelve las copias preparadas; originales intactos.",
+      "Estado: query, search_question, context, prompt, draft, issues, answer, contadores y request_id.",
+      "El estado puede contener texto privado. Sin clientes, credenciales ni checkpoints durables."
+    ]
+  },
+  {
+    "slug": "05-generacion-azure",
+    "title": "Generación delegada en Azure OpenAI",
+    "subtitle": "El primer generate abre OpenAI; las reparaciones reutilizan el cliente y la credencial del usuario.",
+    "continuation": "El borrador pasa a validate_citations en la hoja 6. Si falla el proveedor o OBO, consulta la hoja 7.",
+    "notes": [
+      "OBO: token de la API + credencial del registro FastAPI. Scope: https://cognitiveservices.azure.com/.default.",
+      "RBAC del usuario: Cognitive Services OpenAI User sobre la cuenta Azure OpenAI.",
+      "POST /openai/v1/chat/completions; model = deployment; max_completion_tokens = 2000 por llamada.",
+      "Sin contexto no abre OpenAI. Repara con el mismo cliente; el token puede renovarse. Cierre: hoja 7."
+    ]
+  },
+  {
+    "slug": "06-citas-reparacion",
+    "title": "Comprobar citas y reparar",
+    "subtitle": "Las reglas locales comprueban fuente y página; no demuestran el respaldo factual de cada afirmación.",
+    "continuation": "La reparación vuelve a generate en la hoja 5. La respuesta aceptada o la abstención termina en la hoja 7.",
+    "notes": [
+      "Exige texto no vacío, ≤16.000 caracteres y al menos una cita. Fuente y página deben estar en el contexto.",
+      "Cita de solo fuente: exige un fragmento page=None. No demuestra respaldo factual de cada afirmación.",
+      "verify_citations=false acepta el borrador. Por defecto: 2 generaciones en total; rango 1..3.",
+      "repair prepara prompt con contexto, borrador e issues. generate reutiliza el cliente y la credencial."
+    ]
+  },
+  {
+    "slug": "07-salida-errores",
+    "title": "Salida, abstención y errores",
+    "subtitle": "Abstención: HTTP 200. Un error interrumpe el grafo y mantiene los errores controlados de FastAPI.",
+    "continuation": "Los clientes se cierran también si hay error. La hoja 8 explica cómo configurar y observar estos recorridos.",
+    "notes": [
+      "HTTP 200: respuesta con contexto; aviso sin contexto []; o aviso de citas inválidas con contexto.",
+      "context devuelve solo copias preparadas. ExitStack cierra OpenAI; la dependencia cierra Search, también ante error.",
+      "401: JWT/token. 403: scope/azp, OBO o RBAC Search. 503: configuración o indisponibilidad.",
+      "OpenAI HTTP 403/429 → 502 rag_provider_error; OBO rechazado → 403. Sin reintento HTTP ni cambio de identidad."
+    ]
+  },
+  {
+    "slug": "08-configuracion-trazas",
+    "title": "Configuración, trazas y demostración",
+    "subtitle": "Settings configura API y evaluación; la demostración offline utiliza opciones predeterminadas.",
+    "continuation": "Para estudiar las ramas sin Azure: python -m app.commands.demo_answer_graph --scenario all.",
+    "notes": [
+      "APP_RAG_MAX_SEARCH_ATTEMPTS=2 (1..2); APP_RAG_MAX_GENERATION_ATTEMPTS=2 (1..3).",
+      "APP_RAG_MAX_CONTEXT_CHARACTERS=12000 (1..60000); limita caracteres del contenido.",
+      "APP_RAG_VERIFY_CITATIONS=true; APP_RAG_TRACE_ENABLED=true. La demo usa defaults sin leer .env ni Settings.",
+      "Trazas: request_id, node, outcome, intentos, duration_ms; sin pregunta, contexto, respuesta ni tokens."
+    ]
+  }
+]

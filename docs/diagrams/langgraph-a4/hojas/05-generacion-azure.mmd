@@ -1,0 +1,23 @@
+flowchart LR
+    accTitle: Generación delegada con Azure OpenAI
+    Generate["4 · generate<br/>Invocar cliente OpenAI"]
+    Client["Cliente y credencial<br/>Reutilizar en reparación"]
+    Entra["Microsoft Entra ID<br/>Intercambio OBO"]
+    Request["Chat completions<br/>Prompt + Bearer"]
+    Azure["Azure OpenAI<br/>Generar borrador"]
+    Draft["5 · validate_citations<br/>Continuar: hoja 6"]
+    Generate --> Client --> Request --> Draft
+    Client -.->|Token delegado| Entra
+    Request -.->|Llamada| Azure
+    Azure -.->|Borrador| Request
+    %% El primer generate abre cliente y obtiene token; sin contexto no lo abre.
+    %% OBO usa token API + credencial del registro FastAPI y el scope
+    %% https://cognitiveservices.azure.com/.default. El token puede renovarse.
+    %% RBAC usuario: Cognitive Services OpenAI User sobre la cuenta OpenAI.
+    %% POST /openai/v1/chat/completions; model = nombre del deployment;
+    %% max_completion_tokens = 2000; defecto: dos generaciones con reparación.
+    %% Cliente y credencial se cierran al terminar o fallar (hoja 7).
+    classDef local fill:#EFF4F8,stroke:#526D82,color:#172C42
+    classDef azure fill:#E6F3FF,stroke:#0078D4,color:#172C42
+    class Generate,Client,Request,Draft local
+    class Entra,Azure azure

@@ -1,0 +1,107 @@
+flowchart TD
+    accTitle: Flujo actual de preguntas RAG con LangGraph
+    accDescr: La API autentica al usuario y prepara Search. LangGraph busca, simplifica la pregunta si no encuentra fragmentos, prepara contexto, genera, valida citas y puede reparar una vez por defecto. Los clientes Azure y las credenciales quedan fuera del estado del grafo.
+
+    %% Rectángulos numerados dentro de LangGraph: las ocho funciones reales.
+    %% Rombos: condiciones de esas funciones o de las transiciones del grafo.
+    %% Flechas continuas: orden de ejecución. Punteadas: llamadas o dependencias.
+    %% Este diagrama explica POST /queries/answer; la carga tiene otro servicio.
+
+    subgraph Entrada["Entrada: usuario con sesión iniciada"]
+        UI["Streamlit<br/>Usuario pregunta por un documento ya cargado"]
+        Request["POST /api/v1/queries/answer<br/>question + document_id + top_k<br/>Authorization: Bearer token para la API"]
+        Auth["FastAPI · require_user<br/>Validar firma RS256, emisor, audiencia y vencimiento<br/>Tenant correcto; scp contiene access_as_user<br/>azp corresponde al frontend autorizado"]
+        Resources["Dependencias de FastAPI<br/>Obtener token OBO de Search y abrir su cliente<br/>Preparar una función que abrirá OpenAI cuando haga falta"]
+        Service["AnswerService.answer<br/>Crear grafo por pregunta y ejecutar invoke<br/>ExitStack controla el cierre del cliente generador"]
+        UI --> Request --> Auth --> Resources --> Service
+    end
+
+    subgraph Grafo["LangGraph · StateGraph de AnswerState · coordinación en Python"]
+        Begin(["START<br/>Contadores de búsqueda y generación = 0"])
+        Search["1 · search<br/>Buscar con la consulta actual<br/>Conservar document_id y top_k<br/>Descartar otros documentos y duplicados<br/>Guardar fragmentos e incrementar búsquedas"]
+        HasContext{"¿Quedaron fragmentos?<br/>_after_search"}
+        SearchBudget{"¿Queda presupuesto de búsqueda?<br/>Por defecto: máximo 2 en total"}
+        Rewrite["2 · rewrite_query<br/>Quitar puntuación y palabras frecuentes ES/EN<br/>Crear una alternativa con código local<br/>La pregunta original permanece intacta"]
+        Changed{"¿La alternativa es diferente<br/>y tiene algún término?"}
+        Prepare["3 · prepare_context<br/>Copiar y recortar contenido a 12.000 caracteres por defecto<br/>Preparar JSON con pregunta original, fuentes y páginas<br/>El límite cuenta contenido, no tokens ni todo el prompt"]
+        Generate["4 · generate<br/>Abrir cliente y credencial OBO en la primera generación<br/>Reutilizarlos en reparaciones; el token puede renovarse<br/>Solicitar borrador con pregunta original y contexto<br/>Hasta 2.000 tokens de completion por llamada<br/>Incrementar generaciones"]
+        Validate["5 · validate_citations<br/>Si el control está activo: exigir al menos una cita<br/>Comprobar que fuente y página existan en el contexto<br/>Fuente sin página requiere un fragmento page=None<br/>Respuesta vacía o mayor de 16.000 caracteres falla"]
+        Accepted{"¿issues está vacío?<br/>_after_validation<br/>Desactivar el control también produce issues vacío"}
+        GenerationBudget{"¿Queda presupuesto de generación?<br/>Por defecto: máximo 2 en total"}
+        Repair["6 · repair<br/>Preparar otro prompt con borrador y errores de citas<br/>Pedir corrección usando el mismo contexto<br/>La llamada al modelo ocurre al volver a generate"]
+        Abstain["7 · abstain<br/>Sin contexto: aviso de información insuficiente<br/>Con contexto y citas inválidas: aviso de fallo de citas<br/>Elegir el aviso sin llamar al modelo"]
+        Finish["8 · finish<br/>Elegir la respuesta validada o el aviso de abstención"]
+        End(["END<br/>Devolver RagAnswer: answer + context"])
+
+        Begin --> Search --> HasContext
+        HasContext -->|Sí| Prepare --> Generate --> Validate --> Accepted
+        HasContext -->|No| SearchBudget
+        SearchBudget -->|Sí| Rewrite --> Changed
+        Changed -->|Sí| Search
+        Changed -->|No| Abstain
+        SearchBudget -->|No| Abstain
+        Accepted -->|Sí| Finish
+        Accepted -->|No| GenerationBudget
+        GenerationBudget -->|Sí| Repair --> Generate
+        GenerationBudget -->|No| Abstain
+        Abstain --> Finish --> End
+    end
+
+    Service --> Begin
+
+    subgraph Azure["Recursos Azure utilizados por la API"]
+        Entra["Microsoft Entra ID<br/>Publicar claves JWKS para validar JWT<br/>Intercambiar el token de la API por tokens delegados OBO<br/>Consentimiento permite obtener tokens"]
+        AzureSearch["Azure AI Search<br/>Guardar y buscar fragmentos de texto; devolver scores<br/>Proyecto: Search Index Data Contributor para subir y consultar<br/>RBAC se aplica sobre este recurso"]
+        AzureOpenAI["Azure OpenAI<br/>Recibir prompt y generar el borrador o su corrección<br/>Rol del usuario: Cognitive Services OpenAI User<br/>RBAC se aplica sobre este recurso"]
+    end
+
+    Auth -. "claves públicas JWKS" .-> Entra
+    Resources -. "OBO: https://search.azure.com/.default" .-> Entra
+    Generate -. "primera generación: OBO https://cognitiveservices.azure.com/.default" .-> Entra
+    Search -. "consulta textual" .-> AzureSearch
+    AzureSearch -. "fragmentos, fuentes, páginas y scores" .-> Search
+    Generate -. "prompt con token delegado" .-> AzureOpenAI
+    AzureOpenAI -. "borrador de respuesta" .-> Generate
+
+    subgraph Salida["Salida y fallos"]
+        Close["Terminar ejecución y cerrar recursos<br/>Reparaciones reutilizan el cliente y la credencial OpenAI<br/>Sin contexto: nunca se abre OpenAI"]
+        Response["HTTP 200: answer + context<br/>context contiene sólo las copias usadas para generar<br/>La abstención por falta de contexto devuelve context vacío"]
+        Screen["Streamlit muestra la respuesta y sus fragmentos"]
+        Error["Error controlado: interrumpir y cerrar recursos<br/>401: autenticación; 403: permiso o rechazo OBO/RBAC Search<br/>502: error del generador; 503: configuración o indisponibilidad<br/>El grafo no reintenta errores HTTP ni cambia de identidad"]
+        ErrorResponse["FastAPI devuelve error con code y message<br/>OpenAI HTTP 403 o 429 se expone actualmente como 502<br/>Los ciclos del grafo son por contexto vacío o citas inválidas"]
+        Close --> Response --> Screen
+        Error --> ErrorResponse
+    end
+
+    End --> Close
+    Auth -. "fallo" .-> Error
+    Resources -. "fallo" .-> Error
+    Search -. "fallo" .-> Error
+    Generate -. "fallo" .-> Error
+
+    subgraph Apoyo["Configuración, estado y lectura del diagrama"]
+        Config["Settings: environment del proceso supera .env; luego defaults<br/>APP_RAG_MAX_SEARCH_ATTEMPTS=2 · rango 1..2<br/>APP_RAG_MAX_GENERATION_ATTEMPTS=2 · rango 1..3<br/>APP_RAG_MAX_CONTEXT_CHARACTERS=12000<br/>APP_RAG_VERIFY_CITATIONS=true<br/>APP_RAG_TRACE_ENABLED=true"]
+        State["Estado por pregunta, en memoria<br/>Pregunta original y consulta de búsqueda separadas<br/>Contexto, prompt, borrador, issues, respuesta y contadores<br/>request_id identifica esta ejecución<br/>Sin clientes ni credenciales; sin checkpoints durables"]
+        Trace["Trazas INFO · uvicorn.error · todos los nodos<br/>request_id + node + outcome + intentos + duration_ms<br/>Los registros de nodos omiten pregunta, contexto, respuesta y tokens"]
+        Meaning["Cómo leerlo<br/>Rectángulos numerados: ocho nodos reales<br/>Rombos: decisiones implementadas en Python<br/>Continua: orden; punteada: interacción o dependencia<br/>Citas localizables no demuestran respaldo factual"]
+        Modes["Otros modos de ejecutar el mismo AnswerService<br/>Evaluación CLI: DefaultAzureCredential y juez fuera del grafo<br/>Demo offline: dobles, sin API HTTP ni llamadas Azure<br/>python -m app.commands.demo_answer_graph --scenario all"]
+    end
+
+    Config -. "crear opciones" .-> Service
+    State -. "datos de trabajo" .-> Begin
+    Grafo -. "si trace_enabled" .-> Trace
+    Meaning -. "explicación" .-> Validate
+    Modes -. "entradas alternativas" .-> Service
+
+    classDef local fill:#EFF4F8,stroke:#526D82,color:#172C42
+    classDef decision fill:#FFF4D8,stroke:#987536,color:#172C42
+    classDef azure fill:#E6F3FF,stroke:#0078D4,color:#172C42
+    classDef output fill:#E9F5EC,stroke:#41794C,color:#172C42
+    classDef note fill:#F3EFF9,stroke:#79608C,color:#172C42
+    classDef error fill:#FBECEC,stroke:#A84B4B,color:#172C42
+    class Search,Rewrite,Prepare,Generate,Validate,Repair,Auth,Resources,Service local
+    class HasContext,SearchBudget,Changed,Accepted,GenerationBudget decision
+    class Entra,AzureSearch,AzureOpenAI azure
+    class Begin,Finish,End,Close,Response,Screen output
+    class Config,State,Trace,Meaning,Modes note
+    class Abstain,Error,ErrorResponse error

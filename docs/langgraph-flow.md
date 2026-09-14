@@ -9,6 +9,15 @@ El [diagrama Mermaid](langgraph-flow.mmd) permite estudiar cada decisión. Esta
 guía complementa los diagramas anteriores: el PDF técnico de diez hojas y la
 visión global se conservan como las láminas de la versión anterior del flujo.
 
+El [flujo explicado paso a paso](langgraph-flujo-explicado.mmd) muestra los ocho
+nodos reales, sus decisiones, las llamadas Azure y el cierre de recursos. Las
+flechas continuas indican el orden; las punteadas muestran interacciones o
+dependencias. Los rombos representan condiciones, no nodos adicionales.
+
+Para imprimirlo por partes, utiliza el [PDF de ocho hojas A4 horizontales](diagrams/langgraph-a4/langgraph-a4.pdf).
+El [índice de las hojas](diagrams/langgraph-a4/README.md) incluye las fuentes
+Mermaid y las versiones SVG; cada hoja indica dónde continúa el recorrido.
+
 ## Recorrido de una pregunta
 
 1. **Buscar.** Azure AI Search recibe la pregunta y, cuando corresponde, el filtro

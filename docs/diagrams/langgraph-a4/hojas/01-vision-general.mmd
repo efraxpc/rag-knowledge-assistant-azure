@@ -1,0 +1,28 @@
+flowchart LR
+    accTitle: Visión general de los ocho nodos LangGraph
+    accDescr: Ocho nodos, dos ciclos limitados y salida común; START inicia los contadores en cero.
+    Search["1 · search<br/>Buscar texto"]
+    Rewrite["2 · rewrite_<br/>query"]
+    Prepare["3 · prepare_<br/>context"]
+    Generate["4 · generate<br/>Pedir borrador"]
+    Validate["5 · validate_<br/>citations"]
+    Repair["6 · repair<br/>Preparar corrección"]
+    Abstain["7 · abstain<br/>Elegir aviso"]
+    Finish["8 · finish<br/>END: respuesta"]
+    Search -->|Texto| Prepare --> Generate --> Validate
+    Search -->|Vacío; quedan| Rewrite
+    Rewrite -->|Nueva| Search
+    Search -->|Agotadas| Abstain
+    Rewrite -->|Sin cambio| Abstain
+    Validate -->|Aceptadas| Finish
+    Validate -->|Fallo; quedan| Repair --> Generate
+    Validate -->|Agotadas| Abstain --> Finish
+    %% START: contadores de búsqueda y generación = 0.
+    %% Los nodos no son agentes: las decisiones son reglas de Python.
+    %% Hoja 3: búsqueda; hoja 4: contexto; hoja 5: Azure; hoja 6: citas.
+    classDef local fill:#EFF4F8,stroke:#526D82,color:#172C42
+    classDef output fill:#E9F5EC,stroke:#41794C,color:#172C42
+    classDef error fill:#FBECEC,stroke:#A84B4B,color:#172C42
+    class Search,Rewrite,Prepare,Generate,Validate,Repair local
+    class Finish output
+    class Abstain error
