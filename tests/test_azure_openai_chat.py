@@ -60,6 +60,47 @@ def test_generates_answer_with_entra_token() -> None:
     )
 
 
+def test_unwraps_answer_object_returned_as_text() -> None:
+    client, http_client, _ = make_client(
+        lambda request: httpx.Response(
+            200,
+            json={
+                "choices": [
+                    {
+                        "message": {
+                            "content": json.dumps(
+                                {
+                                    "answer": (
+                                        "Desconecta el equipo antes del mantenimiento "
+                                        "[manual.md]."
+                                    )
+                                }
+                            )
+                        }
+                    }
+                ]
+            },
+        )
+    )
+
+    with http_client:
+        result = client.complete(system_prompt="system", user_prompt="user")
+
+    assert result == "Desconecta el equipo antes del mantenimiento [manual.md]."
+
+
+def test_rejects_empty_answer_object() -> None:
+    client, http_client, _ = make_client(
+        lambda request: httpx.Response(
+            200,
+            json={"choices": [{"message": {"content": json.dumps({"answer": "  "})}}]},
+        )
+    )
+
+    with http_client, pytest.raises(RagProviderError, match="incompatible"):
+        client.complete(system_prompt="system", user_prompt="user")
+
+
 def test_hides_provider_body_on_http_error() -> None:
     def handler(request: httpx.Request) -> httpx.Response:
         return httpx.Response(429, json={"error": {"message": "sensitive body"}})

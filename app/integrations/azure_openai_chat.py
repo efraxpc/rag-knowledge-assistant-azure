@@ -1,5 +1,6 @@
 """Cliente mínimo de Azure OpenAI para generar respuestas RAG."""
 
+import json
 from typing import Any
 
 import httpx
@@ -21,6 +22,24 @@ class RagProviderError(ApplicationError):
             status_code=502,
             code="rag_provider_error",
         )
+
+
+def normalize_answer(content: str) -> str:
+    """Extrae texto plano cuando el modelo envuelve la respuesta en JSON."""
+    normalized = content.strip()
+    try:
+        payload = json.loads(normalized)
+    except json.JSONDecodeError:
+        return normalized
+
+    if isinstance(payload, dict) and set(payload) == {"answer"}:
+        answer = payload["answer"]
+        if not isinstance(answer, str) or not answer.strip():
+            raise RagProviderError(
+                "Azure OpenAI devolvió una respuesta RAG incompatible."
+            )
+        return answer.strip()
+    return normalized
 
 
 class AzureOpenAIChatClient:
@@ -103,4 +122,4 @@ class AzureOpenAIChatClient:
             raise RagProviderError(
                 "Azure OpenAI devolvió una respuesta RAG incompatible."
             )
-        return content.strip()
+        return normalize_answer(content)
