@@ -17,6 +17,14 @@ class EmbeddedChunk(Chunk):
     embedding: list[FiniteFloat] = Field(min_length=1)
 
 
+class DocumentSummary(BaseModel):
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
+
+    document_id: str = Field(min_length=1, max_length=512)
+    source: str = Field(min_length=1)
+    indexed_chunks: int = Field(ge=1)
+
+
 class VectorQuery(BaseModel):
     model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
 

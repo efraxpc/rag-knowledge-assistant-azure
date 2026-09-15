@@ -41,7 +41,6 @@ def evaluation(case_id: str, *, passed: bool, score: int) -> CaseEvaluation:
             relevance=metric,
             completeness=metric,
             citation_quality=metric,
-            unsupported_claims=[],
             missing_information=[],
         ),
     )
@@ -95,6 +94,9 @@ def test_builds_aggregate_report_without_copying_case_data() -> None:
     assert "question" not in serialized
     assert "answer" not in serialized
     assert "context" not in serialized
+    assert report.azure_evaluation_sdk_version
+    assert report.azure_openai_evaluation_api_version == "2024-10-21"
+    assert report.evaluator_providers["groundedness"].endswith("GroundednessEvaluator")
 
 
 def test_case_limits_bound_data_sent_to_the_judge() -> None:
@@ -165,9 +167,12 @@ def test_main_uses_report_as_ci_quality_gate(
     )
     monkeypatch.setattr(command.httpx, "Client", lambda **kwargs: FakeContext())
     monkeypatch.setattr(command, "AzureOpenAIJudgeClient", lambda **kwargs: object())
+    monkeypatch.setattr(command, "AzureRagEvaluators", lambda **kwargs: object())
 
     class FakeJudge:
-        def __init__(self, client: object, *, threshold: int) -> None:
+        def __init__(
+            self, client: object, azure_rag_evaluator: object, *, threshold: int
+        ) -> None:
             pass
 
         def evaluate(self, case: EvaluationCase) -> CaseEvaluation:

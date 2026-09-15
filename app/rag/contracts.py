@@ -3,10 +3,21 @@
 from collections.abc import Sequence
 from typing import Protocol
 
-from app.rag.models import Chunk, EmbeddedChunk, SearchHit, TextQuery, VectorQuery
+from app.rag.models import (
+    Chunk,
+    DocumentSummary,
+    EmbeddedChunk,
+    SearchHit,
+    TextQuery,
+    VectorQuery,
+)
 
 
 class TextChunkStore(Protocol):
+    def list_documents(self) -> list[DocumentSummary]:
+        """Lista documentos guardados y cuenta sus fragmentos indexados."""
+        ...
+
     def index_chunks(self, chunks: Sequence[Chunk]) -> None:
         """Inserta o reemplaza fragmentos de texto sin embeddings."""
         ...

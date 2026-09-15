@@ -27,6 +27,12 @@ from app.integrations.azure_openai_judge import (
     AzureOpenAIJudgeClient,
     JudgeProviderError,
 )
+from app.integrations.azure_rag_evaluators import (
+    AZURE_EVALUATION_SDK_VERSION,
+    AZURE_OPENAI_EVALUATION_API_VERSION,
+    AzureEvaluatorError,
+    AzureRagEvaluators,
+)
 
 
 class DatasetError(ValueError):
@@ -84,6 +90,14 @@ def build_report(
         generated_at=datetime.now(UTC),
         rubric_version=RUBRIC_VERSION,
         judge_deployment=judge_deployment,
+        azure_evaluation_sdk_version=AZURE_EVALUATION_SDK_VERSION,
+        azure_openai_evaluation_api_version=AZURE_OPENAI_EVALUATION_API_VERSION,
+        evaluator_providers={
+            "groundedness": "azure-ai-evaluation/GroundednessEvaluator",
+            "relevance": "azure-ai-evaluation/RelevanceEvaluator",
+            "completeness": "rag-judge-v2",
+            "citation_quality": "rag-judge-v2",
+        },
         threshold=threshold,
         summary=EvaluationSummary(
             total=len(results),
@@ -159,7 +173,13 @@ def main(argv: list[str] | None = None) -> int:
                 credential=credential,
                 http_client=http_client,
             )
-            judge = LlmJudge(client, threshold=args.threshold)
+            azure_rag_evaluators = AzureRagEvaluators(
+                endpoint=str(settings.azure_openai_endpoint),
+                deployment=settings.azure_openai_judge_deployment,
+                credential=credential,
+                threshold=args.threshold,
+            )
+            judge = LlmJudge(client, azure_rag_evaluators, threshold=args.threshold)
             results = [judge.evaluate(case) for case in cases]
         report = build_report(
             results,
@@ -175,16 +195,21 @@ def main(argv: list[str] | None = None) -> int:
         for result in report.results:
             if not result.passed:
                 scores = ", ".join(
-                    f"{name}={getattr(result.assessment, name).score}/5"
+                    f"{name}={getattr(result.assessment, name).score:g}/5"
                     for name in METRIC_NAMES
                 )
                 print(
                     f"Caso rechazado {result.case_id}: {scores}; "
-                    "afirmaciones sin respaldo="
-                    f"{len(result.assessment.unsupported_claims)}.",
+                    "información omitida="
+                    f"{len(result.assessment.missing_information)}.",
                     file=sys.stderr,
                 )
-    except (DatasetError, InvalidJudgeResponseError, JudgeProviderError) as exc:
+    except (
+        AzureEvaluatorError,
+        DatasetError,
+        InvalidJudgeResponseError,
+        JudgeProviderError,
+    ) as exc:
         print(str(exc), file=sys.stderr)
         return 2
 

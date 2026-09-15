@@ -6,13 +6,15 @@ from azure.search.documents import SearchClient
 from azure.search.documents.models import IndexingResult
 
 from app.core.exceptions import (
+    ApplicationError,
     ChunkIndexingError,
+    SearchAccessDeniedError,
     TextSearchUnavailableError,
     TextStoreUnavailableError,
 )
 from app.integrations import azure_text_search
 from app.integrations.azure_text_search import AzureTextSearchAdapter
-from app.rag.models import Chunk, TextQuery
+from app.rag.models import Chunk, DocumentSummary, TextQuery
 
 
 @pytest.fixture
@@ -29,6 +31,59 @@ def chunk(number: int = 0, content: str = "Texto") -> Chunk:
     return Chunk(
         id=str(number), document_id="doc", content=content, source="manual.pdf", page=1
     )
+
+
+def test_lists_documents_and_counts_all_chunks(client: Mock) -> None:
+    # Más de una página de resultados, con nombres iguales e IDs distintos.
+    client.search.return_value = iter(
+        [
+            {"document_id": "doc-2", "source": "manual.pdf"},
+            *[{"document_id": "doc-1", "source": "manual.pdf"} for _ in range(1001)],
+            {"document_id": "doc-3", "source": "A.txt"},
+            {"document_id": "doc-2", "source": "manual.pdf"},
+        ]
+    )
+    assert AzureTextSearchAdapter(client).list_documents() == [
+        DocumentSummary(document_id="doc-3", source="A.txt", indexed_chunks=1),
+        DocumentSummary(document_id="doc-1", source="manual.pdf", indexed_chunks=1001),
+        DocumentSummary(document_id="doc-2", source="manual.pdf", indexed_chunks=2),
+    ]
+    client.search.assert_called_once_with(
+        search_text="*", select=["document_id", "source"]
+    )
+
+
+def test_lists_empty_index(client: Mock) -> None:
+    client.search.return_value = []
+    assert AzureTextSearchAdapter(client).list_documents() == []
+
+
+@pytest.mark.parametrize("result", [{}, {"document_id": "doc", "source": ""}, None])
+def test_rejects_incompatible_document_list(client: Mock, result: object) -> None:
+    client.search.return_value = [result]
+    with pytest.raises(ApplicationError) as error:
+        AzureTextSearchAdapter(client).list_documents()
+    assert error.value.status_code == 502
+    assert error.value.code == "invalid_document_list_response"
+
+
+@pytest.mark.parametrize(
+    "status,error_type",
+    [(403, SearchAccessDeniedError), (503, TextSearchUnavailableError)],
+)
+def test_listing_handles_failure_during_iteration(
+    client: Mock, status: int, error_type: type[ApplicationError]
+) -> None:
+    def results():
+        yield {"document_id": "doc", "source": "manual.pdf"}
+        error = HttpResponseError("private detail")
+        error.status_code = status
+        raise error
+
+    client.search.return_value = results()
+    with pytest.raises(error_type) as error:
+        AzureTextSearchAdapter(client).list_documents()
+    assert "private detail" not in str(error.value)
 
 
 def test_maps_text_and_reuses_keys(client: Mock) -> None:

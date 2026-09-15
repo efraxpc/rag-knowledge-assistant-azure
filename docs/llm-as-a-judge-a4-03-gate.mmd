@@ -2,16 +2,16 @@
 flowchart TB
   %% Lámina 3 de 4. Formato vertical para impresión A4.
 
-  title["<b>Quality gate RAG · 3/4</b><br/>LLM-as-a-judge"]
+  title["<b>Quality gate RAG · 3/4</b><br/>Azure evaluators + rúbrica propia"]
   cases[("<b>Desde la lámina 2</b><br/>Casos generados por el candidato")]
   select["Seleccionar el siguiente caso"]
-  prompt["Prompt <code>rag-judge-v1</code><br/>Sin conocimiento externo<br/>Contenido tratado como datos"]
-  rubric["Puntuaciones 1..5<br/>groundedness · relevance<br/>completeness · citation_quality"]
-  schema["Structured Output estricto<br/>Esquema <code>JudgeAssessment</code>"]
+  prompt["Contexto concatenado con fuente/página<br/>Pregunta · respuesta"]
+  rubric["Azure AI Evaluation<br/>GroundednessEvaluator · RelevanceEvaluator"]
+  schema["Rúbrica <code>rag-judge-v2</code><br/>completeness · citation_quality"]
   judge["Azure OpenAI<br/>Deployment juez independiente"]
-  validate["Validación Pydantic local<br/>Scores, razones y hallazgos"]
+  validate["Validación Pydantic local<br/>Scores · razones · información omitida"]
   valid{"¿Respuesta válida?"}
-  gate{"Gate calculado en Python<br/>¿nota mínima ≥ umbral<br/>Y unsupported_claims vacío?"}
+  gate{"Gate calculado en Python<br/>¿nota mínima ≥ umbral?"}
   result["Guardar resultado del caso<br/><code>case_id</code> · <code>passed</code> · evaluación"]
   more{"¿Quedan casos?"}
   error["Código 2<br/>Error técnico: bloquea el pipeline"]

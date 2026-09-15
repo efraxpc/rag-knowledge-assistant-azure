@@ -1,6 +1,10 @@
 from pydantic import BaseModel, ConfigDict, Field
 
-from app.rag.models import EmbeddedChunk
+from app.rag.models import DocumentSummary, EmbeddedChunk
+
+
+class ListDocumentsResponse(BaseModel):
+    documents: list[DocumentSummary]
 
 
 class IndexChunksRequest(BaseModel):

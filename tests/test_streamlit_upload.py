@@ -117,6 +117,7 @@ def test_button_sends_once_and_reruns_keep_result(
         "http://api", "manual.txt", b"Text", access_token="user-token"
     )
     assert ui.session_state["upload_result"]["indexed_chunks"] == 2
+    assert ui.session_state["document_selection"] == "doc"
     ui.warning.assert_called_with("Página 2 omitida")
     # Cambiar la API invalida el estado, sin volver a enviar el archivo.
     streamlit_app.render_document_upload(manual, "http://other-api", "user-token")

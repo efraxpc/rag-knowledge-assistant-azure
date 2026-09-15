@@ -2,11 +2,11 @@
 flowchart TB
   %% Lámina conceptual 2 de 2. Formato vertical para impresión A4.
 
-  title["<b>Evaluation dataset + LLM-as-a-judge · 2/2</b><br/>Métricas, gate y despliegue"]
+  title["<b>Evaluation dataset + Azure evaluators · 2/2</b><br/>Métricas, gate y despliegue"]
   cases[("<b>Desde la lámina 1</b><br/>Pregunta · respuesta candidata · contexto<br/>expectativas y fuentes")]
 
-  subgraph judge["4. Evaluación con LLM-as-a-judge"]
-    judge_code["<code>LlmJudge</code><br/>Construye el prompt con la rúbrica<br/><code>rag-judge-v1</code>"]
+  subgraph judge["4. Evaluación con Azure y rúbrica del dominio"]
+    judge_code["<code>AzureRagEvaluators</code><br/>Contexto con fuente y página<br/><code>rag-judge-v2</code> complementario"]
     azure_judge["Azure OpenAI<br/>Deployment juez independiente<br/><i>Las puntuaciones pueden variar</i>"]
 
     groundedness["<b>groundedness</b><br/>¿Cada afirmación está respaldada<br/>por el contexto?"]
@@ -14,12 +14,12 @@ flowchart TB
     completeness["<b>completeness</b><br/>¿Cubre la información necesaria<br/>y la respuesta esperada?"]
     citations["<b>citation_quality</b><br/>¿Las citas coinciden con<br/>las fuentes y páginas?"]
 
-    output["Structured Output<br/>Notas 1..5 · razones<br/>unsupported_claims · missing_information"]
+    output["Resultado unificado<br/>Notas 1..5 · razones<br/>missing_information"]
     validation["Validación Pydantic local<br/>del contrato del juez"]
   end
 
   valid{"¿Salida válida?"}
-  gate{"Gate determinista en Python<br/>¿Todas las notas ≥ 4<br/>y unsupported_claims vacío?"}
+  gate{"Gate determinista en Python<br/>¿Todas las notas ≥ 4?"}
   technical_error["Error técnico<br/>Bloquear pipeline"]
   quality_error["Calidad RAG insuficiente<br/>No desplegar"]
   deploy["Construir imagen y desplegar<br/>el commit aprobado"]

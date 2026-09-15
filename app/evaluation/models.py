@@ -1,4 +1,4 @@
-"""Modelos independientes del proveedor para LLM-as-a-judge."""
+"""Modelos de evaluación para Azure evaluators y la rúbrica del dominio."""
 
 from datetime import datetime
 from typing import Annotated, Self
@@ -62,12 +62,31 @@ class EvaluationScenario(BaseModel):
 class MetricEvaluation(BaseModel):
     model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
 
-    score: int = Field(ge=1, le=5)
-    reason: str = Field(min_length=1, max_length=1_000)
+    score: float = Field(ge=1, le=5, allow_inf_nan=False)
+    reason: str = Field(min_length=1, max_length=4_000)
+
+
+class AzureRagAssessment(BaseModel):
+    """Métricas RAG calculadas por evaluadores oficiales de Azure."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    groundedness: MetricEvaluation
+    relevance: MetricEvaluation
+
+
+class SupplementalJudgeAssessment(BaseModel):
+    """Métricas del dominio que no cubren los evaluadores Azure seleccionados."""
+
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
+
+    completeness: MetricEvaluation
+    citation_quality: MetricEvaluation
+    missing_information: list[Finding] = Field(max_length=20)
 
 
 class JudgeAssessment(BaseModel):
-    """Salida que debe generar el modelo juez."""
+    """Evaluación unificada del SDK de Azure y la rúbrica del dominio."""
 
     model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
 
@@ -75,7 +94,6 @@ class JudgeAssessment(BaseModel):
     relevance: MetricEvaluation
     completeness: MetricEvaluation
     citation_quality: MetricEvaluation
-    unsupported_claims: list[Finding] = Field(max_length=20)
     missing_information: list[Finding] = Field(max_length=20)
 
 
@@ -103,6 +121,9 @@ class EvaluationReport(BaseModel):
     generated_at: datetime
     rubric_version: str
     judge_deployment: str
+    azure_evaluation_sdk_version: str
+    azure_openai_evaluation_api_version: str
+    evaluator_providers: dict[str, str]
     threshold: int = Field(ge=1, le=5)
     summary: EvaluationSummary
     results: list[CaseEvaluation]

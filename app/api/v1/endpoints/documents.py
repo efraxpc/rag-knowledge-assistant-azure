@@ -2,16 +2,33 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, UploadFile
 
-from app.api.dependencies import get_file_ingestion_service, get_ingestion_service
+from app.api.dependencies import (
+    get_file_ingestion_service,
+    get_ingestion_service,
+    get_text_store,
+)
+from app.rag.contracts import TextChunkStore
 from app.schemas.documents import (
     IndexChunksRequest,
     IndexChunksResponse,
+    ListDocumentsResponse,
     UploadDocumentResponse,
 )
 from app.services.file_ingestion import FileIngestionService
 from app.services.ingestion import IngestionService
 
 router = APIRouter()
+
+
+@router.get(
+    "/documents",
+    response_model=ListDocumentsResponse,
+    summary="Listar documentos guardados en el índice de texto",
+)
+def list_documents(
+    store: Annotated[TextChunkStore, Depends(get_text_store)],
+) -> ListDocumentsResponse:
+    return ListDocumentsResponse(documents=store.list_documents())
 
 
 @router.post(

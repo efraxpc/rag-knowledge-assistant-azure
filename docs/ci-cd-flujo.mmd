@@ -17,7 +17,7 @@ flowchart TB
   subgraph quality["2 · Quality gate del RAG (solo push a main o manual)"]
     eval_login["Entorno GitHub <code>evaluation</code><br/>Login en Azure mediante OIDC"]
     generate["Generar respuestas candidatas<br/>con el corpus y escenarios versionados"]
-    judge["Evaluar las respuestas<br/>con LLM-as-a-judge · umbral 4"]
+    judge["Evaluar las respuestas<br/>con Azure evaluators · umbral 4"]
     quality_ok{"¿Todos los casos pasan?"}
     evidence[("Guardar resultados<br/>como artefacto durante 30 días")]
   end

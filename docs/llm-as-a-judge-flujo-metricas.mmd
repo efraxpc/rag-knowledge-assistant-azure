@@ -2,7 +2,7 @@
 flowchart TB
   %% Relación entre los datasets, el RAG candidato, las métricas del juez y CI/CD.
 
-  title["<b>Evaluation dataset + LLM-as-a-judge</b><br/>Qué se evalúa y dónde interviene cada métrica"]
+  title["<b>Evaluation dataset + Azure evaluators</b><br/>Qué se evalúa y dónde interviene cada métrica"]
   execution["Ejecución local o pipeline CI/CD"]
 
   subgraph technical["1. Validación técnica determinista"]
@@ -23,8 +23,8 @@ flowchart TB
     answers[("<code>candidate-answers.jsonl</code><br/>pregunta · respuesta generada · contexto<br/>respuesta esperada · fuentes esperadas")]
   end
 
-  subgraph evaluation["4. Evaluación LLM-as-a-judge"]
-    judge_code["<code>LlmJudge</code><br/>Construye el caso y la rúbrica <code>rag-judge-v1</code>"]
+  subgraph evaluation["4. Azure evaluators + rúbrica del dominio"]
+    judge_code["<code>AzureRagEvaluators</code><br/>Groundedness + Relevance<br/><code>rag-judge-v2</code> complementario"]
     azure_judge["Azure OpenAI<br/>Deployment juez<br/><i>La puntuación puede variar</i>"]
 
     groundedness["<b>groundedness</b><br/>¿Las afirmaciones están respaldadas<br/>por el contexto recuperado?"]
@@ -32,8 +32,8 @@ flowchart TB
     completeness["<b>completeness</b><br/>¿Cubre la información necesaria y<br/>la respuesta esperada?"]
     citations["<b>citation_quality</b><br/>¿Las citas corresponden con<br/>las fuentes y páginas?"]
 
-    structured["Structured Output<br/>Notas 1..5 · razones<br/>unsupported_claims · missing_information"]
-    local_gate{"Gate calculado en Python<br/>¿Todas las notas ≥ 4<br/>y sin unsupported_claims?"}
+    structured["Resultado unificado<br/>Notas 1..5 · razones<br/>missing_information"]
+    local_gate{"Gate calculado en Python<br/>¿Todas las notas ≥ 4?"}
   end
 
   stop_technical["Pipeline fallido<br/>No se evalúa ni despliega"]

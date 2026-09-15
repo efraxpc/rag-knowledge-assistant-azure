@@ -15,18 +15,24 @@ datos y las métricas:
 1. [Dataset y respuesta candidata](llm-as-a-judge-conceptos-a4-01-dataset.mmd).
 2. [Métricas, gate y despliegue](llm-as-a-judge-conceptos-a4-02-metricas.mmd).
 
-Puntúa cada respuesta de 1 a 5 en:
+El gate combina dos evaluadores oficiales de Azure AI Evaluation con una rúbrica
+complementaria del dominio. Puntúa cada respuesta de 1 a 5 en:
 
-- `groundedness`: respaldo de las afirmaciones en el contexto recuperado.
-- `relevance`: respuesta directa a la pregunta.
+- `groundedness`: `GroundednessEvaluator` de Azure comprueba el respaldo de las
+  afirmaciones en el contexto recuperado.
+- `relevance`: `RelevanceEvaluator` de Azure comprueba si la respuesta atiende la
+  pregunta.
 - `completeness`: cobertura de la información disponible y de la respuesta esperada.
 - `citation_quality`: citas localizables y coherentes con fuente y página.
 
-El modelo genera las puntuaciones y razones, pero el proceso calcula el gate. Un
-caso pasa si todas las métricas alcanzan el umbral y no hay afirmaciones materiales
-sin respaldo. El reporte identifica los casos, las puntuaciones y las razones, pero
-no incluye los campos de pregunta, respuesta o contexto. Las razones siguen siendo
-datos derivados del contenido y el reporte debe tratarse como información sensible.
+Los evaluadores de Azure calculan las dos primeras métricas. El juez complementario
+genera `completeness` y `citation_quality` mediante Structured Outputs. El proceso
+calcula el gate: un caso pasa si todas las métricas alcanzan el umbral. El reporte
+registra la versión instalada de `azure-ai-evaluation`, la versión de la API de
+Azure OpenAI y el proveedor de cada métrica. Identifica los casos, las puntuaciones y
+las razones, pero no incluye los campos de pregunta, respuesta o contexto. Las
+razones siguen siendo datos derivados del contenido y el reporte debe tratarse como
+información sensible.
 
 ## Flujo completo
 
@@ -45,7 +51,7 @@ tests + lint
     → sembrar corpus de evaluación en Azure AI Search
     → recuperar contexto y generar respuestas con el RAG candidato
     → guardar question + answer + context + fuentes
-    → ejecutar LLM-as-a-judge
+    → ejecutar GroundednessEvaluator + RelevanceEvaluator + rúbrica complementaria
     → desplegar únicamente si el juez devuelve 0
 ```
 
@@ -59,9 +65,9 @@ La verificación local de citas no sustituye la evaluación del respaldo factual
 
 ## Configuración
 
-El juez usa la API v1 de Azure OpenAI con un token de Microsoft Entra ID. La
-identidad que ejecuta el comando necesita el rol `Cognitive Services OpenAI User`.
-Configura:
+Los evaluadores oficiales y el juez complementario usan Azure OpenAI con un token de
+Microsoft Entra ID. La identidad que ejecuta el comando necesita el rol
+`Cognitive Services OpenAI User`. Configura:
 
 ```bash
 APP_AZURE_OPENAI_ENDPOINT="https://<recurso>.cognitiveservices.azure.com"
@@ -87,8 +93,10 @@ En Azure usa la identidad administrada; si es asignada por el usuario, configura
 `APP_AZURE_MANAGED_IDENTITY_CLIENT_ID`. Conviene que el juez sea un despliegue
 distinto y más capaz que el modelo que produjo las respuestas.
 
-El despliegue elegido debe admitir Structured Outputs en Chat Completions. El
-endpoint se configura sin el sufijo `/openai/v1`.
+El despliegue elegido debe admitir los evaluadores de Azure AI Evaluation y
+Structured Outputs en Chat Completions. La infraestructura usa `gpt-5` y la
+integración activa el modo de modelo de razonamiento del SDK. El endpoint se
+configura sin el sufijo `/openai/v1`.
 
 ## Escenarios y casos generados
 
@@ -149,9 +157,9 @@ python -m app.commands.evaluate_answers \
 - `1`: la evaluación terminó, pero uno o más casos no pasan.
 - `2`: dataset, configuración, autenticación o proveedor inválidos.
 
-La rúbrica queda versionada como `rag-judge-v1` en el reporte. Para comparar
-resultados entre versiones, conserva también el nombre/versionado inmutable del
-despliegue del juez y ejecuta siempre el mismo dataset y umbral.
+La rúbrica queda versionada como `rag-judge-v2-azure-evaluators` en el reporte. Para
+comparar resultados entre versiones, conserva también el nombre/versionado inmutable
+del despliegue del juez, la versión registrada del SDK, el dataset y el umbral.
 
 Antes de convertir el resultado en un gate obligatorio, calibra la rúbrica y el
 umbral contra una muestra revisada por expertos. Las puntuaciones de un LLM no son

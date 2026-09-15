@@ -17,7 +17,7 @@ from app.core.exceptions import (
     TextStoreUnavailableError,
 )
 from app.rag.contracts import TextChunkStore
-from app.rag.models import Chunk, SearchHit, TextQuery
+from app.rag.models import Chunk, DocumentSummary, SearchHit, TextQuery
 
 INDEX_BATCH_SIZE = 1000
 # Margen respecto a los 16 MB de Azure para serialización y envoltorio del SDK.
@@ -27,6 +27,38 @@ INDEX_BATCH_BYTES = 15_000_000
 class AzureTextSearchAdapter(TextChunkStore):
     def __init__(self, client: SearchClient) -> None:
         self._client = client
+
+    def list_documents(self) -> list[DocumentSummary]:
+        try:
+            # Sin top: el iterador del SDK recorre todas las páginas del índice.
+            results = self._client.search(
+                search_text="*", select=["document_id", "source"]
+            )
+            documents: dict[str, DocumentSummary] = {}
+            for result in results:
+                summary = DocumentSummary(
+                    document_id=result["document_id"],
+                    source=result["source"],
+                    indexed_chunks=1,
+                )
+                if summary.document_id in documents:
+                    documents[summary.document_id].indexed_chunks += 1
+                else:
+                    documents[summary.document_id] = summary
+            return sorted(
+                documents.values(),
+                key=lambda document: (document.source.casefold(), document.document_id),
+            )
+        except AzureError as exc:
+            if getattr(exc, "status_code", None) == 403:
+                raise SearchAccessDeniedError() from exc
+            raise TextSearchUnavailableError() from exc
+        except (KeyError, TypeError, ValidationError) as exc:
+            raise ApplicationError(
+                "El índice de texto devolvió una lista de documentos incompatible.",
+                status_code=502,
+                code="invalid_document_list_response",
+            ) from exc
 
     @staticmethod
     def _document(chunk: Chunk) -> dict[str, Any]:

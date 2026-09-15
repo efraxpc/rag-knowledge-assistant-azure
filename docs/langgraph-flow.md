@@ -208,7 +208,8 @@ opciones configuradas. La CLI de evaluación obtiene credenciales con
 pero no la identidad ni su modo de autenticación.
 
 CI guarda la respuesta y el contexto finales, incluidas las abstenciones, para
-que LLM-as-a-judge aplique su rúbrica. El juez sigue siendo un paso offline:
+que Azure AI Evaluation y la rúbrica complementaria apliquen el gate. La evaluación
+sigue siendo un paso offline:
 no se ejecuta dentro de cada petición. El grafo tampoco configura checkpoints
 durables; su estado y contadores sirven a la ejecución actual.
 
