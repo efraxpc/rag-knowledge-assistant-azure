@@ -1,3 +1,4 @@
+from datetime import UTC, datetime
 from unittest.mock import Mock
 
 import pytest
@@ -8,6 +9,7 @@ from azure.search.documents.models import IndexingResult
 from app.core.exceptions import (
     ApplicationError,
     ChunkIndexingError,
+    DocumentSoftDeleteError,
     SearchAccessDeniedError,
     TextSearchUnavailableError,
     TextStoreUnavailableError,
@@ -20,7 +22,11 @@ from app.rag.models import Chunk, DocumentSummary, TextQuery
 @pytest.fixture
 def client() -> Mock:
     client = Mock(spec=SearchClient)
-    client.upload_documents.side_effect = lambda documents: [
+    client.merge_or_upload_documents.side_effect = lambda documents: [
+        IndexingResult.deserialize({"key": doc["id"], "status": True})
+        for doc in documents
+    ]
+    client.merge_documents.side_effect = lambda documents: [
         IndexingResult.deserialize({"key": doc["id"], "status": True})
         for doc in documents
     ]
@@ -49,7 +55,9 @@ def test_lists_documents_and_counts_all_chunks(client: Mock) -> None:
         DocumentSummary(document_id="doc-2", source="manual.pdf", indexed_chunks=2),
     ]
     client.search.assert_called_once_with(
-        search_text="*", select=["document_id", "source"]
+        search_text="*",
+        filter="deleted_at eq null",
+        select=["document_id", "source"],
     )
 
 
@@ -89,9 +97,9 @@ def test_listing_handles_failure_during_iteration(
 def test_maps_text_and_reuses_keys(client: Mock) -> None:
     adapter = AzureTextSearchAdapter(client)
     adapter.index_chunks([chunk()])
-    first = client.upload_documents.call_args.kwargs["documents"][0]
+    first = client.merge_or_upload_documents.call_args.kwargs["documents"][0]
     adapter.index_chunks([chunk(content="Actualizado")])
-    second = client.upload_documents.call_args.kwargs["documents"][0]
+    second = client.merge_or_upload_documents.call_args.kwargs["documents"][0]
     assert len(first["id"]) == 64
     assert first["id"] == second["id"]
     assert first == {
@@ -108,7 +116,8 @@ def test_maps_text_and_reuses_keys(client: Mock) -> None:
 def test_splits_by_document_count(client: Mock) -> None:
     AzureTextSearchAdapter(client).index_chunks([chunk(i) for i in range(1001)])
     assert [
-        len(c.kwargs["documents"]) for c in client.upload_documents.call_args_list
+        len(c.kwargs["documents"])
+        for c in client.merge_or_upload_documents.call_args_list
     ] == [1000, 1]
 
 
@@ -120,7 +129,8 @@ def test_splits_by_serialized_bytes(
         [chunk(i, "á" * 1000) for i in range(3)]
     )
     assert [
-        len(c.kwargs["documents"]) for c in client.upload_documents.call_args_list
+        len(c.kwargs["documents"])
+        for c in client.merge_or_upload_documents.call_args_list
     ] == [2, 1]
 
 
@@ -133,7 +143,7 @@ def test_reports_failed_or_missing_results(client: Mock, missing_result: bool) -
             if index == 0 or not missing_result
         ]
 
-    client.upload_documents.side_effect = upload
+    client.merge_or_upload_documents.side_effect = upload
     with pytest.raises(ChunkIndexingError) as error:
         AzureTextSearchAdapter(client).index_chunks([chunk(0), chunk(1)])
     assert error.value.details == {
@@ -142,7 +152,7 @@ def test_reports_failed_or_missing_results(client: Mock, missing_result: bool) -
 
 
 def test_provider_failure_has_no_private_details(client: Mock) -> None:
-    client.upload_documents.side_effect = HttpResponseError("private detail")
+    client.merge_or_upload_documents.side_effect = HttpResponseError("private detail")
     with pytest.raises(TextStoreUnavailableError) as error:
         AzureTextSearchAdapter(client).index_chunks([chunk()])
     assert "private detail" not in str(error.value)
@@ -152,10 +162,10 @@ def test_stops_after_failed_batch(
     client: Mock, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     monkeypatch.setattr(azure_text_search, "INDEX_BATCH_SIZE", 1)
-    client.upload_documents.side_effect = HttpResponseError()
+    client.merge_or_upload_documents.side_effect = HttpResponseError()
     with pytest.raises(TextStoreUnavailableError):
         AzureTextSearchAdapter(client).index_chunks([chunk(0), chunk(1)])
-    assert client.upload_documents.call_count == 1
+    assert client.merge_or_upload_documents.call_count == 1
 
 
 def test_searches_text_with_filter_and_maps_context(client: Mock) -> None:
@@ -176,7 +186,7 @@ def test_searches_text_with_filter_and_maps_context(client: Mock) -> None:
 
     arguments = client.search.call_args.kwargs
     assert arguments["search_text"] == "¿Qué debo hacer?"
-    assert arguments["filter"] == "document_id eq 'O''Brien'"
+    assert arguments["filter"] == ("deleted_at eq null and document_id eq 'O''Brien'")
     assert arguments["top"] == 3
     assert results[0].source == "manual.pdf"
     assert results[0].page == 2
@@ -192,3 +202,82 @@ def test_search_failure_is_controlled(client: Mock) -> None:
     with pytest.raises(TextSearchUnavailableError) as error:
         AzureTextSearchAdapter(client).search(TextQuery(question="pregunta"))
     assert "private detail" not in str(error.value)
+
+
+def test_soft_deletes_only_active_chunks_and_escapes_document_id(
+    client: Mock,
+) -> None:
+    deleted_at = datetime(2026, 9, 16, 12, tzinfo=UTC)
+    client.search.return_value = [
+        {"id": "key-1", "chunk_id": "chunk-1", "deleted_at": None},
+        {
+            "id": "key-2",
+            "chunk_id": "chunk-2",
+            "deleted_at": "2026-09-15T12:00:00Z",
+        },
+    ]
+
+    count = AzureTextSearchAdapter(client).soft_delete_document(
+        "O'Brien", deleted_at=deleted_at
+    )
+
+    assert count == 1
+    client.search.assert_called_once_with(
+        search_text="*",
+        filter="document_id eq 'O''Brien'",
+        select=["id", "chunk_id", "deleted_at"],
+    )
+    client.merge_documents.assert_called_once_with(
+        documents=[{"id": "key-1", "deleted_at": deleted_at}]
+    )
+
+
+def test_soft_delete_is_idempotent_and_reports_missing_document(client: Mock) -> None:
+    deleted_at = datetime(2026, 9, 16, tzinfo=UTC)
+    adapter = AzureTextSearchAdapter(client)
+    client.search.side_effect = [
+        [{"id": "key", "chunk_id": "chunk", "deleted_at": deleted_at}],
+        [],
+    ]
+
+    assert adapter.soft_delete_document("doc", deleted_at=deleted_at) == 0
+    assert adapter.soft_delete_document("missing", deleted_at=deleted_at) is None
+    client.merge_documents.assert_not_called()
+
+
+def test_soft_delete_splits_batches(client: Mock) -> None:
+    client.search.return_value = [
+        {"id": f"key-{index}", "chunk_id": str(index), "deleted_at": None}
+        for index in range(1001)
+    ]
+
+    assert (
+        AzureTextSearchAdapter(client).soft_delete_document(
+            "doc", deleted_at=datetime(2026, 9, 16, tzinfo=UTC)
+        )
+        == 1001
+    )
+    assert [
+        len(call.kwargs["documents"]) for call in client.merge_documents.call_args_list
+    ] == [1000, 1]
+
+
+def test_soft_delete_reports_partial_failure(client: Mock) -> None:
+    client.search.return_value = [
+        {"id": "key-1", "chunk_id": "chunk-1", "deleted_at": None},
+        {"id": "key-2", "chunk_id": "chunk-2", "deleted_at": None},
+    ]
+    client.merge_documents.side_effect = lambda documents: [
+        IndexingResult.deserialize(
+            {"key": document["id"], "status": document["id"] == "key-1"}
+        )
+        for document in documents
+    ]
+
+    with pytest.raises(DocumentSoftDeleteError) as error:
+        AzureTextSearchAdapter(client).soft_delete_document(
+            "doc", deleted_at=datetime(2026, 9, 16, tzinfo=UTC)
+        )
+    assert error.value.details == {
+        "failed_chunks": [{"document_id": "doc", "chunk_id": "chunk-2"}]
+    }

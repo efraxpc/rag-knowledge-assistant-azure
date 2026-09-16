@@ -22,3 +22,8 @@ class UploadDocumentResponse(BaseModel):
     source: str
     indexed_chunks: int
     warnings: list[str]
+
+
+class SoftDeleteDocumentResponse(BaseModel):
+    document_id: str
+    soft_deleted_chunks: int = Field(ge=0)

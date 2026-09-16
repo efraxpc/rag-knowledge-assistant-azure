@@ -79,12 +79,13 @@ La interfaz estará disponible en <http://localhost:8501>. Usa
 `APP_API_BASE_URL` para apuntarla a una API que no se ejecute en
 `http://localhost:8000`.
 
-La sección **Documentos subidos** muestra los archivos guardados en el índice
+La sección **Tus manuales** muestra los archivos guardados en el índice
 textual, incluso después de abrir una sesión nueva, con su cantidad de
 fragmentos. Selecciona un **Documento para consultar** para hacer preguntas sin
 volver a subirlo. La lista se guarda en caché durante 30 segundos por token;
 **Actualizar documentos** fuerza una nueva consulta y las cargas exitosas
-actualizan la lista inmediatamente.
+actualizan la lista inmediatamente. **Eliminar manual** pide confirmación y
+oculta globalmente el documento y todos sus fragmentos, sin borrarlos físicamente.
 
 La interfaz requiere iniciar sesión con Microsoft. FastAPI valida el token de
 acceso y usa el flujo On-Behalf-Of para conectarse a Azure AI Search con la
@@ -118,6 +119,8 @@ Entra ID, preparar el índice y probar los endpoints:
 - `GET /api/v1/documents`: lista de documentos del índice textual. Requiere un
   token delegado y permisos de lectura de Azure AI Search. Ejemplo de respuesta:
   `{"documents": [{"document_id": "...", "source": "manual.pdf", "indexed_chunks": 4}]}`.
+- `DELETE /api/v1/documents/{document_id}`: marca el documento y sus chunks como
+  eliminados; las consultas y el listado dejan de utilizarlos.
 - `POST /api/v1/queries/answer`: búsqueda textual y respuesta RAG con citas.
 
 La documentación interactiva estará disponible en:
@@ -137,7 +140,8 @@ ruff format --check .
 El workflow `quality-gate-deploy.yml` ejecuta tests y lint, genera respuestas de
 la versión candidata sobre el corpus versionado, aplica los evaluadores oficiales
 de Azure para groundedness y relevance junto con la rúbrica del dominio y
-solo despliega el commit si todos los casos pasan. Consulta la
+solo despliega el commit si todos los casos pasan. Terraform declara los
+identificadores de esos evaluadores, sus entradas y el umbral del gate. Consulta la
 [guía de evaluación](docs/llm-as-a-judge.md) para configurar los entornos de
 GitHub y ejecutar el mismo flujo localmente.
 

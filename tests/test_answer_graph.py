@@ -59,12 +59,10 @@ def test_empty_search_reformulation_preserves_filters_and_original_question() ->
 
     searches = [call.args[0] for call in store.search.call_args_list]
     assert len(searches) == 2
-    assert searches[0] == query
-    assert searches[1].question != query.question
-    assert "reinicia" in searches[1].question
-    assert "equipo" in searches[1].question
+    assert searches[0].question == "reinicia equipo"
+    assert searches[1].question == "*"
     assert all(search.document_id == "manual-1" for search in searches)
-    assert all(search.top_k == 3 for search in searches)
+    assert [search.top_k for search in searches] == [3, 20]
     case = prompt_case(completion.complete.call_args.kwargs["user_prompt"])
     assert case["question"] == "¿Cómo se reinicia el equipo?"
     assert query.question == "¿Cómo se reinicia el equipo?"
@@ -91,6 +89,68 @@ def test_searches_stop_within_budget_without_repeating_queries(attempts: int) ->
     assert result.answer == NO_CONTEXT_ANSWER
     assert result.context == []
     factory.assert_not_called()
+
+
+def test_document_overview_retrieves_all_chunks_without_lexical_match() -> None:
+    chunks = [
+        hit("Primer tema.", chunk_id="chunk-1", page=1),
+        hit("Segundo tema.", chunk_id="chunk-2", page=2),
+    ]
+    store = Mock()
+    store.search.return_value = chunks
+    completion = Mock()
+    completion.complete.return_value = "Temas principales [manual.pdf, p. 1]."
+    question = "Resume los puntos principales del manual"
+
+    result = AnswerService(store, completion).answer(
+        TextQuery(question=question, document_id="manual-1", top_k=5)
+    )
+
+    search = store.search.call_args.args[0]
+    assert search.question == "*"
+    assert search.document_id == "manual-1"
+    assert search.top_k == 20
+    assert result.context == chunks
+    case = prompt_case(completion.complete.call_args.kwargs["user_prompt"])
+    assert case["question"] == question
+
+
+def test_document_search_falls_back_to_its_chunks_after_lexical_attempts() -> None:
+    store = Mock()
+    store.search.side_effect = [[], [hit()]]
+    completion = Mock()
+    completion.complete.return_value = "Desconecta [manual.pdf, p. 1]."
+    query = TextQuery(
+        question="¿Cómo se reinicia el equipo?",
+        document_id="manual-1",
+        top_k=3,
+    )
+
+    result = AnswerService(store, completion).answer(query)
+
+    searches = [call.args[0] for call in store.search.call_args_list]
+    assert [search.question for search in searches] == [
+        "reinicia equipo",
+        "*",
+    ]
+    assert [search.top_k for search in searches] == [3, 20]
+    assert all(search.document_id == "manual-1" for search in searches)
+    assert result.context == [hit()]
+
+
+def test_empty_search_without_document_does_not_use_global_wildcard() -> None:
+    store = Mock()
+    store.search.return_value = []
+    completion = Mock()
+
+    result = AnswerService(store, completion).answer(
+        TextQuery(question="¿Cómo se reinicia el equipo?")
+    )
+
+    searches = [call.args[0] for call in store.search.call_args_list]
+    assert "*" not in [search.question for search in searches]
+    assert result.answer == NO_CONTEXT_ANSWER
+    completion.complete.assert_not_called()
 
 
 def test_cannot_reformulate_single_keyword_into_duplicate_searches() -> None:

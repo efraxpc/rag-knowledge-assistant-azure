@@ -20,15 +20,16 @@ Mermaid y las versiones SVG; cada hoja indica dónde continúa el recorrido.
 
 ## Recorrido de una pregunta
 
-1. **Buscar.** Azure AI Search recibe la pregunta y, cuando corresponde, el filtro
-   del documento. La recuperación sigue siendo textual: no se calculan embeddings.
-2. **Comprobar si hay fragmentos.** Si no hay resultados y queda presupuesto de
-   búsqueda, una función local simplifica la consulta y vuelve a buscar. Usa
-   palabras de relleno en español e inglés y no llama a un LLM. Si la consulta
-   simplificada no cambia, no repite la búsqueda. Por defecto se permiten dos
-   búsquedas en total: la inicial y una adicional.
-   El intento alternativo conserva `document_id` y `top_k`: no amplía la consulta
-   a otros documentos. La generación usa siempre la pregunta original.
+1. **Buscar.** Para preguntas concretas, una función local elimina puntuación y
+   palabras de relleno en español e inglés antes de consultar Azure AI Search.
+   Las solicitudes globales, como resumir un documento, recuperan directamente
+   sus fragmentos con `search_text="*"`. La recuperación sigue siendo textual:
+   no se calculan embeddings.
+2. **Comprobar si hay fragmentos.** Si la búsqueda por términos no devuelve
+   resultados y hay un `document_id`, el segundo intento recupera hasta 20 chunks
+   del documento seleccionado. El wildcard nunca se ejecuta sin filtro de
+   documento, por lo que no mezcla archivos. La generación recibe siempre la
+   pregunta original y el contexto continúa limitado por su presupuesto.
 3. **Abstenerse si sigue vacío.** Si no hay una consulta diferente que probar o
    se agotaron las búsquedas sin contexto, devuelve el aviso de información
    insuficiente y `context=[]`. No obtiene un token OpenAI ni llama al modelo.
@@ -89,7 +90,7 @@ un error. [AnswerGraph](../app/services/answer_graph.py) define estos nodos:
 | Nodo en el código y el log | Trabajo |
 | --- | --- |
 | `search` | Recuperar y filtrar los fragmentos. |
-| `rewrite_query` | Preparar la única consulta simplificada alternativa. |
+| `rewrite_query` | Preparar el fallback acotado al documento seleccionado. |
 | `prepare_context` | Copiar y ajustar el contenido al presupuesto. |
 | `generate` | Pedir un borrador al generador. |
 | `validate_citations` | Aplicar las reglas locales o aceptar el borrador si están desactivadas. |
@@ -130,9 +131,9 @@ APP_RAG_TRACE_ENABLED=true
 Una sola generación como máximo impide la reparación. Desactivar la
 comprobación de citas elimina ese control local. Los límites no aseguran un
 tiempo total ni equivalen a un presupuesto de tokens: cada llamada generadora
-mantiene el máximo actual de 2.000 tokens de salida. Con la configuración
-predeterminada, una reparación puede consumir una segunda llamada con ese mismo
-máximo, además de los tokens de entrada de cada llamada.
+permite hasta 8.000 tokens de completion y usa razonamiento `minimal` por defecto.
+Con la configuración predeterminada, una reparación puede consumir una segunda
+llamada con esos mismos límites, además de los tokens de entrada de cada llamada.
 
 ## Entra ID y obtención diferida del token OpenAI
 

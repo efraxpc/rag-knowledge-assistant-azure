@@ -14,6 +14,7 @@ from app.core.resources import (
 from app.rag.contracts import TextChunkStore, TextCompletionClient, VectorStore
 from app.services.answer import AnswerService
 from app.services.answer_graph import AnswerGraphOptions
+from app.services.document_deletion import DocumentDeletionService
 from app.services.file_ingestion import FileIngestionService
 from app.services.ingestion import IngestionService
 from app.services.query import QueryService
@@ -38,6 +39,12 @@ def get_file_ingestion_service(
     store: Annotated[TextChunkStore, Depends(get_text_store)],
 ) -> FileIngestionService:
     return FileIngestionService(store)
+
+
+def get_document_deletion_service(
+    store: Annotated[TextChunkStore, Depends(get_text_store)],
+) -> DocumentDeletionService:
+    return DocumentDeletionService(store)
 
 
 def get_text_completion_client(

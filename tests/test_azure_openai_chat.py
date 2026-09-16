@@ -54,6 +54,8 @@ def test_generates_answer_with_entra_token() -> None:
     assert request.headers["Authorization"] == "Bearer test-token"
     assert body["model"] == "candidate-deployment"
     assert body["messages"][0] == {"role": "system", "content": "system"}
+    assert body["max_completion_tokens"] == 8_000
+    assert body["reasoning_effort"] == "minimal"
     assert result == "Respuesta citada."
     credential.get_token.assert_called_once_with(
         "https://cognitiveservices.azure.com/.default"
@@ -124,6 +126,25 @@ def test_rejects_unusable_model_response(message: dict[str, object]) -> None:
         lambda request: httpx.Response(200, json={"choices": [{"message": message}]})
     )
     with http_client, pytest.raises(RagProviderError):
+        client.complete(system_prompt="system", user_prompt="user")
+
+
+def test_reports_exhausted_output_budget() -> None:
+    client, http_client, _ = make_client(
+        lambda request: httpx.Response(
+            200,
+            json={
+                "choices": [
+                    {
+                        "finish_reason": "length",
+                        "message": {"content": None},
+                    }
+                ]
+            },
+        )
+    )
+
+    with http_client, pytest.raises(RagProviderError, match="presupuesto de salida"):
         client.complete(system_prompt="system", user_prompt="user")
 
 

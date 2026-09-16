@@ -148,6 +148,8 @@ def test_chat_client_uses_user_obo_identity_and_closes(
         deployment="candidate-v1",
         credential=credential,
         http_client=http_client,
+        max_completion_tokens=8_000,
+        reasoning_effort="minimal",
     )
     http_client.__exit__.assert_called_once()
     credential.__exit__.assert_called_once()

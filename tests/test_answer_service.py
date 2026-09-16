@@ -27,7 +27,7 @@ def test_generates_answer_with_retrieved_context() -> None:
     assert result.answer == "Desconecta [manual.pdf, p. 1]."
     assert result.context == [hit()]
     query = store.search.call_args.args[0]
-    assert query.question == "¿Qué debo hacer?"
+    assert query.question == "debo hacer"
     assert query.top_k == 3
     prompt = completion.complete.call_args.kwargs["user_prompt"]
     assert "manual.pdf" in prompt

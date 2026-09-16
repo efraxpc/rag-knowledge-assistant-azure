@@ -110,7 +110,9 @@ def test_empty_search_skips_openai_even_without_generator_configuration(
     azure.credentials[0].__exit__.assert_called_once()
     azure.search_client.__exit__.assert_called_once()
     for call in azure.search_client.search.call_args_list:
-        assert call.kwargs["filter"] == "document_id eq 'manual-1'"
+        assert call.kwargs["filter"] == (
+            "deleted_at eq null and document_id eq 'manual-1'"
+        )
 
 
 def test_context_requires_generator_and_preserves_configuration_error(

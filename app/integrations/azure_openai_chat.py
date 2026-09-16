@@ -50,6 +50,8 @@ class AzureOpenAIChatClient:
         deployment: str,
         credential: TokenCredential,
         http_client: httpx.Client,
+        max_completion_tokens: int = 8_000,
+        reasoning_effort: str = "minimal",
     ) -> None:
         base_url = httpx.URL(endpoint)
         if (
@@ -64,10 +66,16 @@ class AzureOpenAIChatClient:
             )
         if not deployment.strip():
             raise ValueError("deployment no puede estar vacío")
+        if not 1 <= max_completion_tokens <= 100_000:
+            raise ValueError("max_completion_tokens debe estar entre 1 y 100000")
+        if reasoning_effort not in {"minimal", "low", "medium", "high"}:
+            raise ValueError("reasoning_effort no es compatible")
         self._url = f"{str(base_url).rstrip('/')}/openai/v1/chat/completions"
         self._deployment = deployment
         self._credential = credential
         self._http_client = http_client
+        self._max_completion_tokens = max_completion_tokens
+        self._reasoning_effort = reasoning_effort
 
     def complete(self, *, system_prompt: str, user_prompt: str) -> str:
         try:
@@ -90,7 +98,8 @@ class AzureOpenAIChatClient:
                         {"role": "system", "content": system_prompt},
                         {"role": "user", "content": user_prompt},
                     ],
-                    "max_completion_tokens": 2_000,
+                    "max_completion_tokens": self._max_completion_tokens,
+                    "reasoning_effort": self._reasoning_effort,
                 },
             )
             response.raise_for_status()
@@ -107,7 +116,8 @@ class AzureOpenAIChatClient:
 
         try:
             payload: Any = response.json()
-            message = payload["choices"][0]["message"]
+            choice = payload["choices"][0]
+            message = choice["message"]
             if message.get("refusal"):
                 raise RagProviderError("El modelo generador rechazó responder el caso.")
             content = message["content"]
@@ -119,6 +129,11 @@ class AzureOpenAIChatClient:
             ) from exc
 
         if not isinstance(content, str) or not content.strip():
+            if choice.get("finish_reason") == "length":
+                raise RagProviderError(
+                    "Azure OpenAI agotó el presupuesto de salida antes de producir "
+                    "una respuesta."
+                )
             raise RagProviderError(
                 "Azure OpenAI devolvió una respuesta RAG incompatible."
             )

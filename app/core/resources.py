@@ -75,6 +75,8 @@ def open_user_chat_client(
             deployment=settings.azure_openai_chat_deployment,
             credential=credential,
             http_client=http_client,
+            max_completion_tokens=settings.rag_generation_max_completion_tokens,
+            reasoning_effort=settings.rag_generation_reasoning_effort,
         )
 
 

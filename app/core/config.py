@@ -1,5 +1,5 @@
 from functools import lru_cache
-from typing import Self
+from typing import Literal, Self
 from uuid import UUID
 
 from pydantic import Field, HttpUrl, SecretStr, model_validator
@@ -23,6 +23,10 @@ class Settings(BaseSettings):
     azure_openai_chat_deployment: str | None = Field(default=None, min_length=1)
     azure_openai_judge_deployment: str | None = Field(default=None, min_length=1)
     rag_generation_timeout_seconds: float = Field(default=60, gt=0, le=300)
+    rag_generation_max_completion_tokens: int = Field(default=8_000, ge=1, le=100_000)
+    rag_generation_reasoning_effort: Literal["minimal", "low", "medium", "high"] = (
+        "minimal"
+    )
     rag_max_search_attempts: int = Field(default=2, ge=1, le=2)
     rag_max_generation_attempts: int = Field(default=2, ge=1, le=3)
     rag_max_context_characters: int = Field(default=12_000, ge=1, le=60_000)

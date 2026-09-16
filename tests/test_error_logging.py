@@ -36,7 +36,7 @@ def test_azure_failure_logs_original_cause_but_keeps_response_controlled(
     client: TestClient, caplog: pytest.LogCaptureFixture
 ) -> None:
     azure_client = Mock()
-    azure_client.upload_documents.side_effect = HttpResponseError(
+    azure_client.merge_or_upload_documents.side_effect = HttpResponseError(
         "Azure diagnostic: index does not exist"
     )
     store = AzureTextSearchAdapter(azure_client)

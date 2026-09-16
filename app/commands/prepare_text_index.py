@@ -17,30 +17,40 @@ from app.core.config import get_settings
 
 
 def build_text_index(name: str) -> SearchIndex:
+    fields = [
+        SearchField(
+            name=field_name,
+            type=(
+                SearchFieldDataType.Int32
+                if field_name == "page"
+                else SearchFieldDataType.String
+            ),
+            key=field_name == "id",
+            hidden=False,
+            searchable=field_name == "content",
+            filterable=field_name in {"id", "document_id"},
+        )
+        for field_name in (
+            "id",
+            "chunk_id",
+            "document_id",
+            "content",
+            "source",
+            "page",
+        )
+    ]
+    fields.append(
+        SearchField(
+            name="deleted_at",
+            type=SearchFieldDataType.DateTimeOffset,
+            hidden=False,
+            searchable=False,
+            filterable=True,
+        )
+    )
     return SearchIndex(
         name=name,
-        fields=[
-            SearchField(
-                name=field_name,
-                type=(
-                    SearchFieldDataType.Int32
-                    if field_name == "page"
-                    else SearchFieldDataType.String
-                ),
-                key=field_name == "id",
-                hidden=False,
-                searchable=field_name == "content",
-                filterable=field_name in {"id", "document_id"},
-            )
-            for field_name in (
-                "id",
-                "chunk_id",
-                "document_id",
-                "content",
-                "source",
-                "page",
-            )
-        ],
+        fields=fields,
     )
 
 

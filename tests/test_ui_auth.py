@@ -140,6 +140,7 @@ def test_app_renders_upload_view_after_successful_login(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     ui = MagicMock()
+    ui.session_state = {}
     ui.form_submit_button.return_value = False
     ui.file_uploader.return_value = None
     monkeypatch.setattr(streamlit_app, "st", ui)
@@ -151,7 +152,8 @@ def test_app_renders_upload_view_after_successful_login(
 
     sidebar.assert_called_once_with()
     ui.file_uploader.assert_called_once()
-    assert "Selecciona un documento para comenzar" in str(ui.info.call_args_list)
+    ui.chat_input.assert_called_once()
+    assert ui.chat_input.call_args.kwargs["disabled"] is True
 
 
 def test_sidebar_uses_configured_api_destination(
@@ -209,11 +211,12 @@ def test_login_return_opens_document_home(
     home_app.run()
 
     assert not home_app.exception
-    assert home_app.main.subheader[0].value == "Subir documentos"
-    assert len(home_app.main.file_uploader) == 1
-    assert not home_app.sidebar.file_uploader
+    assert home_app.main.title[0].value == "Asistente de manuales"
+    assert home_app.sidebar.subheader[0].value == "Añadir un manual"
+    assert len(home_app.sidebar.file_uploader) == 1
+    assert not home_app.main.file_uploader
     assert "Iniciar sesión con Microsoft" not in [b.label for b in home_app.button]
-    assert home_app.text_area[0].disabled
+    assert home_app.chat_input[0].disabled
 
 
 def test_login_without_access_token_keeps_document_home_protected(
@@ -225,7 +228,7 @@ def test_login_without_access_token_keeps_document_home_protected(
 
     assert not home_app.exception
     assert not home_app.file_uploader
-    assert not home_app.text_area
+    assert not home_app.chat_input
     assert "Tu sesión necesita renovarse" in home_app.warning[0].value
 
 
@@ -242,5 +245,7 @@ def test_document_home_stays_visible_when_api_is_unavailable(
     home_app.run()
 
     assert not home_app.exception
-    assert len(home_app.main.file_uploader) == 1
+    assert len(home_app.sidebar.file_uploader) == 1
+    assert len(home_app.main.chat_message) == 1
+    assert home_app.chat_input[0].disabled
     assert home_app.sidebar.error[0].value == "API no disponible"

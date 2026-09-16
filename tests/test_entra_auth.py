@@ -161,7 +161,7 @@ def azure_doubles(monkeypatch: pytest.MonkeyPatch) -> tuple[Mock, Mock]:
         client = MagicMock()
         client.__enter__.return_value = client
         client.credential = kwargs["credential"]
-        client.upload_documents.side_effect = lambda documents: [
+        client.merge_or_upload_documents.side_effect = lambda documents: [
             IndexingResult.deserialize({"key": doc["id"], "status": True})
             for doc in documents
         ]
@@ -207,7 +207,7 @@ def test_no_rbac_permission_returns_403_without_retrying_as_backend(
     denied.status_code = 403
     search_client = MagicMock()
     search_client.__enter__.return_value = search_client
-    search_client.upload_documents.side_effect = denied
+    search_client.merge_or_upload_documents.side_effect = denied
     clients.side_effect = lambda **kwargs: search_client
     response = upload(client, make_token(private_key))
     assert response.status_code == 403

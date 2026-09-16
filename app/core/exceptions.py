@@ -51,6 +51,17 @@ class ChunkIndexingError(ApplicationError):
         )
 
 
+class DocumentSoftDeleteError(ApplicationError):
+    def __init__(self, failed_chunks: list[dict[str, str]]) -> None:
+        super().__init__(
+            "No se pudieron ocultar todos los chunks del documento. "
+            "Puedes reintentar la eliminación.",
+            status_code=502,
+            code="document_soft_delete_failed",
+            details={"failed_chunks": failed_chunks},
+        )
+
+
 class TextStoreUnavailableError(ApplicationError):
     def __init__(self) -> None:
         super().__init__(
@@ -76,7 +87,8 @@ class SearchAccessDeniedError(ApplicationError):
     def __init__(self) -> None:
         super().__init__(
             "Tu usuario no tiene permisos para esta operación en Azure AI Search. "
-            "Para cargar documentos necesitas Search Index Data Contributor.",
+            "Para cargar o eliminar documentos necesitas "
+            "Search Index Data Contributor.",
             status_code=403,
             code="search_access_denied",
         )

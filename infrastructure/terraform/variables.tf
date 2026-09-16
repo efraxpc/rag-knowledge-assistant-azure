@@ -270,6 +270,21 @@ variable "azure_openai_judge_capacity" {
   }
 }
 
+variable "rag_quality_gate_threshold" {
+  description = "Puntuación mínima de 1 a 5 que deben alcanzar todas las métricas del quality gate RAG."
+  type        = number
+  default     = 4
+
+  validation {
+    condition = (
+      var.rag_quality_gate_threshold >= 1 &&
+      var.rag_quality_gate_threshold <= 5 &&
+      floor(var.rag_quality_gate_threshold) == var.rag_quality_gate_threshold
+    )
+    error_message = "rag_quality_gate_threshold debe ser un entero entre 1 y 5."
+  }
+}
+
 variable "search_service_name" {
   description = "Nombre global de Azure AI Search. Si es null, se genera uno estable con la suscripción."
   type        = string

@@ -4,6 +4,10 @@ El evaluador es un proceso offline para desarrollo y CI; no expone un endpoint
 público ni participa en una petición de usuario. Los diagramas con tipografía
 grande para impresión A4 muestran la ejecución completa:
 
+El diagrama [Evaluadores aplicados](evaluadores-aplicados.mmd) muestra en una sola
+vista la declaración Terraform, las entradas de cada evaluador y la decisión del
+quality gate.
+
 1. [Tests, configuración y corpus](llm-as-a-judge-a4-01-input.mmd).
 2. [Ejecución de la versión candidata](llm-as-a-judge-a4-02-request.mmd).
 3. [Evaluación LLM-as-a-judge](llm-as-a-judge-a4-03-gate.mmd).
@@ -182,7 +186,9 @@ variables de GitHub en el entorno correspondiente:
 - Evaluación: `EVAL_AZURE_SEARCH_ENDPOINT`,
   `EVAL_AZURE_SEARCH_TEXT_INDEX_NAME`, `EVAL_AZURE_OPENAI_ENDPOINT`,
   `EVAL_AZURE_OPENAI_CHAT_DEPLOYMENT` y
-  `EVAL_AZURE_OPENAI_JUDGE_DEPLOYMENT`.
+  `EVAL_AZURE_OPENAI_JUDGE_DEPLOYMENT`. Configura también
+  `EVAL_RAG_QUALITY_GATE_THRESHOLD` con
+  `terraform output -raw rag_quality_gate_threshold`; si se omite, CI utiliza `4`.
 - Producción: `AZURE_CONTAINER_REGISTRY_NAME`,
   `AZURE_CONTAINER_IMAGE_REPOSITORY`, `AZURE_CONTAINER_APP_RESOURCE_GROUP` y
   `AZURE_CONTAINER_APP_NAME`.
@@ -191,7 +197,9 @@ Terraform administra los deployments generador y juez dentro de la cuenta
 Azure AI Services existente. Obtén los valores para las variables de evaluación
 con `terraform output -raw azure_openai_endpoint`,
 `terraform output -raw azure_openai_chat_deployment_name` y
-`terraform output -raw azure_openai_judge_deployment_name`.
+`terraform output -raw azure_openai_judge_deployment_name`. La declaración de
+Groundedness y Relevance, sus identificadores integrados, entradas y umbral puede
+consultarse con `terraform output -json rag_quality_gate_configuration`.
 
 Terraform crea dos identidades administradas con credenciales federadas OIDC,
 una restringida al entorno `evaluation` y otra a `production`. También asigna

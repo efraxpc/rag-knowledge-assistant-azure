@@ -1,6 +1,7 @@
 """Operaciones requeridas por el RAG, sin tipos del SDK de Azure."""
 
 from collections.abc import Sequence
+from datetime import datetime
 from typing import Protocol
 
 from app.rag.models import (
@@ -20,6 +21,12 @@ class TextChunkStore(Protocol):
 
     def index_chunks(self, chunks: Sequence[Chunk]) -> None:
         """Inserta o reemplaza fragmentos de texto sin embeddings."""
+        ...
+
+    def soft_delete_document(
+        self, document_id: str, *, deleted_at: datetime
+    ) -> int | None:
+        """Marca los fragmentos del documento y devuelve cuántos cambió."""
         ...
 
     def search(self, query: TextQuery) -> list[SearchHit]:

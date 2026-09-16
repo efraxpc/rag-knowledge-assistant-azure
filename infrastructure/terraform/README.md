@@ -113,6 +113,8 @@ El despliegue crea:
   ese grupo de usuarios.
 - Un deployment general `gpt-5-mini` y un deployment juez `gpt-5`, ambos con
   versión fija `2025-08-07`, SKU GlobalStandard y capacidad inicial 10.
+- La configuración del quality gate con los evaluadores integrados Groundedness
+  y Relevance, sus entradas y el umbral mínimo.
 
 La imagen debe existir antes de ejecutar `terraform apply`. Puede construirse y
 publicarse mediante ACR Tasks:
@@ -170,6 +172,31 @@ terraform output -raw azure_openai_judge_deployment_name
 Configura esos resultados respectivamente como `EVAL_AZURE_OPENAI_ENDPOINT`,
 `EVAL_AZURE_OPENAI_CHAT_DEPLOYMENT` y
 `EVAL_AZURE_OPENAI_JUDGE_DEPLOYMENT` en el entorno `evaluation` de GitHub.
+
+## Evaluadores del quality gate
+
+Terraform declara los evaluadores oficiales que ejecuta CI en `evaluation.tf`:
+
+| Métrica | Identificador integrado | Clase del SDK | Entradas |
+|---------|--------------------------|---------------|----------|
+| Groundedness | `azureai://built-in/evaluators/groundedness` | `GroundednessEvaluator` | `query`, `response`, `context` |
+| Relevance | `azureai://built-in/evaluators/relevance` | `RelevanceEvaluator` | `query`, `response` |
+
+Estos identificadores pertenecen al catálogo integrado de Microsoft Foundry y no
+son recursos ARM independientes. Terraform administra su configuración, el
+deployment juez, el umbral y los permisos requeridos; el paquete
+`azure-ai-evaluation` los ejecuta dentro del job de GitHub Actions.
+
+Consulta la declaración completa y el umbral configurado con:
+
+```bash
+terraform output -json rag_quality_gate_configuration
+terraform output -raw rag_quality_gate_threshold
+```
+
+Configura el segundo valor como `EVAL_RAG_QUALITY_GATE_THRESHOLD` en el entorno
+`evaluation` de GitHub. Si la variable todavía no existe, el workflow conserva el
+valor predeterminado `4`.
 
 ## Identidades OIDC de GitHub Actions
 

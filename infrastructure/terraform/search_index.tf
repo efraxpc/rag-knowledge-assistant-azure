@@ -8,18 +8,30 @@ resource "azurerm_role_assignment" "search_index_admin" {
 
 locals {
   text_index_body = {
-    fields = [
-      for field in [
-        "id", "chunk_id", "document_id", "content", "source", "page"
-        ] : {
-        name        = field
-        type        = field == "page" ? "Edm.Int32" : "Edm.String"
-        key         = field == "id"
-        searchable  = field == "content"
-        filterable  = contains(["id", "document_id"], field)
-        retrievable = true
-      }
-    ]
+    fields = concat(
+      [
+        for field in [
+          "id", "chunk_id", "document_id", "content", "source", "page"
+          ] : {
+          name        = field
+          type        = field == "page" ? "Edm.Int32" : "Edm.String"
+          key         = field == "id"
+          searchable  = field == "content"
+          filterable  = contains(["id", "document_id"], field)
+          retrievable = true
+        }
+      ],
+      [
+        {
+          name        = "deleted_at"
+          type        = "Edm.DateTimeOffset"
+          key         = false
+          searchable  = false
+          filterable  = true
+          retrievable = true
+        }
+      ]
+    )
   }
 }
 

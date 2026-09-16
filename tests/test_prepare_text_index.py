@@ -17,6 +17,8 @@ def test_creates_missing_index() -> None:
     assert fields["id"].key
     assert fields["content"].searchable
     assert fields["document_id"].filterable
+    assert fields["deleted_at"].type == "Edm.DateTimeOffset"
+    assert fields["deleted_at"].filterable
     assert "embedding" not in fields
     client.create_or_update_index.assert_not_called()
 
@@ -57,7 +59,7 @@ def test_missing_field_is_incompatible() -> None:
     index = build_text_index("text")
     index.fields.pop()
     client.get_index.return_value = index
-    with pytest.raises(ValueError, match="page"):
+    with pytest.raises(ValueError, match="deleted_at"):
         prepare_text_index(client, "text")
     client.create_index.assert_not_called()
 

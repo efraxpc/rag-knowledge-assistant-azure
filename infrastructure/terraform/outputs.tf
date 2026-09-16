@@ -46,6 +46,16 @@ output "azure_openai_judge_deployment_name" {
   value       = azurerm_cognitive_deployment.judge.name
 }
 
+output "rag_quality_gate_configuration" {
+  description = "Evaluadores integrados de Azure y parámetros declarados para el quality gate RAG."
+  value       = local.rag_quality_gate_configuration
+}
+
+output "rag_quality_gate_threshold" {
+  description = "Umbral que se configura como EVAL_RAG_QUALITY_GATE_THRESHOLD en GitHub."
+  value       = var.rag_quality_gate_threshold
+}
+
 output "key_vault_id" {
   description = "ID del Azure Key Vault."
   value       = azurerm_key_vault.main.id

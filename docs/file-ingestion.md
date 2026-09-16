@@ -33,8 +33,9 @@ termina con código 1; configura otro nombre para crear un índice nuevo. No bor
 ni reemplaza índices o datos. No se ejecuta automáticamente al arrancar la API.
 
 El índice contiene `id` (clave), `chunk_id`, `document_id` (filtrable), `content`
-(buscable), `source` y `page` (entero opcional). Todos son recuperables y no hay
-campo vectorial. Su definición está en `app.commands.prepare_text_index`.
+(buscable), `source`, `page` (entero opcional) y `deleted_at` (fecha filtrable
+para el borrado suave). Todos son recuperables y no hay campo vectorial. Su
+definición está en `app.commands.prepare_text_index`.
 
 Para **cargar documentos**, cada usuario necesita `Search Index Data Contributor`
 sobre el servicio o el índice. FastAPI intercambia el token de la interfaz por un
@@ -111,6 +112,11 @@ Reenviar el mismo nombre y contenido reutiliza las claves. Cambiar contenido o
 nombre crea otro documento y conserva el anterior. No hay borrado de versiones.
 Esta estabilidad presupone la misma extracción y configuración de chunking;
 un cambio futuro de algoritmo requiere gestionar la reindexación y los datos antiguos.
+
+`DELETE /api/v1/documents/{document_id}` marca con `deleted_at` todos los chunks
+del documento. El listado y el retrieval solo consultan chunks sin esa marca.
+La operación es global, no elimina físicamente el contenido y no tiene
+restauración desde la aplicación ni purga automática.
 
 ## Errores y reintentos
 

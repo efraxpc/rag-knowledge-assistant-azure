@@ -58,6 +58,7 @@ jobs:
       APP_AZURE_OPENAI_ENDPOINT: ${{ vars.EVAL_AZURE_OPENAI_ENDPOINT }}
       APP_AZURE_OPENAI_CHAT_DEPLOYMENT: ${{ vars.EVAL_AZURE_OPENAI_CHAT_DEPLOYMENT }}
       APP_AZURE_OPENAI_JUDGE_DEPLOYMENT: ${{ vars.EVAL_AZURE_OPENAI_JUDGE_DEPLOYMENT }}
+      RAG_QUALITY_GATE_THRESHOLD: ${{ vars.EVAL_RAG_QUALITY_GATE_THRESHOLD || '4' }}
     steps:
       - name: Checkout candidate
         uses: actions/checkout@v6
@@ -90,7 +91,7 @@ jobs:
           python -m app.commands.evaluate_answers \
             evaluations/results/candidate-answers.jsonl \
             --output evaluations/results/judge-report.json \
-            --threshold 4
+            --threshold "${RAG_QUALITY_GATE_THRESHOLD}"
 
       - name: Preserve evaluation evidence
         if: always()

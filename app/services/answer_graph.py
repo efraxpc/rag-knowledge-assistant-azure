@@ -39,6 +39,22 @@ STOP_WORDS = frozenset(
     "a an and are at can do does for how i in is it of on or the to what which "
     "with you".split()
 )
+DOCUMENT_FALLBACK_QUERY = "*"
+DOCUMENT_FALLBACK_TOP_K = 20
+OVERVIEW_PHRASES = (
+    "contenido del documento",
+    "document overview",
+    "main points",
+    "puntos principales",
+    "resumen",
+    "resume",
+    "resuma",
+    "resumo",
+    "summary",
+    "summarize",
+    "temas principales",
+    "visao geral",
+)
 
 
 @dataclass(frozen=True)
@@ -82,6 +98,14 @@ def simplify_question(question: str) -> str:
         if normalized not in STOP_WORDS:
             keywords.append(word)
     return " ".join(dict.fromkeys(keywords))
+
+
+def is_document_overview_question(question: str) -> bool:
+    """Detecta solicitudes globales que no comparten términos con el documento."""
+    normalized = unicodedata.normalize("NFKD", question.casefold())
+    normalized = "".join(c for c in normalized if not unicodedata.combining(c))
+    normalized = " ".join(re.findall(r"[^\W_]+", normalized, flags=re.UNICODE))
+    return any(phrase in normalized for phrase in OVERVIEW_PHRASES)
 
 
 def citation_issues(answer: str, context: Sequence[SearchHit]) -> list[str]:
@@ -168,9 +192,15 @@ class AnswerGraph:
         self._graph = builder.compile()
 
     def run(self, query: TextQuery) -> RagAnswer:
+        if query.document_id is not None and is_document_overview_question(
+            query.question
+        ):
+            search_question = DOCUMENT_FALLBACK_QUERY
+        else:
+            search_question = simplify_question(query.question) or query.question
         initial: AnswerState = {
             "query": query,
-            "search_question": query.question,
+            "search_question": search_question,
             "context": [],
             "prompt": "",
             "draft": "",
@@ -220,7 +250,10 @@ class AnswerGraph:
         return execute
 
     def _search(self, state: AnswerState) -> dict[str, Any]:
-        query = state["query"].model_copy(update={"question": state["search_question"]})
+        updates: dict[str, Any] = {"question": state["search_question"]}
+        if state["search_question"] == DOCUMENT_FALLBACK_QUERY:
+            updates["top_k"] = DOCUMENT_FALLBACK_TOP_K
+        query = state["query"].model_copy(update=updates)
         hits = self._store.search(query)
         selected = []
         seen = set()
@@ -237,23 +270,31 @@ class AnswerGraph:
         return {
             "context": selected,
             "search_attempts": state["search_attempts"] + 1,
-            "outcome": "context_found" if selected else "empty_context",
+            "outcome": (
+                "document_context_found"
+                if selected and query.question == DOCUMENT_FALLBACK_QUERY
+                else "context_found"
+                if selected
+                else "empty_context"
+            ),
         }
 
     def _after_search(self, state: AnswerState) -> str:
         if state["context"]:
             return "prepare_context"
+        if state["search_question"] == DOCUMENT_FALLBACK_QUERY:
+            return "abstain"
         if state["search_attempts"] < self._options.max_search_attempts:
             return "rewrite_query"
         return "abstain"
 
     def _rewrite_query(self, state: AnswerState) -> dict[str, Any]:
-        question = simplify_question(state["query"].question)
-        if question.casefold() == state["search_question"].casefold():
-            question = ""
+        question = (
+            DOCUMENT_FALLBACK_QUERY if state["query"].document_id is not None else ""
+        )
         return {
             "search_question": question,
-            "outcome": "query_simplified" if question else "no_alternative_query",
+            "outcome": "document_fallback" if question else "no_alternative_query",
         }
 
     def _prepare_context(self, state: AnswerState) -> dict[str, Any]:
