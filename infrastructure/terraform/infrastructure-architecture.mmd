@@ -1,29 +1,42 @@
-%%{init: {"flowchart": {"curve": "linear", "nodeSpacing": 32, "rankSpacing": 48}, "themeVariables": {"fontSize": "16px"}}}%%
+%%{init: {"flowchart": {"curve": "linear", "nodeSpacing": 30, "rankSpacing": 56}, "themeVariables": {"fontSize": "16px"}}}%%
 flowchart LR
   %% Arquitectura derivada de los recursos declarados en infrastructure/terraform.
   %% Línea continua: tráfico o dependencia de ejecución.
   %% Línea discontinua: administración, identidad o asignación RBAC.
 
-  subgraph actors["Actores y automatización"]
+  subgraph actors["1 · Actores y automatización"]
     direction TB
     user["<b>Usuario</b><br/>Navegador"]
     streamlit["<b>Frontend Streamlit</b><br/>Fuera del despliegue Terraform"]
     operator["<b>Operador</b><br/>Azure CLI + Terraform<br/>AzureRM · AzAPI · AzureAD"]
     state[("<b>Estado Terraform local</b><br/>terraform.tfstate")]
-    github_eval["<b>GitHub Actions · evaluation</b><br/>Genera y evalúa respuestas RAG"]
-    github_prod["<b>GitHub Actions · production</b><br/>Construye y despliega la imagen"]
+    github_eval["<b>GitHub Actions · evaluation</b><br/>Evalúa respuestas RAG"]
+    github_prod["<b>GitHub Actions · production</b><br/>Construye y despliega la API"]
+
+    runtime_note["<b>Runtime RAG</b><br/>Login → FastAPI → retrieval de chunks activos<br/>→ prompt aumentado → generación"]
+    cicd_note["<b>CI/CD</b><br/>Tests → evaluación con juez → quality gate<br/>→ imagen inmutable → actualización de la app"]
+    boundary_note["<b>Límites actuales</b><br/>API y Search tienen endpoints públicos.<br/>Key Vault no participa en runtime."]
+
+    user -->|"HTTPS"| streamlit
+    operator -->|"Lee y guarda"| state
+    user -.-> runtime_note
+    github_eval -.-> cicd_note
+    operator -.-> boundary_note
   end
 
-  subgraph entra["Microsoft Entra ID"]
+  subgraph entra["2 · Microsoft Entra ID"]
     direction TB
-    frontend_app["<b>App registration frontend</b><br/>Login OIDC"]
+    frontend_app["<b>App registration frontend</b><br/>Inicio de sesión OIDC"]
     api_app["<b>App registration FastAPI</b><br/>API confidencial<br/>scope: access_as_user"]
-    obo["<b>Flujo On-Behalf-Of</b><br/>Tokens delegados para<br/>Search y Azure OpenAI"]
-    user_group["<b>Grupo autorizado</b><br/>Search Index Data Contributor"]
+    obo["<b>Flujo On-Behalf-Of</b><br/>Acceso delegado a Search<br/>y Azure OpenAI"]
+    user_group["<b>Grupo autorizado</b><br/>Usuarios con acceso a Search"]
     github_oidc["<b>Federación GitHub OIDC</b><br/>Tokens temporales · sin secretos"]
+
+    frontend_app -->|"Solicita access_as_user"| api_app
+    api_app -->|"Intercambio delegado"| obo
   end
 
-  subgraph azure["Suscripción Azure"]
+  subgraph azure["3 · Suscripción Azure"]
     direction TB
 
     subgraph app_rg["Resource Group existente · plataforma de aplicación"]
@@ -42,8 +55,18 @@ flowchart LR
         search_service["<b>Search Service</b><br/>Endpoint público<br/>Claves locales deshabilitadas"]
         text_index[("<b>rag-text-chunks</b><br/>Chunks de manuales<br/>deleted_at: soft delete")]
         evaluation_index[("<b>rag-evaluation-chunks</b><br/>Corpus de evaluación")]
-        search_identity["SystemAssigned identity<br/>Reservada para acceso saliente futuro"]
+        search_identity["<b>System Assigned Identity</b><br/>Reservada para acceso saliente futuro"]
+
+        search_service --> text_index
+        search_service --> evaluation_index
+        search_service --- search_identity
       end
+
+      acr -->|"Imagen"| api
+      app_identity -.->|"Identidad del registry"| api
+      app_identity -.->|"AcrPull"| acr
+      api -->|"Logs"| logs
+      api -->|"Ingesta, listado y retrieval"| search_service
     end
 
     subgraph project_rg["Resource Group administrado · IA, seguridad y CI/CD"]
@@ -58,61 +81,37 @@ flowchart LR
 
       eval_identity["<b>Managed Identity GitHub Eval</b><br/>Search Index Data Contributor<br/>Cognitive Services OpenAI User"]
       prod_identity["<b>Managed Identity GitHub Prod</b><br/>Container Registry Tasks Contributor<br/>Container Apps Contributor"]
+
+      eval_identity -.->|"RBAC"| judge
+      eval_identity -.->|"RBAC"| general
     end
+
+    api -->|"Prompt + contexto recuperado"| general
+    eval_identity -.->|"RBAC"| search_service
+    prod_identity -.->|"RBAC"| acr
+    prod_identity -.->|"RBAC"| api
   end
 
-  runtime_note["<b>Runtime RAG</b><br/>Login → token FastAPI → OBO<br/>→ retrieval de chunks activos<br/>→ prompt aumentado → generación"]
-  cicd_note["<b>CI/CD</b><br/>Tests → evaluación con juez<br/>→ quality gate → imagen inmutable<br/>→ actualización de Container App"]
-  boundary_note["<b>Límites actuales</b><br/>Container App y Search son públicos.<br/>Key Vault no participa en runtime.<br/>El estado Terraform aún es local."]
+  %% Autenticación del usuario y entrada a la API.
+  streamlit -->|"Login"| frontend_app
+  obo -->|"Bearer delegado"| api
+  user -.->|"Miembro"| user_group
+  user_group -.->|"Search Index Data Contributor"| search_service
 
-  %% Aprovisionamiento.
-  operator -->|"Lee y guarda"| state
+  %% Infraestructura como código.
   operator -.->|"Administra recursos declarados"| azure
   operator -.->|"Search Service Contributor"| search_service
   operator -.->|"Key Vault Secrets Officer opcional"| key_vault
 
-  %% Runtime de usuario y RAG.
-  user -->|"HTTPS"| streamlit
-  streamlit -->|"1 · Login"| frontend_app
-  frontend_app -->|"2 · Bearer access_as_user"| api
-  api -->|"3 · Valida JWT"| api_app
-  api_app -->|"4 · Intercambio delegado"| obo
-  obo -->|"5 · Token Search"| search_service
-  obo -->|"5 · Token OpenAI"| general
-  api -->|"6 · Listar, ingerir y recuperar"| search_service
-  search_service --> text_index
-  search_service --> evaluation_index
-  search_service --- search_identity
-  api -->|"7 · Prompt + contexto"| general
-  general -->|"8 · Respuesta"| api
-  api -->|"JSON"| streamlit
-  user -.->|"Miembro"| user_group
-  user_group -.->|"RBAC sobre Search"| search_service
-
-  %% Ejecución y observabilidad de Container Apps.
-  acr -->|"Imagen"| api
-  app_identity -.->|"Identidad del registry"| api
-  app_identity -.->|"AcrPull"| acr
-  container_apps -->|"Logs"| logs
-
-  %% Identidades separadas para evaluación y producción.
+  %% GitHub Actions usa identidades separadas para evaluación y producción.
   github_eval -->|"OIDC"| github_oidc
   github_prod -->|"OIDC"| github_oidc
   github_oidc --> eval_identity
   github_oidc --> prod_identity
-  eval_identity -.->|"RBAC"| search_service
-  eval_identity -.->|"RBAC"| general
-  eval_identity -.->|"RBAC"| judge
   github_eval -->|"Corpus y respuestas"| evaluation_index
   github_eval -->|"Groundedness · relevance · rúbrica"| judge
-  prod_identity -.->|"RBAC"| acr
-  prod_identity -.->|"RBAC"| api
   github_prod -->|"az acr build"| acr
   github_prod -->|"az containerapp update"| api
-
-  runtime_note -.-> obo
-  cicd_note -.-> github_eval
-  boundary_note -.-> key_vault
 
   classDef azureService fill:#e6f7ff,stroke:#0078d4,color:#003b5c,stroke-width:2px
   classDef existingService fill:#f3f4f6,stroke:#4b5563,color:#111827,stroke-width:2px
@@ -128,10 +127,11 @@ flowchart LR
   class operator,state tooling
   class runtime_note,cicd_note,boundary_note note
 
+  style actors fill:#f0fdf4,stroke:#059669,stroke-width:2px,color:#064e3b
+  style entra fill:#faf5ff,stroke:#7e22ce,stroke-width:2px,color:#3b0764
   style azure fill:#f8fbff,stroke:#0078d4,stroke-width:3px,color:#003b5c
   style app_rg fill:#eff6ff,stroke:#60a5fa,stroke-width:2px,color:#172554
   style project_rg fill:#eff6ff,stroke:#60a5fa,stroke-width:2px,color:#172554
   style container_apps fill:#ffffff,stroke:#0078d4,stroke-width:2px,color:#003b5c
   style search fill:#ffffff,stroke:#0078d4,stroke-width:2px,color:#003b5c
   style openai fill:#ffffff,stroke:#0078d4,stroke-width:2px,color:#003b5c
-  style entra fill:#faf5ff,stroke:#7e22ce,stroke-width:2px,color:#3b0764
