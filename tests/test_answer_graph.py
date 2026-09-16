@@ -250,6 +250,7 @@ def test_valid_citation_needs_one_generation(page: int | None, citation: str) ->
         "Desconecta [manual.pdf, p. 9].",
         "Desconecta [manual.pdf].",
         "Desconecta [manual.pdf, p. 1] y espera [inventado.pdf, p. 1].",
+        "Desconecta [manual.pdf, p. 1; p. 9].",
     ],
 )
 def test_invalid_citations_are_repaired_with_another_generation(
@@ -303,6 +304,23 @@ def test_citation_verification_can_be_disabled_without_repair() -> None:
     ).answer(TextQuery(question="Pregunta"))
 
     assert result.answer == "Respuesta sin cita."
+    completion.complete.assert_called_once()
+
+
+def test_accepts_grouped_pages_when_all_were_retrieved() -> None:
+    store = Mock()
+    store.search.return_value = [
+        hit(chunk_id="chunk-10", source="manual[2026].pdf", page=10),
+        hit(chunk_id="chunk-15", source="manual[2026].pdf", page=15),
+    ]
+    completion = Mock()
+    completion.complete.return_value = (
+        "Compara ambos mecanismos [manual[2026].pdf, p. 10; p. 15]."
+    )
+
+    result = AnswerService(store, completion).answer(TextQuery(question="Pregunta"))
+
+    assert result.answer == completion.complete.return_value
     completion.complete.assert_called_once()
 
 

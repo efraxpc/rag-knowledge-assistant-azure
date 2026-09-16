@@ -198,7 +198,45 @@ def test_registered_restart_replaces_both_services(
 
 
 @pytest.mark.parametrize("port_key", ["RAG_API_PORT", "RAG_UI_PORT"])
-def test_occupied_port_does_not_report_success_or_stop_unrelated_process(
+def test_restart_stops_process_on_configured_port_before_starting(
+    local_project: tuple[Path, dict[str, str]], port_key: str
+) -> None:
+    project, env = local_project
+    port = env[port_key]
+    with running_process(
+        [sys.executable, "-m", "uvicorn", "app.main:app", "--port", port],
+        project,
+        env,
+        "unrelated.log",
+    ) as unrelated:
+        occupied_pid = wait_for_pid(port)
+        with running_process(
+            ["./run_local.sh", "restart"], project, env, "restart.log"
+        ) as replacement:
+            new_api = wait_for_pid(
+                env["RAG_API_PORT"],
+                occupied_pid if port_key == "RAG_API_PORT" else None,
+            )
+            new_ui = wait_for_pid(
+                env["RAG_UI_PORT"],
+                occupied_pid if port_key == "RAG_UI_PORT" else None,
+            )
+            wait_for_available(project / "restart.log")
+
+            assert unrelated.wait(timeout=5) == -signal.SIGTERM
+            assert replacement.poll() is None
+            assert new_api != occupied_pid
+            assert new_ui != occupied_pid
+
+        output = (project / "restart.log").read_text()
+        service = "la API" if port_key == "RAG_API_PORT" else "la interfaz"
+        assert f"el proceso que ocupa {service} 127.0.0.1:{port}" in output
+        assert "RAG Manual está disponible" in output
+        assert "Address already in use" not in output
+
+
+@pytest.mark.parametrize("port_key", ["RAG_API_PORT", "RAG_UI_PORT"])
+def test_start_does_not_stop_process_on_configured_port(
     local_project: tuple[Path, dict[str, str]], port_key: str
 ) -> None:
     project, env = local_project
@@ -211,7 +249,7 @@ def test_occupied_port_does_not_report_success_or_stop_unrelated_process(
     ) as unrelated:
         wait_for_pid(port)
         result = subprocess.run(
-            ["./run_local.sh", "restart"],
+            ["./run_local.sh"],
             cwd=project / "scripts",
             env=env,
             capture_output=True,
@@ -219,11 +257,11 @@ def test_occupied_port_does_not_report_success_or_stop_unrelated_process(
             timeout=8,
             check=False,
         )
+
         assert result.returncode == 1
         assert f"127.0.0.1:{port}" in result.stderr
         assert "No se puede iniciar" in result.stderr
         assert "RAG Manual está disponible" not in result.stdout
-        assert "Iniciando API" not in result.stdout
         assert unrelated.poll() is None
         assert service_pid(port) == unrelated.pid
 

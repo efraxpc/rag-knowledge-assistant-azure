@@ -148,6 +148,66 @@ stop_launcher() {
     fi
 }
 
+port_listener_pids() {
+    local port=$1
+    local output
+
+    if command -v lsof >/dev/null 2>&1; then
+        output="$(
+            lsof -t -nP -iTCP:"${port}" -sTCP:LISTEN 2>/dev/null || true
+        )"
+    elif command -v fuser >/dev/null 2>&1; then
+        output="$(fuser -n tcp "${port}" 2>/dev/null || true)"
+    else
+        printf 'No se puede identificar el proceso del puerto %s: instala lsof o fuser.\n' \
+            "${port}" >&2
+        return 1
+    fi
+
+    [[ -z "${output}" ]] \
+        || printf '%s\n' "${output}" \
+            | tr '[:space:]' '\n' \
+            | sed -n '/^[1-9][0-9]*$/p' \
+            | sort -un
+}
+
+stop_port_listeners() {
+    local host=$1
+    local port=$2
+    local service=$3
+    local attempt
+    local output
+    local pid
+    local -a listeners=()
+
+    for ((attempt = 1; attempt <= 3; attempt++)); do
+        output="$(port_listener_pids "${port}")" || return 1
+        [[ -n "${output}" ]] || return 0
+        mapfile -t listeners <<<"${output}"
+
+        for pid in "${listeners[@]}"; do
+            [[ "${pid}" != "$$" ]] || continue
+            stop_launcher \
+                "${pid}" \
+                "el proceso que ocupa ${service} ${host}:${port}" \
+                || return 1
+        done
+    done
+
+    output="$(port_listener_pids "${port}")" || return 1
+    if [[ -n "${output}" ]]; then
+        printf 'No se pudo liberar el puerto de %s %s:%s (PID: %s).\n' \
+            "${service}" "${host}" "${port}" \
+            "$(tr '\n' ' ' <<<"${output}")" >&2
+        return 1
+    fi
+}
+
+stop_configured_ports() {
+    stop_port_listeners "${API_HOST}" "${API_PORT}" "la API" || return 1
+    stop_port_listeners "${UI_HOST}" "${UI_PORT}" "la interfaz" || return 1
+}
+
 registered_pid() {
     local current_identity
     local pid
@@ -354,6 +414,7 @@ case "${ACTION}" in
             printf 'No hay una instancia registrada; comprobando instancias anteriores.\n'
         fi
         stop_legacy_launchers || exit 1
+        stop_configured_ports || exit 1
         ;;
     -h | --help)
         usage

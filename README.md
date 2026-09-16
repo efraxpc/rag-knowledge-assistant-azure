@@ -58,7 +58,9 @@ Para reiniciar ambos servicios desde otra terminal, ejecuta:
 no responde a la señal de terminación, fuerza el cierre de su launcher y sus
 procesos descendientes. Si no hay una instancia registrada, en Linux también
 detecta y detiene instancias anteriores de este mismo script que no tengan
-archivo PID. Si un puerto está ocupado por otro proceso, el script informa del
+archivo PID. Antes de reiniciar, también detiene cualquier proceso que esté
+escuchando en los puertos configurados para la API y la interfaz. La opción
+`start` no detiene procesos ajenos: si encuentra un puerto ocupado, informa del
 conflicto y no inicia los servicios. El mensaje de disponibilidad aparece cuando
 la API y la interfaz responden a sus comprobaciones de salud.
 
