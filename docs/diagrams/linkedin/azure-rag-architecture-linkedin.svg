@@ -1,0 +1,255 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" role="img" aria-labelledby="title description">
+  <title id="title">Arquitetura RAG no Azure</title>
+  <desc id="description">Diagrama vertical para LinkedIn que mostra o fluxo desde um frontend Streamlit, autenticação com Microsoft Entra ID, uma API FastAPI no Azure Container Apps, recuperação no Azure AI Search, enriquecimento e geração com Azure OpenAI, além de CI/CD, observabilidade e infraestrutura como código.</desc>
+
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#061324"/>
+      <stop offset="0.55" stop-color="#0A1D35"/>
+      <stop offset="1" stop-color="#102A4A"/>
+    </linearGradient>
+    <linearGradient id="apiGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0866B5"/>
+      <stop offset="1" stop-color="#0A8FD8"/>
+    </linearGradient>
+    <linearGradient id="searchGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0078D4"/>
+      <stop offset="1" stop-color="#13A5E8"/>
+    </linearGradient>
+    <linearGradient id="openaiGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6657D9"/>
+      <stop offset="1" stop-color="#8E6CEF"/>
+    </linearGradient>
+    <linearGradient id="answerGradient" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#123F53"/>
+      <stop offset="1" stop-color="#174B5E"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#020817" flood-opacity="0.42"/>
+    </filter>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#020817" flood-opacity="0.3"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#55C6FF"/>
+    </marker>
+    <marker id="arrowMuted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#7896B5"/>
+    </marker>
+    <style>
+      text { font-family: Inter, "Segoe UI", Arial, sans-serif; }
+      .title { fill: #F8FBFF; font-size: 48px; font-weight: 750; letter-spacing: -1.2px; }
+      .subtitle { fill: #AFC5DC; font-size: 21px; font-weight: 400; }
+      .badge { fill: #6DD5FF; font-size: 13px; font-weight: 700; letter-spacing: 2.4px; }
+      .section { fill: #70D3FF; font-size: 14px; font-weight: 750; letter-spacing: 2px; }
+      .card-title { fill: #FFFFFF; font-size: 20px; font-weight: 720; }
+      .card-kicker { fill: #A8C6E3; font-size: 11px; font-weight: 750; letter-spacing: 1.35px; }
+      .card-copy { fill: #C4D5E7; font-size: 14px; font-weight: 430; }
+      .white-copy { fill: #EAF7FF; font-size: 15px; font-weight: 430; }
+      .chip { fill: #EAF8FF; font-size: 12px; font-weight: 700; }
+      .step { fill: #06233A; font-size: 13px; font-weight: 800; }
+      .connector-label { fill: #8FB6D7; font-size: 11px; font-weight: 650; letter-spacing: .5px; }
+      .mini-title { fill: #F6FAFF; font-size: 15px; font-weight: 700; }
+      .mini-copy { fill: #AFC5DC; font-size: 12px; font-weight: 430; }
+      .footer { fill: #7896B5; font-size: 12px; font-weight: 550; letter-spacing: .35px; }
+    </style>
+  </defs>
+
+  <rect width="1080" height="1350" fill="url(#background)"/>
+  <circle cx="1010" cy="80" r="245" fill="#0078D4" opacity="0.08"/>
+  <circle cx="30" cy="890" r="260" fill="#745EE8" opacity="0.06"/>
+  <path d="M0 205 H1080" stroke="#244461" stroke-width="1" opacity="0.75"/>
+
+  <!-- Encabezado -->
+  <g aria-label="Cabeçalho">
+    <rect x="70" y="42" width="226" height="31" rx="15.5" fill="#0C3554" stroke="#1E6B99"/>
+    <circle cx="89" cy="57.5" r="5" fill="#37C5FF"/>
+    <text x="103" y="62" class="badge">AZURE · RAG · GENAI</text>
+    <text x="70" y="126" class="title">Arquitetura RAG no Azure</text>
+    <text x="70" y="164" class="subtitle">De manuais em PDF a respostas rastreáveis e com citações</text>
+    <g transform="translate(920 44)">
+      <path d="M14 62 39 8h30L43 62Z" fill="#29A8FF" opacity="0.98"/>
+      <path d="m53 62 17-31 28 31Z" fill="#69D6FF" opacity="0.9"/>
+      <text x="56" y="83" text-anchor="middle" fill="#9FC3E2" font-size="11" font-weight="700" letter-spacing="1.4">RAG MANUAL</text>
+    </g>
+  </g>
+
+  <!-- 01 Experiencia -->
+  <text x="70" y="237" class="section">01 · EXPERIÊNCIA SEGURA</text>
+
+  <g filter="url(#softShadow)" aria-label="Usuário">
+    <rect x="70" y="258" width="260" height="114" rx="20" fill="#102842" stroke="#2C4B6B" stroke-width="1.5"/>
+    <circle cx="112" cy="315" r="27" fill="#173B5D" stroke="#4EA9DA"/>
+    <circle cx="112" cy="306" r="8" fill="none" stroke="#8ADFFF" stroke-width="2.3"/>
+    <path d="M98 328c2-9 8-13 14-13s12 4 14 13" fill="none" stroke="#8ADFFF" stroke-width="2.3" stroke-linecap="round"/>
+    <text x="150" y="298" class="card-kicker">PESSOA</text>
+    <text x="150" y="324" class="card-title">Usuário</text>
+    <text x="150" y="347" class="card-copy">Pergunta em linguagem natural</text>
+  </g>
+
+  <g filter="url(#softShadow)" aria-label="Frontend Streamlit">
+    <rect x="410" y="258" width="260" height="114" rx="20" fill="#10334B" stroke="#25A4D6" stroke-width="1.5"/>
+    <circle cx="452" cy="315" r="27" fill="#0C4966"/>
+    <path d="M439 304h26v18h-13l-8 7v-7h-5Z" fill="none" stroke="#7EE5FF" stroke-width="2.3" stroke-linejoin="round"/>
+    <circle cx="447" cy="313" r="1.8" fill="#7EE5FF"/>
+    <circle cx="453" cy="313" r="1.8" fill="#7EE5FF"/>
+    <circle cx="459" cy="313" r="1.8" fill="#7EE5FF"/>
+    <text x="490" y="298" class="card-kicker">CHATBOT</text>
+    <text x="490" y="324" class="card-title">Streamlit</text>
+    <text x="490" y="347" class="card-copy">Upload, consultas e fontes</text>
+  </g>
+
+  <g filter="url(#softShadow)" aria-label="Microsoft Entra ID">
+    <rect x="750" y="258" width="260" height="114" rx="20" fill="#123A39" stroke="#32B89C" stroke-width="1.5"/>
+    <circle cx="792" cy="315" r="27" fill="#15514D"/>
+    <path d="M792 296 807 302v11c0 10-6 17-15 22-9-5-15-12-15-22v-11Z" fill="none" stroke="#80F2D3" stroke-width="2.3" stroke-linejoin="round"/>
+    <path d="m785 315 5 5 9-11" fill="none" stroke="#80F2D3" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="830" y="298" class="card-kicker">IDENTIDAD</text>
+    <text x="830" y="324" class="card-title">Microsoft Entra ID</text>
+    <text x="830" y="347" class="card-copy">OIDC + On-Behalf-Of</text>
+  </g>
+
+  <path d="M330 315 H397" fill="none" stroke="#55C6FF" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="364" y="303" text-anchor="middle" class="connector-label">HTTPS</text>
+  <path d="M670 315 H737" fill="none" stroke="#55C6FF" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="704" y="303" text-anchor="middle" class="connector-label">LOGIN</text>
+
+  <!-- 02 Orquestación -->
+  <path d="M880 372 V401 H540 V430" fill="none" stroke="#55C6FF" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="816" y="389" width="98" height="23" rx="11.5" fill="#0B243B" stroke="#285272"/>
+  <text x="865" y="405" text-anchor="middle" class="connector-label">TOKEN OBO</text>
+
+  <g filter="url(#shadow)" aria-label="API RAG no Azure Container Apps">
+    <rect x="150" y="438" width="780" height="150" rx="26" fill="url(#apiGradient)"/>
+    <rect x="176" y="462" width="82" height="82" rx="22" fill="#07558F" opacity="0.88"/>
+    <path d="M194 516c-10 0-17-6-17-14 0-8 6-14 14-15 3-10 12-16 23-16 13 0 23 8 25 20 8 1 14 6 14 13 0 7-6 12-14 12Z" fill="none" stroke="#DDF6FF" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="m203 491-8 10 8 10m23-20 8 10-8 10m-8-24-7 28" fill="none" stroke="#DDF6FF" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="288" y="469" fill="#D9F4FF" font-size="12" font-weight="750" letter-spacing="1.7">02 · ORQUESTRAÇÃO</text>
+    <text x="288" y="504" fill="#FFFFFF" font-size="27" font-weight="750">Azure Container Apps</text>
+    <text x="288" y="531" class="white-copy">FastAPI + LangGraph coordenam o fluxo RAG e validam as citações.</text>
+    <g transform="translate(288 548)">
+      <rect width="104" height="25" rx="12.5" fill="#DDF5FF" opacity="0.17"/>
+      <text x="52" y="17" text-anchor="middle" class="chip">FASTAPI</text>
+      <rect x="114" width="122" height="25" rx="12.5" fill="#DDF5FF" opacity="0.17"/>
+      <text x="175" y="17" text-anchor="middle" class="chip">LANGGRAPH</text>
+      <rect x="246" width="137" height="25" rx="12.5" fill="#DDF5FF" opacity="0.17"/>
+      <text x="314.5" y="17" text-anchor="middle" class="chip">0–3 RÉPLICAS</text>
+    </g>
+  </g>
+
+  <!-- 03 Flujo RAG -->
+  <text x="70" y="637" class="section">03 · RECUPERAÇÃO → ENRIQUECIMENTO → GERAÇÃO</text>
+  <path d="M540 588 V651 H210 V662" fill="none" stroke="#55C6FF" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="614" y="618" class="connector-label">PERGUNTA + DOCUMENTO ATIVO</text>
+
+  <g filter="url(#softShadow)" aria-label="Azure AI Search">
+    <rect x="70" y="670" width="280" height="202" rx="23" fill="url(#searchGradient)"/>
+    <circle cx="111" cy="711" r="23" fill="#0065B4" opacity="0.82"/>
+    <circle cx="107" cy="707" r="9" fill="none" stroke="#E8F8FF" stroke-width="2.4"/>
+    <path d="m114 714 9 9" stroke="#E8F8FF" stroke-width="2.4" stroke-linecap="round"/>
+    <rect x="296" y="688" width="34" height="34" rx="17" fill="#DDF5FF"/>
+    <text x="313" y="711" text-anchor="middle" class="step">1</text>
+    <text x="94" y="757" fill="#DDF6FF" font-size="11" font-weight="750" letter-spacing="1.5">RECUPERAÇÃO</text>
+    <text x="94" y="787" class="card-title">Azure AI Search</text>
+    <text x="94" y="815" class="white-copy">Recupera os chunks mais</text>
+    <text x="94" y="837" class="white-copy">relevantes do manual ativo.</text>
+    <text x="94" y="858" fill="#CDEEFF" font-size="11.5">Índice textual · exclusão lógica</text>
+  </g>
+
+  <g filter="url(#softShadow)" aria-label="Enriquecimento">
+    <rect x="400" y="670" width="280" height="202" rx="23" fill="#2A2E49" stroke="#F1A93A" stroke-width="1.5"/>
+    <circle cx="441" cy="711" r="23" fill="#4A3E35"/>
+    <path d="M429 700h8v22h-8m24-22h-8v22h8" fill="none" stroke="#FFD085" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M440 706h2m-2 6h2m-2 6h2" stroke="#FFD085" stroke-width="2.5" stroke-linecap="round"/>
+    <rect x="626" y="688" width="34" height="34" rx="17" fill="#FFE5B8"/>
+    <text x="643" y="711" text-anchor="middle" class="step">2</text>
+    <text x="424" y="757" fill="#F8C978" font-size="11" font-weight="750" letter-spacing="1.5">ENRIQUECIMENTO</text>
+    <text x="424" y="787" class="card-title">Construtor de contexto</text>
+    <text x="424" y="815" class="card-copy">Combina pergunta + top-k +</text>
+    <text x="424" y="837" class="card-copy">fonte + página em um prompt.</text>
+    <text x="424" y="858" fill="#D9BB87" font-size="11.5">Contexto limitado e seguro</text>
+  </g>
+
+  <g filter="url(#softShadow)" aria-label="Azure OpenAI">
+    <rect x="730" y="670" width="280" height="202" rx="23" fill="url(#openaiGradient)"/>
+    <circle cx="771" cy="711" r="23" fill="#5547BE" opacity="0.9"/>
+    <path d="m771 692 4 12 12 4-12 4-4 12-4-12-12-4 12-4Z" fill="none" stroke="#F1ECFF" stroke-width="2.2" stroke-linejoin="round"/>
+    <circle cx="785" cy="695" r="2.5" fill="#F1ECFF"/>
+    <circle cx="756" cy="724" r="2" fill="#F1ECFF"/>
+    <rect x="956" y="688" width="34" height="34" rx="17" fill="#EEE9FF"/>
+    <text x="973" y="711" text-anchor="middle" class="step">3</text>
+    <text x="754" y="757" fill="#E8E0FF" font-size="11" font-weight="750" letter-spacing="1.5">GERAÇÃO</text>
+    <text x="754" y="787" class="card-title">Azure OpenAI</text>
+    <text x="754" y="815" class="white-copy">Gera uma resposta usando</text>
+    <text x="754" y="837" class="white-copy">exclusivamente o contexto.</text>
+    <text x="754" y="858" fill="#E3DBFF" font-size="11.5">gpt-5-mini · citações verificadas</text>
+  </g>
+
+  <path d="M350 771 H387" fill="none" stroke="#55C6FF" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="369" y="758" text-anchor="middle" class="connector-label">TOP-K</text>
+  <path d="M680 771 H717" fill="none" stroke="#55C6FF" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="699" y="758" text-anchor="middle" class="connector-label">PROMPT</text>
+
+  <!-- Respuesta -->
+  <path d="M870 872 V905 H540 V927" fill="none" stroke="#55C6FF" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <g filter="url(#softShadow)" aria-label="Resposta fundamentada">
+    <rect x="170" y="935" width="740" height="105" rx="22" fill="url(#answerGradient)" stroke="#35C6C1" stroke-width="1.5"/>
+    <circle cx="217" cy="987" r="26" fill="#155E62"/>
+    <path d="m204 987 8 8 17-19" fill="none" stroke="#8CFFF5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="260" y="974" fill="#7AF3EA" font-size="11" font-weight="750" letter-spacing="1.5">RESPOSTA FUNDAMENTADA</text>
+    <text x="260" y="1004" class="card-title">Explicação clara + trechos consultados</text>
+    <text x="260" y="1026" class="card-copy">Exemplo de rastreabilidade: [manual.pdf, p. 19]</text>
+    <rect x="771" y="963" width="112" height="47" rx="23.5" fill="#C6FFF7" opacity="0.12" stroke="#62E8DC"/>
+    <text x="827" y="983" text-anchor="middle" fill="#A8FFF7" font-size="11" font-weight="750">VALIDAÇÃO</text>
+    <text x="827" y="1000" text-anchor="middle" fill="#E6FFFC" font-size="12" font-weight="700">DE CITAÇÕES</text>
+  </g>
+
+  <!-- 04 Plataforma -->
+  <text x="70" y="1087" class="section">04 · ENTREGA, SEGURANÇA E OPERAÇÃO</text>
+
+  <g aria-label="Fluxo de entrega contínua">
+    <rect x="70" y="1110" width="280" height="86" rx="18" fill="#101F33" stroke="#3A526C"/>
+    <circle cx="102" cy="1153" r="18" fill="#202C3A"/>
+    <path d="M94 1153h16m-8-8v16" stroke="#F7FAFC" stroke-width="2" stroke-linecap="round"/>
+    <text x="132" y="1145" class="mini-title">GitHub Actions</text>
+    <text x="132" y="1167" class="mini-copy">Testes + avaliação RAG + OIDC</text>
+
+    <rect x="400" y="1110" width="280" height="86" rx="18" fill="#102B46" stroke="#247FC1"/>
+    <circle cx="432" cy="1153" r="18" fill="#0C4D78"/>
+    <path d="M423 1146h18v14h-18Zm4-5h10v5h-10Z" fill="none" stroke="#9CE4FF" stroke-width="2" stroke-linejoin="round"/>
+    <text x="462" y="1145" class="mini-title">Azure Container Registry</text>
+    <text x="462" y="1167" class="mini-copy">Imagem OCI aprovada e imutável</text>
+
+    <rect x="730" y="1110" width="280" height="86" rx="18" fill="#102B46" stroke="#247FC1"/>
+    <circle cx="762" cy="1153" r="18" fill="#0C4D78"/>
+    <path d="M750 1158h24m-20-10h16m-12-7h8" stroke="#9CE4FF" stroke-width="2" stroke-linecap="round"/>
+    <text x="792" y="1145" class="mini-title">Container Apps</text>
+    <text x="792" y="1167" class="mini-copy">Implantação automática aprovada</text>
+
+    <path d="M350 1153 H387" fill="none" stroke="#7896B5" stroke-width="2" marker-end="url(#arrowMuted)"/>
+    <text x="369" y="1141" text-anchor="middle" class="connector-label">BUILD</text>
+    <path d="M680 1153 H717" fill="none" stroke="#7896B5" stroke-width="2" marker-end="url(#arrowMuted)"/>
+    <text x="699" y="1141" text-anchor="middle" class="connector-label">DEPLOY</text>
+  </g>
+
+  <g aria-label="Controles da plataforma">
+    <rect x="70" y="1218" width="205" height="82" rx="17" fill="#0F2238" stroke="#2D4865"/>
+    <text x="90" y="1250" class="mini-title">Terraform</text>
+    <text x="90" y="1272" class="mini-copy">Infraestrutura como código</text>
+
+    <rect x="315" y="1218" width="205" height="82" rx="17" fill="#0F2C31" stroke="#25877A"/>
+    <text x="335" y="1250" class="mini-title">Identidade + RBAC</text>
+    <text x="335" y="1272" class="mini-copy">Privilégio mínimo</text>
+
+    <rect x="560" y="1218" width="205" height="82" rx="17" fill="#27233F" stroke="#7563CB"/>
+    <text x="580" y="1250" class="mini-title">GPT-5 avaliador</text>
+    <text x="580" y="1272" class="mini-copy">Avaliação de qualidade RAG</text>
+
+    <rect x="805" y="1218" width="205" height="82" rx="17" fill="#0F2238" stroke="#2D6291"/>
+    <text x="825" y="1250" class="mini-title">Log Analytics</text>
+    <text x="825" y="1272" class="mini-copy">Logs e rastreamento do fluxo</text>
+  </g>
+
+  <text x="70" y="1328" class="footer">AZURE AI SEARCH · AZURE OPENAI · CONTAINER APPS · ENTRA ID · ACR · LOG ANALYTICS</text>
+  <text x="1010" y="1328" text-anchor="end" class="footer">RAG MANUAL</text>
+</svg>
