@@ -1,39 +1,39 @@
 <div align="center">
 
-# RAG Knowledge Assistant on Azure
+# Assistente de Conhecimento RAG no Azure
 
-**Asistente para consultar manuales con respuestas fundamentadas, citas verificables y seguridad basada en Microsoft Entra ID.**
+**Assistente para consultar manuais com respostas fundamentadas, citações verificáveis e segurança baseada no Microsoft Entra ID.**
 
 [![Python 3.11](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![Azure](https://img.shields.io/badge/Microsoft-Azure-0078D4?logo=microsoftazure&logoColor=white)](https://azure.microsoft.com/)
 [![Terraform](https://img.shields.io/badge/IaC-Terraform-844FBA?logo=terraform&logoColor=white)](https://www.terraform.io/)
-[![Quality gate and deploy](https://github.com/efraxpc/rag-knowledge-assistant-azure/actions/workflows/quality-gate-deploy.yml/badge.svg)](https://github.com/efraxpc/rag-knowledge-assistant-azure/actions/workflows/quality-gate-deploy.yml)
+[![Controle de qualidade e implantação](https://github.com/efraxpc/rag-knowledge-assistant-azure/actions/workflows/quality-gate-deploy.yml/badge.svg)](https://github.com/efraxpc/rag-knowledge-assistant-azure/actions/workflows/quality-gate-deploy.yml)
 
-[Inicio rápido](#inicio-rápido) · [Arquitectura](#arquitectura) · [API](#api) · [Documentación](#documentación)
+[Início rápido](#início-rápido) · [Arquitetura](#arquitetura) · [API](#api) · [Documentação](#documentação)
 
 </div>
 
 ---
 
-Este proyecto implementa un flujo **Retrieval-Augmented Generation (RAG)** de
-extremo a extremo sobre Azure. Permite cargar documentos, recuperar los
-fragmentos más relevantes y generar una respuesta usando exclusivamente el
-contexto encontrado. Cada respuesta conserva las fuentes utilizadas y el flujo
-se abstiene cuando los manuales no contienen información suficiente.
+Este projeto implementa um fluxo de **Retrieval-Augmented Generation (RAG)** de
+ponta a ponta no Azure. Ele permite carregar documentos, recuperar os trechos
+mais relevantes e gerar uma resposta usando exclusivamente o contexto
+encontrado. Cada resposta preserva as fontes utilizadas, e o fluxo se abstém de
+responder quando os manuais não contêm informações suficientes.
 
-La solución incluye una interfaz conversacional con Streamlit, una API FastAPI,
-orquestación con LangGraph, Azure AI Search, Azure OpenAI, autenticación delegada
-con Entra ID, infraestructura Terraform y un quality gate basado en evaluación
-LLM.
+A solução inclui uma interface conversacional com Streamlit, uma API FastAPI,
+orquestração com LangGraph, Azure AI Search, Azure OpenAI, autenticação delegada
+com o Entra ID, infraestrutura Terraform e um controle de qualidade baseado em
+avaliação por LLM.
 
-## Vista general
+## Visão geral
 
 <p align="center">
   <a href="docs/diagrams/linkedin/azure-rag-architecture-linkedin.png">
     <img
       src="docs/diagrams/linkedin/azure-rag-architecture-linkedin.png"
-      alt="Arquitectura del asistente RAG seguro en Azure"
+      alt="Arquitetura do assistente RAG seguro no Azure"
       width="900"
     />
   </a>
@@ -41,64 +41,65 @@ LLM.
 
 ## Funcionalidades
 
-- Interfaz de chatbot con inicio de sesión mediante Microsoft Entra ID.
-- Carga de archivos PDF con texto, TXT y Markdown de hasta 10 MiB.
-- Extracción, fragmentación e indexación del contenido en Azure AI Search.
-- Preguntas sobre todos los manuales o sobre un documento específico.
-- Generación con Azure OpenAI limitada al contexto recuperado.
-- Citas por fuente y página, con validación y una reparación controlada.
-- Segundo intento de recuperación mediante simplificación de la consulta.
-- Listado de documentos y eliminación lógica de todos sus fragmentos.
-- API REST documentada con Swagger y ReDoc.
-- Infraestructura como código con Terraform y acceso mediante RBAC.
-- Pipeline con tests, lint, evaluación RAG y despliegue condicionado por calidad.
+- Interface de chatbot com login pelo Microsoft Entra ID.
+- Upload de arquivos PDF com texto, TXT e Markdown de até 10 MiB.
+- Extração, fragmentação e indexação do conteúdo no Azure AI Search.
+- Perguntas sobre todos os manuais ou sobre um documento específico.
+- Geração com o Azure OpenAI limitada ao contexto recuperado.
+- Citações por fonte e página, com validação e correção controlada.
+- Segunda tentativa de recuperação por meio da simplificação da consulta.
+- Listagem de documentos e exclusão lógica de todos os seus trechos.
+- API REST documentada com Swagger e ReDoc.
+- Infraestrutura como código com Terraform e acesso por RBAC.
+- Pipeline com testes, lint, avaliação RAG e implantação condicionada à qualidade.
 
 > [!NOTE]
-> La eliminación es lógica: los fragmentos reciben `deleted_at` y dejan de
-> aparecer en búsquedas y listados, pero no se borran físicamente del índice.
+> A exclusão é lógica: os trechos recebem `deleted_at` e deixam de aparecer nas
+> buscas e listagens, mas não são removidos fisicamente do índice.
 
-## Cómo funciona
+## Como funciona
 
-1. El usuario inicia sesión en Streamlit mediante Entra ID.
-2. FastAPI valida el JWT y usa On-Behalf-Of para acceder a los servicios de
-   Azure con la identidad delegada del usuario.
-3. El documento se divide en fragmentos y se guarda en Azure AI Search.
-4. LangGraph recupera el contexto relevante para la pregunta.
-5. Azure OpenAI genera una respuesta exclusivamente con esos fragmentos.
-6. El grafo comprueba las citas y repara o rechaza respuestas no confiables.
+1. O usuário faz login no Streamlit pelo Entra ID.
+2. O FastAPI valida o JWT e usa On-Behalf-Of para acessar os serviços do Azure
+   com a identidade delegada do usuário.
+3. O documento é dividido em trechos e armazenado no Azure AI Search.
+4. O LangGraph recupera o contexto relevante para a pergunta.
+5. O Azure OpenAI gera uma resposta exclusivamente com esses trechos.
+6. O grafo verifica as citações e corrige ou rejeita respostas não confiáveis.
 
-Si la primera búsqueda no encuentra contexto, el grafo puede simplificar la
-consulta y buscar una vez más. Si aun así no hay evidencia suficiente, responde
-de forma segura sin inventar información.
+Se a primeira busca não encontrar contexto, o grafo poderá simplificar a
+consulta e buscar mais uma vez. Se ainda assim não houver evidências
+suficientes, ele responderá de forma segura, sem inventar informações.
 
-## Arquitectura
+## Arquitetura
 
-| Capa | Tecnología | Responsabilidad |
+| Camada | Tecnologia | Responsabilidade |
 |---|---|---|
-| Interfaz | Streamlit | Chat, autenticación, carga y administración de manuales |
-| API | FastAPI + Pydantic | Contratos HTTP, validación y servicios de aplicación |
-| Orquestación | LangGraph | Retrieval, contexto, generación y control de citas |
-| Recuperación | Azure AI Search | Índices textual y vectorial opcional |
-| Generación | Azure OpenAI | Respuestas RAG y evaluación de calidad |
-| Identidad | Microsoft Entra ID | OIDC, JWT, On-Behalf-Of y acceso delegado |
-| Runtime | Azure Container Apps | Ejecución de la API con escalado administrado |
-| Entrega | GitHub Actions + ACR | Quality gate, imagen OCI y despliegue inmutable |
-| Infraestructura | Terraform | Recursos Azure, identidades, roles e índices |
+| Interface | Streamlit | Chat, autenticação, upload e gerenciamento de manuais |
+| API | FastAPI + Pydantic | Contratos HTTP, validação e serviços da aplicação |
+| Orquestração | LangGraph | Recuperação, contexto, geração e controle de citações |
+| Recuperação | Azure AI Search | Índices textual e vetorial opcional |
+| Geração | Azure OpenAI | Respostas RAG e avaliação de qualidade |
+| Identidade | Microsoft Entra ID | OIDC, JWT, On-Behalf-Of e acesso delegado |
+| Ambiente de execução | Azure Container Apps | Execução da API com dimensionamento gerenciado |
+| Entrega | GitHub Actions + ACR | Controle de qualidade, imagem OCI e implantação imutável |
+| Infraestrutura | Terraform | Recursos do Azure, identidades, funções e índices |
 
-La arquitectura aplica mínimo privilegio: el pipeline usa identidades separadas
-para `evaluation` y `production`, mientras que las solicitudes de la aplicación
-usan la identidad del usuario y no una clave compartida de Search u OpenAI.
+A arquitetura aplica o princípio do privilégio mínimo: o pipeline usa
+identidades separadas para `evaluation` e `production`, enquanto as requisições
+da aplicação usam a identidade do usuário, e não uma chave compartilhada do
+Search ou do OpenAI.
 
-## Inicio rápido
+## Início rápido
 
 ### Requisitos
 
-- Python 3.11 o superior.
-- Una cuenta de Azure para ejecutar el flujo RAG completo.
-- Azure CLI y Terraform para preparar la infraestructura.
-- Un registro de aplicaciones en Entra ID para usar la interfaz autenticada.
+- Python 3.11 ou superior.
+- Uma conta do Azure para executar o fluxo RAG completo.
+- Azure CLI e Terraform para preparar a infraestrutura.
+- Um registro de aplicativo no Entra ID para usar a interface autenticada.
 
-### 1. Preparar el entorno
+### 1. Preparar o ambiente
 
 ```bash
 git clone https://github.com/efraxpc/rag-knowledge-assistant-azure.git
@@ -110,48 +111,48 @@ pip install -e ".[dev]"
 cp .env.example .env
 ```
 
-### 2. Configurar Azure
+### 2. Configurar o Azure
 
-Completa en `.env` los recursos que utilizará la aplicación:
+Preencha no `.env` os recursos que serão usados pela aplicação:
 
 ```dotenv
-APP_AZURE_SEARCH_ENDPOINT="https://<servicio>.search.windows.net"
+APP_AZURE_SEARCH_ENDPOINT="https://<servico>.search.windows.net"
 APP_AZURE_SEARCH_TEXT_INDEX_NAME="rag-text-chunks"
 
 APP_AZURE_OPENAI_ENDPOINT="https://<recurso>.cognitiveservices.azure.com"
-APP_AZURE_OPENAI_CHAT_DEPLOYMENT="<deployment-generador>"
+APP_AZURE_OPENAI_CHAT_DEPLOYMENT="<implantacao-gerador>"
 
 APP_ENTRA_TENANT_ID="<tenant-id>"
 APP_ENTRA_API_CLIENT_ID="<client-id-api>"
-APP_ENTRA_API_CLIENT_SECRET="<secreto-api>"
+APP_ENTRA_API_CLIENT_SECRET="<segredo-api>"
 APP_ENTRA_FRONTEND_CLIENT_ID="<client-id-streamlit>"
 ```
 
-Las cuatro variables `APP_ENTRA_*` se configuran conjuntamente. No confirmes el
-archivo `.env`, secretos, tokens ni archivos de estado de Terraform en Git.
-Consulta la [guía de autenticación](docs/entra-auth.md) para registrar la API y
-el frontend, configurar OBO y asignar los permisos necesarios.
+As quatro variáveis `APP_ENTRA_*` são configuradas em conjunto. Não faça commit
+do arquivo `.env`, de segredos, tokens nem de arquivos de estado do Terraform.
+Consulte o [guia de autenticação](docs/entra-auth.md) para registrar a API e o
+frontend, configurar o OBO e atribuir as permissões necessárias.
 
-### 3. Iniciar la aplicación
+### 3. Iniciar a aplicação
 
 ```bash
 ./scripts/run_local.sh
 ```
 
-Cuando ambos servicios estén listos:
+Quando ambos os serviços estiverem prontos:
 
 - Chat: <http://localhost:8501>
 - Swagger UI: <http://localhost:8000/docs>
 - ReDoc: <http://localhost:8000/redoc>
 - Health check: <http://localhost:8000/api/v1/health>
 
-Para reiniciar la API y la interfaz, liberando primero sus puertos:
+Para reiniciar a API e a interface, liberando primeiro suas portas:
 
 ```bash
 ./scripts/run_local.sh restart
 ```
 
-También puedes cambiar los puertos:
+Você também pode alterar as portas:
 
 ```bash
 RAG_API_PORT=8080 RAG_UI_PORT=8502 ./scripts/run_local.sh
@@ -159,17 +160,18 @@ RAG_API_PORT=8080 RAG_UI_PORT=8502 ./scripts/run_local.sh
 
 ## Uso
 
-Desde la interfaz web:
+Na interface web:
 
-1. Inicia sesión con Microsoft.
-2. Carga un PDF, TXT o Markdown y selecciona **Procesar y guardar**.
-3. Elige el documento que quieres consultar.
-4. Escribe una pregunta en el chat.
-5. Revisa la respuesta, las citas y los fragmentos recuperados.
+1. Entre com sua conta Microsoft.
+2. Carregue um PDF, TXT ou Markdown e selecione **Procesar y guardar**.
+3. Escolha o documento que deseja consultar.
+4. Digite uma pergunta no chat.
+5. Confira a resposta, as citações e os trechos recuperados.
 
-También puedes llamar a la API con un token destinado al registro de FastAPI.
+Você também pode chamar a API com um token destinado ao registro do aplicativo
+FastAPI.
 
-### Cargar un documento
+### Carregar um documento
 
 ```bash
 curl -X POST http://localhost:8000/api/v1/documents/upload \
@@ -177,24 +179,24 @@ curl -X POST http://localhost:8000/api/v1/documents/upload \
   -F "file=@manual.pdf"
 ```
 
-### Hacer una pregunta
+### Fazer uma pergunta
 
 ```bash
 curl -X POST http://localhost:8000/api/v1/queries/answer \
   -H "Authorization: Bearer ${ACCESS_TOKEN}" \
   -H "Content-Type: application/json" \
   -d '{
-    "question": "¿Qué mantenimiento requiere el equipo?",
+    "question": "Qual manutenção o equipamento requer?",
     "document_id": "<document-id>",
     "top_k": 5
   }'
 ```
 
-Ejemplo abreviado de respuesta:
+Exemplo resumido de resposta:
 
 ```json
 {
-  "answer": "El mantenimiento debe realizarse cada seis meses [manual.pdf, p. 12].",
+  "answer": "A manutenção deve ser realizada a cada seis meses [manual.pdf, p. 12].",
   "context": [
     {
       "id": "page-12-chunk-1",
@@ -210,24 +212,25 @@ Ejemplo abreviado de respuesta:
 
 ## API
 
-Todos los endpoints usan el prefijo `/api/v1`.
+Todos os endpoints usam o prefixo `/api/v1`.
 
-| Método | Endpoint | Descripción |
+| Método | Endpoint | Descrição |
 |---|---|---|
-| `GET` | `/health` | Comprueba el estado de la API |
-| `POST` | `/documents/upload` | Extrae, fragmenta e indexa un archivo |
-| `GET` | `/documents` | Lista los documentos activos |
-| `DELETE` | `/documents/{document_id}` | Aplica soft delete al documento y sus chunks |
-| `POST` | `/queries/answer` | Recupera contexto y genera una respuesta citada |
-| `POST` | `/documents/chunks` | Indexa chunks con embeddings precalculados |
-| `POST` | `/queries/search` | Ejecuta búsqueda vectorial opcional |
+| `GET` | `/health` | Verifica o estado da API |
+| `POST` | `/documents/upload` | Extrai, fragmenta e indexa um arquivo |
+| `GET` | `/documents` | Lista os documentos ativos |
+| `DELETE` | `/documents/{document_id}` | Aplica exclusão lógica ao documento e aos seus trechos |
+| `POST` | `/queries/answer` | Recupera o contexto e gera uma resposta com citações |
+| `POST` | `/documents/chunks` | Indexa trechos com embeddings pré-calculados |
+| `POST` | `/queries/search` | Executa uma busca vetorial opcional |
 
-Salvo el health check, las operaciones requieren un bearer token válido cuando
-Entra ID está configurado. Los esquemas completos están disponibles en Swagger.
+Com exceção do health check, as operações exigem um bearer token válido quando
+o Entra ID está configurado. Os esquemas completos estão disponíveis no
+Swagger.
 
-## Pruebas y calidad
+## Testes e qualidade
 
-Las pruebas son deterministas y no necesitan conectarse a recursos reales de
+Os testes são determinísticos e não precisam se conectar a recursos reais do
 Azure:
 
 ```bash
@@ -236,27 +239,27 @@ ruff check .
 ruff format --check .
 ```
 
-El workflow de GitHub Actions ejecuta:
+O workflow do GitHub Actions executa:
 
 ```text
-tests + lint
-    → indexar el corpus de evaluación
-    → generar respuestas con el RAG candidato
-    → evaluar groundedness, relevance, completeness y citation quality
-    → construir la imagen en ACR
-    → desplegar en Azure Container Apps
+testes + lint
+    → indexar o corpus de avaliação
+    → gerar respostas com o RAG candidato
+    → avaliar groundedness, relevance, completeness e citation quality
+    → criar a imagem no ACR
+    → implantar no Azure Container Apps
 ```
 
-El despliegue solo continúa si todos los casos alcanzan el umbral configurado.
-GitHub se autentica en Azure mediante OIDC, sin secretos de cliente permanentes.
-La configuración completa está en la
-[guía LLM-as-a-judge](docs/llm-as-a-judge.md).
+A implantação só continua se todos os casos atingirem o limite configurado. O
+GitHub se autentica no Azure por OIDC, sem segredos de cliente permanentes. A
+configuração completa está no
+[guia LLM-as-a-judge](docs/llm-as-a-judge.md).
 
-## Infraestructura
+## Infraestrutura
 
-Terraform administra Azure AI Search, los índices, identidades, asignaciones
-RBAC, deployments de Azure OpenAI, observabilidad y la configuración de
-Container Apps.
+O Terraform gerencia o Azure AI Search, os índices, as identidades, as
+atribuições RBAC, as implantações do Azure OpenAI, a observabilidade e a
+configuração do Container Apps.
 
 ```bash
 cd infrastructure/terraform
@@ -267,60 +270,60 @@ terraform validate
 terraform plan
 ```
 
-Revisa siempre el plan antes de aplicarlo. Algunos recursos, como la cuenta de
-Azure AI Services y el ACR, se integran como recursos preexistentes. Consulta el
-[README de infraestructura](infrastructure/terraform/README.md) antes de hacer
-cambios en Azure.
+Sempre revise o plano antes de aplicá-lo. Alguns recursos, como a conta do Azure
+AI Services e o ACR, são integrados como recursos preexistentes. Consulte o
+[README de infraestrutura](infrastructure/terraform/README.md) antes de fazer
+alterações no Azure.
 
-## Estructura del repositorio
+## Estrutura do repositório
 
 ```text
 app/
 ├── api/              # Endpoints FastAPI versionados
-├── commands/         # Preparación de índices y evaluación
-├── core/             # Configuración, autenticación y errores
-├── evaluation/       # Contratos y lógica del quality gate
-├── integrations/     # Clientes de Azure Search y Azure OpenAI
-├── rag/              # Modelos y contratos del dominio
-├── schemas/          # Esquemas HTTP con Pydantic
-├── services/         # Ingesta, retrieval y generación
-├── main.py           # Aplicación FastAPI
-└── streamlit_app.py  # Interfaz conversacional
+├── commands/         # Preparação de índices e avaliação
+├── core/             # Configuração, autenticação e erros
+├── evaluation/       # Contratos e lógica do controle de qualidade
+├── integrations/     # Clientes do Azure Search e Azure OpenAI
+├── rag/              # Modelos e contratos do domínio
+├── schemas/          # Esquemas HTTP com Pydantic
+├── services/         # Ingestão, recuperação e geração
+├── main.py           # Aplicação FastAPI
+└── streamlit_app.py  # Interface conversacional
 
-evaluations/          # Corpus y escenarios de evaluación
-infrastructure/       # Infraestructura Azure con Terraform
-docs/                 # Guías y diagramas técnicos
-tests/                # Pruebas automatizadas
+evaluations/          # Corpus e cenários de avaliação
+infrastructure/       # Infraestrutura do Azure com Terraform
+docs/                 # Guias e diagramas técnicos
+tests/                # Testes automatizados
 ```
 
-## Documentación
+## Documentação
 
 | Tema | Documento |
 |---|---|
-| Flujo RAG y decisiones de LangGraph | [Flujo LangGraph](docs/langgraph-flow.md) |
-| Carga, chunking y soft delete | [Ingesta de documentos](docs/file-ingestion.md) |
-| Microsoft Entra ID, JWT y OBO | [Autenticación delegada](docs/entra-auth.md) |
-| Índice y búsqueda vectorial opcional | [Vector store](docs/vector-store.md) |
-| Evaluación y quality gate | [LLM-as-a-judge](docs/llm-as-a-judge.md) |
-| Identidades OIDC del pipeline | [GitHub OIDC](docs/github-oidc-identities.mmd) |
-| Infraestructura Azure | [Terraform](infrastructure/terraform/README.md) |
-| Vista técnica imprimible | [Arquitectura A4](docs/diagrams/arquitectura/arquitectura-a4.pdf) |
-| Flujo técnico completo | [Diagrama técnico A4](docs/diagrams/flujo-tecnico/flujo-tecnico-a4.pdf) |
+| Fluxo RAG e decisões do LangGraph | [Fluxo do LangGraph](docs/langgraph-flow.md) |
+| Upload, fragmentação e exclusão lógica | [Ingestão de documentos](docs/file-ingestion.md) |
+| Microsoft Entra ID, JWT e OBO | [Autenticação delegada](docs/entra-auth.md) |
+| Índice e busca vetorial opcional | [Armazenamento vetorial](docs/vector-store.md) |
+| Avaliação e controle de qualidade | [LLM-as-a-judge](docs/llm-as-a-judge.md) |
+| Identidades OIDC do pipeline | [GitHub OIDC](docs/github-oidc-identities.mmd) |
+| Infraestrutura do Azure | [Terraform](infrastructure/terraform/README.md) |
+| Visão técnica para impressão | [Arquitetura A4](docs/diagrams/arquitectura/arquitectura-a4.pdf) |
+| Fluxo técnico completo | [Diagrama técnico A4](docs/diagrams/flujo-tecnico/flujo-tecnico-a4.pdf) |
 
-## Alcance actual
+## Escopo atual
 
-- La recuperación principal es textual; el contrato vectorial acepta embeddings
-  precalculados, pero la aplicación todavía no los genera.
-- Los PDF deben contener texto extraíble. Los documentos escaneados necesitan
-  OCR antes de cargarse.
-- El archivo original no se almacena: solo se indexan sus fragmentos.
-- El soft delete no incluye restauración ni purga automática.
+- A recuperação principal é textual; o contrato vetorial aceita embeddings
+  pré-calculados, mas a aplicação ainda não os gera.
+- Os PDFs devem conter texto extraível. Documentos digitalizados precisam de
+  OCR antes do upload.
+- O arquivo original não é armazenado: somente seus trechos são indexados.
+- A exclusão lógica não inclui restauração nem remoção definitiva automática.
 
 ---
 
 <div align="center">
 
-Construido con FastAPI, LangGraph y servicios administrados de Azure para
-mostrar un RAG seguro, observable y evaluable de extremo a extremo.
+Criado com FastAPI, LangGraph e serviços gerenciados do Azure para demonstrar
+um RAG seguro, observável e avaliável de ponta a ponta.
 
 </div>
