@@ -8,7 +8,7 @@ environment  = "dev"
 location     = "brazilsouth"
 
 # Repositorio exacto autorizado para autenticarse en Azure desde GitHub Actions.
-github_repository = "efraxpc/rag-manual-generico"
+github_repository = "efraxpc/rag-knowledge-assistant-azure"
 github_repository_ids = {
   owner      = "2850073"
   repository = "1356528895"

@@ -47,7 +47,7 @@ variable "location" {
 variable "github_repository" {
   description = "Repositorio de GitHub autorizado para solicitar tokens OIDC, con formato propietario/repositorio."
   type        = string
-  default     = "efraxpc/rag-manual-generico"
+  default     = "efraxpc/rag-knowledge-assistant-azure"
 
   validation {
     condition     = can(regex("^[0-9A-Za-z_.-]+/[0-9A-Za-z_.-]+$", var.github_repository))
